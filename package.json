@@ -1,0 +1,24 @@
+{
+  "name": "jshare-react-native",
+  "version": "1.0.0",
+  "description": "JShare SDK for react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpush/jshare-react-native.git"
+  },
+  "keywords": [
+    "JShare",
+    "React",
+    "Native"
+  ],
+  "author": "KenChoi,HuminiOS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpush/jshare-react-native/issues"
+  },
+  "homepage": "https://github.com/jpush/jshare-react-native#readme"
+}
