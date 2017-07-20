@@ -1,4 +1,4 @@
-package com.pushdemo;
+package com.jshare.demo;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +46,7 @@ public class MainActivity extends ReactActivity implements DefaultHardwareBackBt
 
     @Override
     protected String getMainComponentName() {
-        return "PushDemoApp";
+        return "JShareDemoApp";
     }
 
     @Override

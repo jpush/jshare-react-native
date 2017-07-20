@@ -87,7 +87,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.share.demo"
+        applicationId "com.jshare.demo"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
@@ -96,9 +96,9 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
-                JSHARE_PKGNAME: "com.share.demo",
+                JSHARE_PKGNAME: "com.jshare.demo",
                 JPUSH_APPKEY: "d4ee2375846bc30fa51334f5",	//在此替换你的APPKey
-                APP_CHANNEL: "developer-default",		//应用渠道号
+                JPUSH_CHANNEL: "developer-default",		//应用渠道号
                 TENCENT_APPID: "your tencent app id"
         ]
     }
@@ -110,10 +110,28 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file("jshare.jks") //签名文件路径
+            storePassword "sdkteam"
+            keyAlias "jshare"
+            keyPassword "sdkteam" //签名密码
+        }
+        release {
+            storeFile file("jshare.jks") //签名文件路径
+            storePassword "sdkteam"
+            keyAlias "jshare"
+            keyPassword "sdkteam" //签名密码
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     sourceSets {
@@ -146,6 +164,7 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:25.3.1"
     compile project(':jshare-react-native')
+    compile project(':jcore-react-native')
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 

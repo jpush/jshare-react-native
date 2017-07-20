@@ -1,10 +1,13 @@
 {
   "name": "jshare-react-native",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "JShare SDK for react native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "jcore-react-native": ">= 1.1.5"
   },
   "repository": {
     "type": "git",

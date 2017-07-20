@@ -1,4 +1,4 @@
-package cn.jpush.reactnativejpush;
+package cn.jiguang.share.reactnative;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class JPushPackage implements ReactPackage {
+public class JSharePackage implements ReactPackage {
 
-    public JPushPackage(boolean toastFlag, boolean logFlag) {
+    public JSharePackage(boolean toastFlag, boolean logFlag) {
         Logger.SHUTDOWNTOAST = toastFlag;
         Logger.SHUTDOWNLOG = logFlag;
     }
@@ -20,7 +20,7 @@ public class JPushPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.asList(new NativeModule[]{
-                new JPushModule(reactContext),
+            new JShareModule(reactContext)
         });
     }
 

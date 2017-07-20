@@ -1,7 +1,7 @@
 import {
-	NativeModules,
-	Platform,
-	DeviceEventEmitter
+    NativeModules,
+    Platform,
+    DeviceEventEmitter
 } from 'react-native';
 
 const JShareModule = NativeModules.JShareModule;
@@ -25,39 +25,53 @@ export default class JShare {
      * }
      */
     static setup(config) {
-        JShareModule.setup(parma)
+        JShareModule.setup(parma);
     }
-    
+
+    /**
+     * 获取SDK所有能用的平台名称，如要使用某个平台，必须在JGShareSDK.xml中配置。
+     * Android only
+     * @param {*} callback 
+     */
+    static getPlatformList(cb) {
+        JShareModule.getPlatformList((list) => {
+            cb(list);
+        });
+    }
+
     /**
      * 初始化插件
      * 
      * @param {object} Message = {
      * 
-     * platformString 用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
-     * 
+     * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     * type 必填
      * 
      * {
      *  type: 'text'
      *  platform: platformString  // 
      *  title: String
      *  text: String
+     *  imagePath: // 选填，新浪微博本地图片地址，其他平台没有这个字段
      * }
      * 
      * {
      *  type: 'image'
      *  platform: platformString  // 
-     *  path: String  
-     *  imagePaths: [String]  // (选填: 分享到 Qzone 才提供这个字段) 如果需要分享多张图片需要这个参数，数组中问题图片路径
+     *  imagePath: String   // 本地图片路径 imagePath, imageUrl imageArray 必须三选一
+     *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一
+     *  imageArray: [String]  // (选填: 分享到 Qzone 才提供这个字段) 如果需要分享多张图片需要这个参数，数组中问题图片路径 imagePath, imageUrl imageArray 必须三选一
      * }
      * 
      * {
      *  type: 'video'
      *  platform: platformString  // 
-     *  title: String
-     *  url: String
-     *  text: String
+     *  title: String // 选填
+     *  url: String // 视频 url
+     *  text: String  // 选填
+     *  imagePath: String // 选填，缩略图，本地图片路径
      *  
-     *  videoUrl: String  //
+     *  videoUrl: String  // QQ 空间本地视频 或者
      * !! iOS 相册视频，可传ALAsset的ALAssetPropertyAssetURL，或者PHAsset的localIdentifier。
      * 
      * }
@@ -65,16 +79,18 @@ export default class JShare {
      * {
      *  type: 'audio'
      *  platform: platformString  // 
-     *  url: String
-     *  path: String
-     *  title: String
-     *  text: String
+     *  musicUrl: String //必填 点击直接播放的 url
+     *  url: String //选填，点击跳转的 url
+     *  imagePath: String   //选填，缩略图，本地图片路径，imagePath，imageUrl 必须二选一
+     *  imageUrl: String // 选填，网络图片路径，imagePath， imageUrl 必须二选一
+     *  title: String // 选填 
+     *  text: String  // 选填
      * }
      * 
      * {
      *  type: 'file'
      *  platform: platformString  // 
-     *  path: String
+     *  path: String // 必填，文件路径
      *  tile: String
      *  fileExt: String
      * }
@@ -82,8 +98,7 @@ export default class JShare {
      * {
      *  type: 'emoticon'
      *  platform: platformString  // 
-     *  url: String
-     *  path: String
+     *  imagePath: String // 必填，本地图片路径
      * }
      * 
      * {
@@ -99,9 +114,11 @@ export default class JShare {
      * {
      *  type: 'link'
      *  platform: platformString  // 
-     *  url: String
-     *  title: String
-     *  text: String
+     *  url: String // 必填，网页 url
+     *  imagePath: String // 选填，本地图片路径 imagePath，imageUrl 必须二选一
+     *  imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一
+     *  title: String // 选填
+     *  text: String // 选填
      * }
      * 
      * {
@@ -113,11 +130,11 @@ export default class JShare {
      * @param {*} fail = function (error) {} ## error = {code: number, descript: String}
      */
     static share(alias, success, fail) {
-		JShareModule.share(alias, success, fail)
+        JShareModule.share(alias, success, fail);
     }
-    
+
     /**
-     * 
+     * 获取社交平台用户信息
      * @param {*} param = {
      *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
      * }
@@ -130,21 +147,69 @@ export default class JShare {
      * }
      * @param {*} fail = function (error) {} ## error = {code: number, descript: String}
      */
-    static getSoicalUserInfo(param, success, fail) {
-		JShareModule.getSoicalUserInfo(param, success, fail)
+    static getSocialUserInfo(param, success, fail) {
+        JShareModule.getSocialUserInfo(param, () => {
+            success();
+        }, () => {
+            fail();
+        });
     }
-    
+
     /**
-     * 获取社交平台用户信息
+     * 判断某平台是否支持授权
      * 
+     * @param {*} param = {
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     * }
+     * @param {*} callback 
+     */
+    static isPlatformAuth(param, cb) {
+        JShareModule.isPlatformAuth(param, (result) => {
+            cb(result);
+        });
+    }
+
+    /**
+     * 判断该平台的分享是否有效
+     * Android only
+     * @param {*} param = {
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     * }
+     * @param {*} callback 
+     */
+    static isClientValid(param, cb) {
+        JShareModule.isClientValid(param, (result) => {
+            cb(result);
+        })
+    }
+
+    /**
+     *  授权接口
      * @param {*} param = {
      *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
      * }
      * @param {*} success 
      * @param {*} fail 
      */
-    static isPlatformAuth(param, success) {
-		JShareModule.isPlatformAuth(param, success)
+    static authorize(param, success, fail) {
+        JShareModule.authorize(param, (map) => {
+            success(map);
+        }, () => {
+            fail();
+        });
+    }
+
+    /**
+     *  判断是否授权接口
+     * @param {*} param = {
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     * }
+     * @param {*} callback 
+     */
+    static isAuthorize(param, cb) {
+        JShareModule.isAuthorize(param, (result) => {
+            cb(result);
+        });
     }
 
     /**
@@ -159,11 +224,13 @@ export default class JShare {
      *                           'sina_weibo' /
      *                           'sina_weibo_contact' 
      * }
-     * @param {function} success function (result) {}
-     * @param {function} fail 
+     * @param {function} callback function
+     * @code 返回码，0 表示成功删除
      */
-    static cancelAuthWithPlatform(param, success) {
-		JPushModule.cancelAuthWithPlatform(param, success)
+    static cancelAuthWithPlatform(param, cb) {
+        JPushModule.cancelAuthWithPlatform(param, (code) => {
+            cb(code);
+        });
     }
 
     /**
@@ -172,7 +239,7 @@ export default class JShare {
      * @param {function} success 
      */
     static isSinaWeiboWebLogined(success) {
-		JPushModule.isSinaWeiboWebLogined(success)
+        JPushModule.isSinaWeiboWebLogined(success)
     }
 
     /**
@@ -181,7 +248,7 @@ export default class JShare {
      * @param {function} success 
      */
     static sinaWeiboWebLogOut(success) {
-		JShareModule.sinaWeiboWebLogOut(success)
+        JShareModule.sinaWeiboWebLogOut(success)
     }
 
     /**
@@ -190,7 +257,7 @@ export default class JShare {
      * @param {function} success 
      */
     static isWeChatInstalled(success) {
-		JShareModule.isWeChatInstalled(success)
+        JShareModule.isWeChatInstalled(success)
     }
 
     /**
@@ -199,7 +266,7 @@ export default class JShare {
      * @param {function} success 
      */
     static isQQInstalled(success) {
-		JShareModule.isQQInstalled(success)
+        JShareModule.isQQInstalled(success)
     }
 
     /**
@@ -208,14 +275,14 @@ export default class JShare {
      * @param {function} success 
      */
     static isSinaWeiBoInstalled(success) {
-		JShareModule.isSinaWeiBoInstalled(success)
-    }
-    /**
-     * 
-     * @param {Object} param = {
-     *  enable: Boolean
-     * }
-     */
+            JShareModule.isSinaWeiBoInstalled(success)
+        }
+        /**
+         * 
+         * @param {Object} param = {
+         *  enable: Boolean
+         * }
+         */
     static setDebug(param) {
         JShareModule.setDebug(param)
     }
