@@ -50,7 +50,6 @@ export default class JShare {
      * {
      *  type: 'text'
      *  platform: platformString  // 
-     *  title: String
      *  text: String
      *  imagePath: // 选填，新浪微博本地图片地址，其他平台没有这个字段
      * }
