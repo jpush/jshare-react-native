@@ -39,7 +39,6 @@ export default class JShare {
      * {
      *  type: 'text'
      *  platform: platformString  // 
-     *  title: String
      *  text: String
      * }
      * 
