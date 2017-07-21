@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactNative from 'react-native';
-import JAnalyticsModule from 'janalytics-react-native';
+import JShareModule from 'jshare-react-native';
 
 const {
   View,
@@ -18,82 +18,77 @@ export default class MainActivity extends React.Component {
     super(props);
   }
 
-  onLoginPress = () => {
-    var LoginEvent = {
-      type: 'login',
-      extra: {
-        userId: "user1"
-      },
-      method: "login",
-      success: true
-    };
-    JAnalyticsModule.postEvent(LoginEvent);
+  onGetPlatformList = () => {
+    JShareModule.getPlatformList((list) => {
+      console.log("list: " + list);
+    });
   }
 
-  onRegisterPress = () => {
-    var RegisterEvent = {
-      type: "register",
-      extra: {
-        userId: "user2"
-      },
-      method: "register",
-      success: true
+  onGetUserInfo = () => {
+    var param = {
+      platform: "wechat_session"
     };
-    JAnalyticsModule.postEvent(RegisterEvent);
+    JShareModule.getSocialUserInfo(param, (map) => {
+      console.log(map);
+    }, (errorCode) => {
+      console.log("errorCode: " + errorCode);
+    });
   }
 
-  onPurchasePress = () => {
-    var PurchaseEvent = {
-      goodsId: '123',
-      type: 'purchase',
-      extra: {
-        userId: 'user2'
-      },
-      goodsType: 'sports',
-      goodsName: 'basketball',
-      price: 300,
-      currency: 'CNY',
-      count: 1,
-      success: true
+  onPlatformAuth = () => {
+    var param = {
+      platform: "wechat_session"
     };
-    JAnalyticsModule.postEvent(PurchaseEvent);
+    JShareModule.isPlatformAuth(param, (result) => {
+      console.log(param.platform + "is Auth: " + result);
+    });
   }
 
-  onCountPress = () => {
-    var CountEvent = {
-      id: 'count1',
-      extra: {
-        userId: 'user1'
-      },
-      type: 'count'
+  onClientValid = () => {
+    var param = {
+      platform: "wechat_session"
     };
-    JAnalyticsModule.postEvent(CountEvent);
+    JShareModule.isClientValid(param, (result) => {
+      console.log(param.platform + "is valid: " + result);
+    });
   }
 
-  onCalculatePress = () => {
-    var CalculateEvent = {
-      id: 'calculate1',
-      extra: {
-        userId: 'user1'
-      },
-      type: 'calculate',
-      value: 200
+  onAuthorize = () => {
+    var param = {
+      platform: "wechat_session"
     };
-    JAnalyticsModule.postEvent(CalculateEvent);
+    JShareModule.authorize(param, (map) => {
+      console.log("Authorize succeed " + map);
+    }, (errorCode) => {
+      console.log("Authorize failed, errorCode : " + errorCode);
+    });
   }
 
-  onBrowsePress = () => {
-    var BrowseEvent = {
-      id: 'browse1',
-      name: 'shenzhen news',
-      type: 'browse',
-      extra: {
-        userId: 'user1'
-      },
-      contentType: 'news',
-      duration: 60
+  onRemoveAuthorize = () => {
+    var param = {
+      platform: "wechat_session"
     };
-    JAnalyticsModule.postEvent(BrowseEvent);
+    JShareModule.cancelAuthWithPlatform(param, (code) => {
+      if (code === 0) {
+        console.log("remove authorize succeed");
+      } else {
+        console.log("remove authorize failed, errorCode: " + code);
+      }
+    });
+  }
+
+  onSharePress = () => {
+    var shareParam = {
+      platform: "wechat_session",
+      type: "image",
+      text: "JShare test text",
+      imagePath: "/storage/emulated/0/DCIM/Camera/IMG20170707202330.jpg"
+    };
+    JShareModule.share(shareParam, (map) => {
+      console.log("share succeed, map: " + map);
+    }, (map) => {
+      console.log("share failed, map: " + map);
+    });
   }
 
   render() {
@@ -107,54 +102,63 @@ export default class MainActivity extends React.Component {
           underlayColor = '#e4083f'
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onLoginPress}>
+          onPress = {this.onGetPlatformList}>
           <Text style={styles.btnTextStyle}>
-            Login event
+            Get Platform List
           </Text> 
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor = "#e4083f"
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onRegisterPress}>
+          onPress = {this.onGetUserInfo}>
           <Text style = {styles.btnTextStyle}>
-            Register event
+            Get userInfo
           </Text>
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor = "#e4083f"
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onPurchasePress}>
+          onPress = {this.onPlatformAuth}>
           <Text style = {styles.btnTextStyle}>
-            Purchase event
+            Is Platform auth
           </Text>
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor = "#e4083f"
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onCountPress}>
+          onPress = {this.onClientValid}>
           <Text style = {styles.btnTextStyle}>
-            Count event
+            Is client valid
           </Text>
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor = "#e4083f"
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onCalculatePress}>
+          onPress = {this.onAuthorize}>
           <Text style = {styles.btnTextStyle}>
-            Calculate event
+            Authorize
           </Text>
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor = "#e4083f"
           activeOpacity = {0.5}
           style = {styles.btnStyle}
-          onPress = {this.onBrowsePress}>
+          onPress = {this.onRemoveAuthorize}>
           <Text style = {styles.btnTextStyle}>
-            Browse event
+            Remove authorize
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          underlayColor = "#e4083f"
+          activeOpacity = {0.5}
+          style = {styles.btnStyle}
+          onPress = {this.onSharePress}>
+          <Text style = {styles.btnTextStyle}>
+            Share
           </Text>
         </TouchableHighlight>
       </View>

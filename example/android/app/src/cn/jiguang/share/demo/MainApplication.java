@@ -1,4 +1,4 @@
-package com.jshare.demo;
+package cn.jiguang.share.demo;
 
 import android.app.Application;
 

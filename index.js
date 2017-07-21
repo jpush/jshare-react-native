@@ -129,7 +129,11 @@ export default class JShare {
      * @param {*} fail = function (error) {} ## error = {code: number, descript: String}
      */
     static share(alias, success, fail) {
-        JShareModule.share(alias, success, fail);
+        JShareModule.share(alias, (map) => {
+            success(map);
+        }, (map) => {
+            fail(map);
+        });
     }
 
     /**
@@ -147,10 +151,10 @@ export default class JShare {
      * @param {*} fail = function (error) {} ## error = {code: number, descript: String}
      */
     static getSocialUserInfo(param, success, fail) {
-        JShareModule.getSocialUserInfo(param, () => {
-            success();
-        }, () => {
-            fail();
+        JShareModule.getSocialUserInfo(param, (map) => {
+            success(map);
+        }, (errorCode) => {
+            fail(errorCode);
         });
     }
 
@@ -193,8 +197,8 @@ export default class JShare {
     static authorize(param, success, fail) {
         JShareModule.authorize(param, (map) => {
             success(map);
-        }, () => {
-            fail();
+        }, (errorCode) => {
+            fail(errorCode);
         });
     }
 

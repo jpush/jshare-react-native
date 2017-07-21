@@ -106,7 +106,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 if (map.hasKey("imagePath")) {
                     shareParams.setImagePath(map.getString("imagePath"));
                 }
-                 break;
+                break;
             case "audio":
                 shareType = Platform.SHARE_MUSIC;
                 shareParams.setMusicUrl(map.getString("musicUrl"));
@@ -148,8 +148,8 @@ public class JShareModule extends ReactContextBaseJavaModule {
                     shareParams.setImageUrl(map.getString("imageUrl"));
                 }
                 break;
-                default:
-                    shareType = Platform.SHARE_APPS;
+            default:
+                shareType = Platform.SHARE_APPS;
 
         }
         shareParams.setShareType(shareType);
@@ -164,11 +164,11 @@ public class JShareModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public void onError(Platform platform, int i, int i1, Throwable throwable) {
+            public void onError(Platform platform, int action, int errorCode, Throwable throwable) {
                 Logger.i(JSHARE_NAME, "share failed");
                 WritableMap writableMap = Arguments.createMap();
                 writableMap.putString("name", platform.getName());
-                writableMap.putInt("code", i);
+                writableMap.putInt("code", errorCode);
                 failedCallback.invoke(writableMap);
                 throwable.printStackTrace();
             }
