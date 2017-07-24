@@ -31,7 +31,7 @@ export default class JShare {
     /**
      * 获取SDK所有能用的平台名称，如要使用某个平台，必须在JGShareSDK.xml中配置。
      * Android only
-     * @param {*} callback 
+     * @param {*} callback 返回值 list 是一个数组
      */
     static getPlatformList(cb) {
         JShareModule.getPlatformList((list) => {
@@ -40,9 +40,8 @@ export default class JShare {
     }
 
     /**
-     * 初始化插件
-     * 
-     * @param {object} Message = {
+     * 分享
+     * @param {object} message = {
      * 
      * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
      * type 必填
@@ -128,8 +127,8 @@ export default class JShare {
      * @param {*} success = function (state) {} ## state = {state: String} state 可以是 ‘success’ / 'fail' / 'cancel' / 'unknow'
      * @param {*} fail = function (error) {} ## error = {code: number, descript: String}
      */
-    static share(alias, success, fail) {
-        JShareModule.share(alias, (map) => {
+    static share(message, success, fail) {
+        JShareModule.share(message, (map) => {
             success(map);
         }, (map) => {
             fail(map);

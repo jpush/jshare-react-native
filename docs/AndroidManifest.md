@@ -1,6 +1,11 @@
+# AndroidManifest Configuration
+
+> your project/android/app/AndroidManifest.xml
+
+```
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="cn.jiguang.share.demo">
+    package="your package name">
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -48,3 +53,5 @@
 
 
 </manifest>
+```
+
