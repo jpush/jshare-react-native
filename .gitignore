@@ -197,4 +197,4 @@ build-res/
 *.log
 .qshell
 *.qshell
-example/node_modules/
+example/node_modules/*
