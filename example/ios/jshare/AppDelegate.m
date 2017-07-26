@@ -18,6 +18,18 @@
 {
   NSURL *jsCodeLocation;
 
+
+  NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"wechat@3x" ofType:@"png"];
+  NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"jiguang" ofType:@"mp4"];
+  
+  NSString *emotionPath = [[NSBundle mainBundle] pathForResource:@"res6" ofType:@"gif"];
+  
+  NSLog(@"+++++++++++++ list  the file path +++++++++++");
+  NSLog(@"%@",imagePath);
+  NSLog(@"%@",videoPath);
+  NSLog(@"%@",emotionPath);
+  
+  
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -34,4 +46,12 @@
   return YES;
 }
 
+-(NSString *)getFilePath:(NSString *)fileName{
+  NSArray *paths = NSSearchPathForDirectoriesInDomains
+  (NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = [paths objectAtIndex:0];
+  NSString *filePath = [NSString stringWithFormat:@"%@/%@",
+                        documentsDirectory,fileName];
+  return filePath;
+}
 @end

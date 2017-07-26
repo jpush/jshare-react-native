@@ -46,6 +46,10 @@
 		62482E7F1F1DFAF8009C9996 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E7E1F1DFAF8009C9996 /* CoreGraphics.framework */; };
 		62482E811F1DFAFD009C9996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E801F1DFAFD009C9996 /* UIKit.framework */; };
 		62482E831F1DFB03009C9996 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E821F1DFB03009C9996 /* libz.tbd */; };
+		62CBDE451F274D1C00C1C703 /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDE441F274D1C00C1C703 /* jcore-ios-1.1.5.a */; };
+		62CBDE471F286B3F00C1C703 /* wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE461F286B3F00C1C703 /* wechat@3x.png */; };
+		62CBDE4A1F286B7E00C1C703 /* res6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE491F286B7E00C1C703 /* res6.gif */; };
+		62CBDE4B1F28726600C1C703 /* jiguang.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE481F286B5100C1C703 /* jiguang.mp4 */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +286,10 @@
 		62482E7E1F1DFAF8009C9996 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		62482E801F1DFAFD009C9996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		62482E821F1DFB03009C9996 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		62CBDE441F274D1C00C1C703 /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
+		62CBDE461F286B3F00C1C703 /* wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@3x.png"; sourceTree = "<group>"; };
+		62CBDE481F286B5100C1C703 /* jiguang.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jiguang.mp4; sourceTree = "<group>"; };
+		62CBDE491F286B7E00C1C703 /* res6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res6.gif; sourceTree = "<group>"; };
 		65EDC57FA8C64C2FA7931CF0 /* RCTJShareModule.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTJShareModule.xcodeproj; path = "../node_modules/jshare-react-native/ios/RCTJShareModule.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -304,6 +312,7 @@
 				62482E811F1DFAFD009C9996 /* UIKit.framework in Frameworks */,
 				62482E7F1F1DFAF8009C9996 /* CoreGraphics.framework in Frameworks */,
 				62482E7D1F1DFAF2009C9996 /* SystemConfiguration.framework in Frameworks */,
+				62CBDE451F274D1C00C1C703 /* jcore-ios-1.1.5.a in Frameworks */,
 				62482E7B1F1DFAEB009C9996 /* CoreTelephony.framework in Frameworks */,
 				62482E791F1DFADD009C9996 /* CFNetwork.framework in Frameworks */,
 				62482E771F1DFAD7009C9996 /* CoreFoundation.framework in Frameworks */,
@@ -431,8 +440,12 @@
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				62CBDE441F274D1C00C1C703 /* jcore-ios-1.1.5.a */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				62CBDE461F286B3F00C1C703 /* wechat@3x.png */,
+				62CBDE481F286B5100C1C703 /* jiguang.mp4 */,
+				62CBDE491F286B7E00C1C703 /* res6.gif */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -922,6 +935,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CBDE4B1F28726600C1C703 /* jiguang.mp4 in Resources */,
+				62CBDE4A1F286B7E00C1C703 /* res6.gif in Resources */,
+				62CBDE471F286B3F00C1C703 /* wechat@3x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
