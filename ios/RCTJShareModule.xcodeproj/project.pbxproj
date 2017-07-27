@@ -1,0 +1,336 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		62CBDDDE1F27397F00C1C703 /* jshare-ios-1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDDA1F27397F00C1C703 /* jshare-ios-1.2.0.a */; };
+		62CBDDDF1F27397F00C1C703 /* RCTJShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */; };
+		62CBDDE21F273B9B00C1C703 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE11F273B9B00C1C703 /* UIKit.framework */; };
+		62CBDDE41F273BA400C1C703 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE31F273BA400C1C703 /* SystemConfiguration.framework */; };
+		62CBDDE61F273BAE00C1C703 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE51F273BAE00C1C703 /* CoreTelephony.framework */; };
+		62CBDDE81F273BBC00C1C703 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE71F273BBC00C1C703 /* CoreGraphics.framework */; };
+		62CBDDEA1F273BC500C1C703 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE91F273BC500C1C703 /* Security.framework */; };
+		62CBDDEC1F273BCD00C1C703 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDEB1F273BCD00C1C703 /* Foundation.framework */; };
+		62CBDDEE1F273BE200C1C703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDED1F273BE200C1C703 /* CoreLocation.framework */; };
+		62CBDDF01F273BEA00C1C703 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDEF1F273BEA00C1C703 /* CoreFoundation.framework */; };
+		62CBDDF21F273BF700C1C703 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF11F273BF700C1C703 /* CFNetwork.framework */; };
+		62CBDDF41F273C1C00C1C703 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF31F273C1C00C1C703 /* libz.tbd */; };
+		62CBDDF61F273C2300C1C703 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF51F273C2300C1C703 /* libresolv.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		62CBDDCC1F27394300C1C703 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		62CBDDCE1F27394300C1C703 /* libRCTJShareModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTJShareModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		62CBDDDA1F27397F00C1C703 /* jshare-ios-1.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jshare-ios-1.2.0.a"; sourceTree = "<group>"; };
+		62CBDDDB1F27397F00C1C703 /* JSHAREService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSHAREService.h; sourceTree = "<group>"; };
+		62CBDDDC1F27397F00C1C703 /* RCTJShareModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTJShareModule.h; sourceTree = "<group>"; };
+		62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTJShareModule.m; sourceTree = "<group>"; };
+		62CBDDE11F273B9B00C1C703 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		62CBDDE31F273BA400C1C703 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		62CBDDE51F273BAE00C1C703 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		62CBDDE71F273BBC00C1C703 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		62CBDDE91F273BC500C1C703 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		62CBDDEB1F273BCD00C1C703 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		62CBDDED1F273BE200C1C703 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		62CBDDEF1F273BEA00C1C703 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		62CBDDF11F273BF700C1C703 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		62CBDDF31F273C1C00C1C703 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		62CBDDF51F273C2300C1C703 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		62CBDDCB1F27394300C1C703 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62CBDDF61F273C2300C1C703 /* libresolv.tbd in Frameworks */,
+				62CBDDF41F273C1C00C1C703 /* libz.tbd in Frameworks */,
+				62CBDDF21F273BF700C1C703 /* CFNetwork.framework in Frameworks */,
+				62CBDDF01F273BEA00C1C703 /* CoreFoundation.framework in Frameworks */,
+				62CBDDEE1F273BE200C1C703 /* CoreLocation.framework in Frameworks */,
+				62CBDDEC1F273BCD00C1C703 /* Foundation.framework in Frameworks */,
+				62CBDDEA1F273BC500C1C703 /* Security.framework in Frameworks */,
+				62CBDDE81F273BBC00C1C703 /* CoreGraphics.framework in Frameworks */,
+				62CBDDE61F273BAE00C1C703 /* CoreTelephony.framework in Frameworks */,
+				62CBDDE41F273BA400C1C703 /* SystemConfiguration.framework in Frameworks */,
+				62CBDDE21F273B9B00C1C703 /* UIKit.framework in Frameworks */,
+				62CBDDDE1F27397F00C1C703 /* jshare-ios-1.2.0.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		62CBDDC51F27394300C1C703 = {
+			isa = PBXGroup;
+			children = (
+				62CBDDD01F27394300C1C703 /* RCTJShareModule */,
+				62CBDDCF1F27394300C1C703 /* Products */,
+				62CBDDE01F273B9B00C1C703 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		62CBDDCF1F27394300C1C703 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				62CBDDCE1F27394300C1C703 /* libRCTJShareModule.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		62CBDDD01F27394300C1C703 /* RCTJShareModule */ = {
+			isa = PBXGroup;
+			children = (
+				62CBDDDA1F27397F00C1C703 /* jshare-ios-1.2.0.a */,
+				62CBDDDB1F27397F00C1C703 /* JSHAREService.h */,
+				62CBDDDC1F27397F00C1C703 /* RCTJShareModule.h */,
+				62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */,
+			);
+			path = RCTJShareModule;
+			sourceTree = "<group>";
+		};
+		62CBDDE01F273B9B00C1C703 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				62CBDDF51F273C2300C1C703 /* libresolv.tbd */,
+				62CBDDF31F273C1C00C1C703 /* libz.tbd */,
+				62CBDDF11F273BF700C1C703 /* CFNetwork.framework */,
+				62CBDDEF1F273BEA00C1C703 /* CoreFoundation.framework */,
+				62CBDDED1F273BE200C1C703 /* CoreLocation.framework */,
+				62CBDDEB1F273BCD00C1C703 /* Foundation.framework */,
+				62CBDDE91F273BC500C1C703 /* Security.framework */,
+				62CBDDE71F273BBC00C1C703 /* CoreGraphics.framework */,
+				62CBDDE51F273BAE00C1C703 /* CoreTelephony.framework */,
+				62CBDDE31F273BA400C1C703 /* SystemConfiguration.framework */,
+				62CBDDE11F273B9B00C1C703 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		62CBDDCD1F27394300C1C703 /* RCTJShareModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62CBDDD71F27394300C1C703 /* Build configuration list for PBXNativeTarget "RCTJShareModule" */;
+			buildPhases = (
+				62CBDDCA1F27394300C1C703 /* Sources */,
+				62CBDDCB1F27394300C1C703 /* Frameworks */,
+				62CBDDCC1F27394300C1C703 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCTJShareModule;
+			productName = RCTJShareModule;
+			productReference = 62CBDDCE1F27394300C1C703 /* libRCTJShareModule.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		62CBDDC61F27394300C1C703 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = HXHG;
+				TargetAttributes = {
+					62CBDDCD1F27394300C1C703 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = RL64Y54S9V;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 62CBDDC91F27394300C1C703 /* Build configuration list for PBXProject "RCTJShareModule" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 62CBDDC51F27394300C1C703;
+			productRefGroup = 62CBDDCF1F27394300C1C703 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				62CBDDCD1F27394300C1C703 /* RCTJShareModule */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		62CBDDCA1F27394300C1C703 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62CBDDDF1F27397F00C1C703 /* RCTJShareModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		62CBDDD51F27394300C1C703 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		62CBDDD61F27394300C1C703 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		62CBDDD81F27394300C1C703 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = RL64Y54S9V;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RCTJShareModule",
+					"$(SRCROOT)/../../jcore-react-native/ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		62CBDDD91F27394300C1C703 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = RL64Y54S9V;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RCTJShareModule",
+					"$(SRCROOT)/../../jcore-react-native/ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		62CBDDC91F27394300C1C703 /* Build configuration list for PBXProject "RCTJShareModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62CBDDD51F27394300C1C703 /* Debug */,
+				62CBDDD61F27394300C1C703 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62CBDDD71F27394300C1C703 /* Build configuration list for PBXNativeTarget "RCTJShareModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62CBDDD81F27394300C1C703 /* Debug */,
+				62CBDDD91F27394300C1C703 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 62CBDDC61F27394300C1C703 /* Project object */;
+}
