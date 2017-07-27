@@ -289,7 +289,7 @@ export default class JShare {
             JShareModule.isSinaWeiBoInstalled(success)
         }
     
-        /**
+    /**
      * 
      * @param {Object} param = {
      *  enable: Boolean
