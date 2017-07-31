@@ -8,6 +8,7 @@ const JShareModule = NativeModules.JShareModule;
 
 export default class JShare {
     /**
+     * iOS Only
      * 
      * @param {Object} config = {
      *  appKey: String              // appKey 一个 JIGUANG 应用必须的,唯一的标识. 请参考 JIGUANG 相关说明文档来获取这个标识。
