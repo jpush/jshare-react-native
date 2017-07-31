@@ -19,7 +19,9 @@ react-native link
 
 That's it.
 
+### iOS
 
+- [configure iOS](./docs/iOSConfig.md)
 
 ## Usage
 
