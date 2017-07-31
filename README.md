@@ -29,9 +29,10 @@ That's it.
 
   > your component.js
 
-  ```
+  ```javascript
   ...
   import JShareModule from 'jshare-react-native';
+  JShareModule.setup(param) // iOS 调用该方法才能正常使用， param 参考 API 文档
   ```
 
 - Use JShareModule call APIs, [API Document](./docs/API.md)
