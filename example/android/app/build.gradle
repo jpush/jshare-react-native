@@ -112,16 +112,16 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file("jshare.jks") //签名文件路径
-            storePassword "sdkteam"
-            keyAlias "jshare"
-            keyPassword "sdkteam" //签名密码
+            storeFile file("jshare.jks") //你的签名文件路径
+            storePassword "sdkteam"    //你的签名文件保存密码
+            keyAlias "jshare"         // 你的别名
+            keyPassword "sdkteam" //你的签名密码
         }
         release {
-            storeFile file("jshare.jks") //签名文件路径
-            storePassword "sdkteam"
-            keyAlias "jshare"
-            keyPassword "sdkteam" //签名密码
+            storeFile file("jshare.jks") //你的签名文件路径
+            storePassword "sdkteam"     //你的签名文件保存密码
+            keyAlias "jshare"          // 你的别名
+            keyPassword "sdkteam" //你的签名密码
         }
     }
     buildTypes {
