@@ -4,7 +4,7 @@
 
 ```
 npm install jshare-react-native --save
-npm install jcore-react-native@1.1.5 --save
+npm install jcore-react-native --save
 react-native link
 ```
 
