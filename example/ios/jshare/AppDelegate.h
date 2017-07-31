@@ -8,6 +8,11 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <React/RCTRootView.h>
+
+
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTBridge.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

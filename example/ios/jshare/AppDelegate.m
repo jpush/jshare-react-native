@@ -8,26 +8,16 @@
  */
 
 #import "AppDelegate.h"
-
+#import <RCTJShareModule.h>
 #import <React/RCTBundleURLProvider.h>
-#import <React/RCTRootView.h>
+#import <React/RCTEventEmitter.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-
-
-  NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"wechat@3x" ofType:@"png"];
-  NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"jiguang" ofType:@"mp4"];
-  
-  NSString *emotionPath = [[NSBundle mainBundle] pathForResource:@"res6" ofType:@"gif"];
-  
-  NSLog(@"+++++++++++++ list  the file path +++++++++++");
-  NSLog(@"%@",imagePath);
-  NSLog(@"%@",videoPath);
-  NSLog(@"%@",emotionPath);
   
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];

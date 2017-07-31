@@ -12,13 +12,16 @@ const {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  NativeAppEventEmitter,
 } = ReactNative;
 
 export default class MainActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      path: ""
+      imagePath: "",
+      videoPath: "",
+      emotionPath: ""
     }
     var config = 
     {
@@ -37,6 +40,17 @@ export default class MainActivity extends React.Component {
     }
      
     JShareModule.setup(config)
+  }
+
+  componentWillMount() {
+    NativeAppEventEmitter.addListener('finishGetResource', (result) => {
+        this.setState({ 
+            imagePath: result.imagePath ,
+            videoPath: result.videoPath,
+            emotionPath: result.emotionPath,
+          });
+          console.log(this.state)
+        });
   }
 
   onGetUserInfo = () => {
@@ -106,7 +120,7 @@ export default class MainActivity extends React.Component {
       imageUrl: "",
       imagePath: ""
     }
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.imagePath
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
     }, (map) => {
@@ -136,7 +150,7 @@ export default class MainActivity extends React.Component {
       imagePath: "",
       videoUrl: "",
     };
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.imagePath
 
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
@@ -167,7 +181,7 @@ export default class MainActivity extends React.Component {
       title: "audio",
       imagePath: "",
     };
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.imagePath
 
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
@@ -183,7 +197,7 @@ export default class MainActivity extends React.Component {
       path: "",
       fileExt: "to share file type"
     };
-    shareParam.path = this.state.path
+    shareParam.path = this.state.videoPath
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
     }, (map) => {
@@ -197,7 +211,7 @@ export default class MainActivity extends React.Component {
       type: "emoticon",
       imagePath: ""
     };
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.emotionPath
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
     }, (map) => {
@@ -216,7 +230,7 @@ export default class MainActivity extends React.Component {
       extInfo: "ext info string",
       path: ""
     };
-    shareParam.path = this.state.path
+    shareParam.path = this.state.imagePath
 
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
@@ -247,7 +261,7 @@ export default class MainActivity extends React.Component {
       title: " shared link",
       text: "the web link",
     };
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.imagePath
 
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);

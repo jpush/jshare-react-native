@@ -36,6 +36,7 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* jshareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* jshareTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		624764041F2ADF9E00BB06C7 /* EventEmiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 624764031F2ADF9E00BB06C7 /* EventEmiter.m */; };
 		62482E711F1DFAC2009C9996 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E701F1DFAC2009C9996 /* AssetsLibrary.framework */; };
 		62482E731F1DFACA009C9996 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E721F1DFACA009C9996 /* libresolv.tbd */; };
 		62482E751F1DFAD0009C9996 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E741F1DFAD0009C9996 /* Security.framework */; };
@@ -276,6 +277,8 @@
 		2D02E47B1E0B4A5D006451C7 /* jshare-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "jshare-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* jshare-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jshare-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		624764021F2ADF9E00BB06C7 /* EventEmiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventEmiter.h; sourceTree = "<group>"; };
+		624764031F2ADF9E00BB06C7 /* EventEmiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventEmiter.m; sourceTree = "<group>"; };
 		62482E701F1DFAC2009C9996 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		62482E721F1DFACA009C9996 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		62482E741F1DFAD0009C9996 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -443,6 +446,8 @@
 				62CBDE441F274D1C00C1C703 /* jcore-ios-1.1.5.a */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				624764021F2ADF9E00BB06C7 /* EventEmiter.h */,
+				624764031F2ADF9E00BB06C7 /* EventEmiter.m */,
 				62CBDE461F286B3F00C1C703 /* wechat@3x.png */,
 				62CBDE481F286B5100C1C703 /* jiguang.mp4 */,
 				62CBDE491F286B7E00C1C703 /* res6.gif */,
@@ -1004,6 +1009,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				624764041F2ADF9E00BB06C7 /* EventEmiter.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
