@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "jcore-react-native": "^1.1.7",
     "jshare-react-native": "^0.0.6",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
