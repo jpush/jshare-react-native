@@ -18,8 +18,6 @@
 		62CBDDEE1F273BE200C1C703 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDED1F273BE200C1C703 /* CoreLocation.framework */; };
 		62CBDDF01F273BEA00C1C703 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDEF1F273BEA00C1C703 /* CoreFoundation.framework */; };
 		62CBDDF21F273BF700C1C703 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF11F273BF700C1C703 /* CFNetwork.framework */; };
-		62CBDDF41F273C1C00C1C703 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF31F273C1C00C1C703 /* libz.tbd */; };
-		62CBDDF61F273C2300C1C703 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDF51F273C2300C1C703 /* libresolv.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,8 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62CBDDF61F273C2300C1C703 /* libresolv.tbd in Frameworks */,
-				62CBDDF41F273C1C00C1C703 /* libz.tbd in Frameworks */,
 				62CBDDF21F273BF700C1C703 /* CFNetwork.framework in Frameworks */,
 				62CBDDF01F273BEA00C1C703 /* CoreFoundation.framework in Frameworks */,
 				62CBDDEE1F273BE200C1C703 /* CoreLocation.framework in Frameworks */,
@@ -288,7 +284,7 @@
 					"$(SRCROOT)/../../jcore-react-native/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_LIBTOOLFLAGS = "-ljcore-ios";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -305,7 +301,7 @@
 					"$(SRCROOT)/../../jcore-react-native/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_LIBTOOLFLAGS = "-ljcore-ios";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
