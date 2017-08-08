@@ -26,7 +26,7 @@ export default class JShare {
      * }
      */
     static setup(config) {
-        JShareModule.setup(parma);
+        JShareModule.setup(config);
     }
 
     /**
