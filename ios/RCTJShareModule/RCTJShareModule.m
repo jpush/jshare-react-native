@@ -7,7 +7,6 @@
 //
 
 #import "RCTJShareModule.h"
-#import "JSHAREService.h"
 
 #if __has_include(<React/RCTBridge.h>)
 #import <React/RCTEventDispatcher.h>
@@ -161,7 +160,7 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
 }
 
 
-RCT_EXPORT_METHOD(getSoicalUserInfo:(NSDictionary *)param
+RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
                   success:(RCTResponseSenderBlock) successCallBack
                   fail:(RCTResponseSenderBlock) failCallBack) {
 

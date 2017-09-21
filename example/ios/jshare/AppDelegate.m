@@ -44,4 +44,9 @@
                         documentsDirectory,fileName];
   return filePath;
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
 @end
