@@ -16,6 +16,7 @@ const {
   StyleSheet,
   TextInput,
   Keyboard,
+  Alert,
   TouchableWithoutFeedback,
   NativeAppEventEmitter,
   ScrollView
@@ -388,7 +389,10 @@ export default class MainActivity extends React.Component {
           <FormButton
             title="getUserInfo"
             onPress={ () => {
-              JShareModule.getSocialUserInfo({platform:'qq'}, (success) => {}, (error) => {})
+              JShareModule.getSocialUserInfo({platform:'qq'}, (success) => {
+                Alert.alert(JSON.stringify(success))
+              }, (error) => {})
+
             }}
           />
         </ScrollView>
