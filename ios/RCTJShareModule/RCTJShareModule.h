@@ -16,6 +16,8 @@
 #import "React/RCTBridgeModule.h"
 #endif
 
+#import "JSHAREService.h"
+
 @interface RCTJShareModule : NSObject <RCTBridgeModule>
 
 @end

@@ -10,7 +10,7 @@
  */
 
 
-#define JSHARE_VERSION_NUMBER 1.2.0
+#define JSHARE_VERSION_NUMBER 1.2.1
 
 #import <Foundation/Foundation.h>
 
