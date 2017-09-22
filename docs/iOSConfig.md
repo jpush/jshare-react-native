@@ -11,7 +11,13 @@
 添加 `handleOpenURL`
 
 ```objective-c
+// work in iOS(2_0, 9_0)
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
+// work in iOS(9_0,++)
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
   [JSHAREService handleOpenUrl:url];
   return YES;
 }
