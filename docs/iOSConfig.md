@@ -1,6 +1,37 @@
 ## iOS Configuration Part
 
-### 配置 Info.plist
+### 在 Appdelegate.m 中插入代码
+
+加入头文件 `RCTJShareModule.h`
+
+```objective-c
+#import <RCTJShareModule.h>
+```
+
+添加 `handleOpenURL`
+
+```objective-c
+// work in iOS(2_0, 9_0)
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
+// work in iOS(9_0,++)
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
+```
+
+### 添加搜索路径
+
+TARGET -> Build Settings -> Header Search Paths 添加搜索路径
+
+```
+$(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
+```
+
+### 配置 Info.plist 
 
 在 info.plist 文件中添加如下键值对
 

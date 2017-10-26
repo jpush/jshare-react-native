@@ -7,7 +7,6 @@
 //
 
 #import "RCTJShareModule.h"
-#import "JSHAREService.h"
 
 #if __has_include(<React/RCTBridge.h>)
 #import <React/RCTEventDispatcher.h>
@@ -161,7 +160,7 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
 }
 
 
-RCT_EXPORT_METHOD(getSoicalUserInfo:(NSDictionary *)param
+RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
                   success:(RCTResponseSenderBlock) successCallBack
                   fail:(RCTResponseSenderBlock) failCallBack) {
 
@@ -269,6 +268,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     message.platform = platform;
   } else {
     failCallBack(@[@{@"code":@(1), @"description": @"parame error: platform error"}]);
+    return;
   }
   
   if ([param[@"type"] isEqualToString: @"text"]) {
@@ -280,8 +280,8 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   }
   
   if ([param[@"type"] isEqualToString: @"image"]) {
-    if (param[@"image"]) {
-      message.image = [NSData dataWithContentsOfFile:param[@"image"]];
+    if (param[@"imagePath"]) {
+      message.image = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
     
     if (param[@"text"]) {
@@ -415,6 +415,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
     if (error) {
       failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+      return;
     }
     NSString *stateString = [self stateToString:state];
     successCallBack(@[@{@"state": stateString}]);

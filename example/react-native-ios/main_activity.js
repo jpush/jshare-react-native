@@ -1,6 +1,11 @@
 'use strict';
 
 import React from 'react';
+var {
+  PropTypes,
+  Component,
+} = React;
+
 import ReactNative from 'react-native';
 import JShareModule from 'jshare-react-native';
 
@@ -11,8 +16,10 @@ const {
   StyleSheet,
   TextInput,
   Keyboard,
+  Alert,
   TouchableWithoutFeedback,
   NativeAppEventEmitter,
+  ScrollView
 } = ReactNative;
 
 export default class MainActivity extends React.Component {
@@ -273,7 +280,7 @@ export default class MainActivity extends React.Component {
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View>
+        <ScrollView>
           <TextInput 
             
             placeholder = { 'path' }
@@ -379,12 +386,55 @@ export default class MainActivity extends React.Component {
               Share Link
             </Text>
           </TouchableHighlight>
-        </View>
+          <FormButton
+            title="getUserInfo"
+            onPress={ () => {
+              JShareModule.getSocialUserInfo({platform:'qq'}, (success) => {
+                Alert.alert(JSON.stringify(success))
+              }, (error) => {})
+
+            }}
+          />
+        </ScrollView>
       </TouchableWithoutFeedback>
     );
   }
 }
 
+class FormButton extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    onPress: PropTypes.func
+  }
+
+  constructor(props) {
+    super(props);
+    this.title = props.title
+    this.onPress = this.onPress.bind(this);
+  }
+
+  onPress() {
+    if (!this.props.onPress) {
+        return;
+      }
+    this.props.onPress();
+  }
+
+  render () {
+    return (
+        <TouchableHighlight
+        underlayColor = "#e4083f"
+        activeOpacity = {0.5}
+        style = {styles.btnStyle}
+        onPress = {this.onPress}>
+        <Text style = {styles.btnTextStyle}>
+              {this.props.title}
+            </Text>
+
+        </TouchableHighlight>
+    )
+}
+}
 var styles = StyleSheet.create({
   welcome: {
     textAlign: 'center',
