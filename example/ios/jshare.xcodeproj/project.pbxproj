@@ -515,6 +515,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		625969F61F8A0FC300D3EB67 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1F258CF97D3D4E2EB8216E98 /* libRCTJShareModule.a */,
+				E853780E10334DF8A54B2F6A /* libRCTJCoreModule.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		62CBDE261F274A0D00C1C703 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +578,7 @@
 				00E356EF1AD99517003FC87E /* jshareTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				62482E6F1F1DFAC2009C9996 /* Frameworks */,
+				625969F61F8A0FC300D3EB67 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
