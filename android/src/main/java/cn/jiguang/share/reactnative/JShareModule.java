@@ -281,7 +281,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                             String openId = ((UserInfo) data).getOpenid();  //openid
                             String name = ((UserInfo) data).getName();  //昵称
                             String imageUrl = ((UserInfo) data).getImageUrl();  //头像url
-                            int gender = ((UserInfo) data).getGenter();//性别, 1表示男性；2表示女性
+                            int gender = ((UserInfo) data).getGender();//性别, 1表示男性；2表示女性
                             //个人信息原始数据，开发者可自行处理
                             String originData = data.getOriginData();
                             WritableMap writableMap = Arguments.createMap();

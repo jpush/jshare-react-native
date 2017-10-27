@@ -15,6 +15,7 @@ react-native link
 - [Checkout configuration](./docs/AndroidConfig.md)
 - [Add JSharePackage, Don't forget the parameters !](./docs/JSharePackage.md)
 - [Checkout AndroidManifest](./docs/AndroidManifest.md)
+- [Add JGShareSDK.xml](./docs/JGShareSDK.md)
 - [Add WXEntryActivity](./docs/WXEntryActivity.md)
 
 That's it.
