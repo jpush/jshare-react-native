@@ -78,8 +78,8 @@ $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 </array>
 ```
 
-###添加 URL Types
-####各个平台的 URL Schemes 格式说明：
+### 添加 URL Types
+#### 各个平台的 URL Schemes 格式说明：
 
 | 平台   | 格式                               | 举例                                       |
 | ---- | -------------------------------- | ---------------------------------------- |
@@ -91,7 +91,7 @@ $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 Xcode 工程目录中的 [TARGETS] -> [Info] 中设置：
 ![](https://docs.jiguang.cn/jshare/client/image/urlType.png)
 
-###HTTPS 设置
+### HTTPS 设置
  > Apple 将从2017年开始执行 ATS(App Transport Security)，所有进行审核的应用中网络请求全部支持 HTTPS，届时以下配置将会失效，请提前做好准备。
 
   目前 JSHARE 支持不存在新浪微博客户端情况下的网页分享，但是由于新浪微博的 api 尚未针对 https 做优化所以需要针对新浪的做对应的 https 设置。在 JSHARE 中是默认关闭新浪微博的网页端分享的，如需使用这个功能则需要在 JSHARELaunchConfig 类的实例中将 **isSupportWebSina** 属性设置为 YES。
