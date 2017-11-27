@@ -235,7 +235,7 @@ export default class JShare {
      * @code 返回码，0 表示成功删除
      */
     static cancelAuthWithPlatform(param, cb) {
-        JPushModule.cancelAuthWithPlatform(param, (code) => {
+        JShareModule.cancelAuthWithPlatform(param, (code) => {
             cb(code);
         });
     }
@@ -247,7 +247,7 @@ export default class JShare {
      * @param {Function} success = (Boolean) => {} 
      */
     static isSinaWeiboWebLogined(success) {
-        JPushModule.isSinaWeiboWebLogined(success)
+        JShareModule.isSinaWeiboWebLogined(success)
     }
 
     /**
