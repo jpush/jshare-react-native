@@ -26,8 +26,6 @@
 
 RCT_EXPORT_MODULE();
 
-//@synthesize bridge = _bridge;
-
 + (id)allocWithZone:(NSZone *)zone {
   static RCTJShareModule *sharedInstance = nil;
   static dispatch_once_t onceToken;
@@ -41,32 +39,6 @@ RCT_EXPORT_MODULE();
   self = [super init];
   return self;
 }
-
-
-
-//
-///**
-// 启动SDK,必要!
-//
-// @param config SDK启动参数模型，不可为nil。
-// */
-//+ (void)setupWithConfig:(JSHARELaunchConfig *)config;
-//
-//
-
-
-//JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
-//config.appKey = @"a1703c14b186a68a66ef86c1";
-//config.SinaWeiboAppKey = @"374535501";
-//config.SinaWeiboAppSecret = @"baccd12c166f1df96736b51ffbf600a2";
-//config.SinaRedirectUri = @"https://www.jiguang.cn";
-//config.QQAppId = @"1105864531";
-//config.QQAppKey = @"glFYjkHQGSOCJHMC";
-//config.WeChatAppId = @"wxc40e16f3ba6ebabc";
-//config.WeChatAppSecret = @"dcad950cd0633a27e353477c4ec12e7a";
-//config.isSupportWebSina = YES;
-//[JSHAREService setupWithConfig:config];
-//[JSHAREService setDebug:YES];
 
 - (JSHAREPlatform)getPlatformFromDic:(NSDictionary *)param {
   JSHAREPlatform platform = 0;
