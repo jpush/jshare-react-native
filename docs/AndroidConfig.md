@@ -21,7 +21,7 @@ android {
     applicationId "your application id"
     ...
     manifestPlaceholders = [
-      JSHARE_PKGNAME: "cn.jiguang.share.demo",
+      JSHARE_PKGNAME: "your application id",
       JPUSH_APPKEY: "your app key",	//在此替换你的APPKey
       JPUSH_CHANNEL: "developer-default",		//应用渠道号, 默认即可
       TENCENT_APPID: "your tencent app id"

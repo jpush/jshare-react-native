@@ -18,6 +18,10 @@ export default class MainActivity extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    JShareModule.setDebug({enable: true})
+  }
+
   onGetPlatformList = () => {
     JShareModule.getPlatformList((list) => {
       console.log("list: " + list);

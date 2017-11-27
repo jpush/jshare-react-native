@@ -192,6 +192,7 @@ export default class JShare {
 
     /**
      *  授权接口
+     * Android only
      * @param {Object} param = {
      *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
      * }
@@ -235,7 +236,7 @@ export default class JShare {
      * @code 返回码，0 表示成功删除
      */
     static cancelAuthWithPlatform(param, cb) {
-        JPushModule.cancelAuthWithPlatform(param, (code) => {
+        JShareModule.cancelAuthWithPlatform(param, (code) => {
             cb(code);
         });
     }
@@ -247,7 +248,7 @@ export default class JShare {
      * @param {Function} success = (Boolean) => {} 
      */
     static isSinaWeiboWebLogined(success) {
-        JPushModule.isSinaWeiboWebLogined(success)
+        JShareModule.isSinaWeiboWebLogined(success)
     }
 
     /**

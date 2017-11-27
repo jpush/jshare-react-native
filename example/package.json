@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "jcore-react-native": "^1.1.7",
-    "jshare-react-native": "^0.0.6",
+    "jshare-react-native": "^1.1.0",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
     "react-navigation": "^1.0.0-beta.11"

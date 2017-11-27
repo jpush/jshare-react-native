@@ -239,11 +239,11 @@ JShareModule.xxx();
   });
   ```
 
-- **authorize(param, successCallback, failCallback)**
+- **authorize(param, successCallback, failCallback) Android Only**
 
   ```javascript
   /**
-   * 授权接口
+   * 授权接口 Android Only
    * @param {Object} param = {
    *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
    * }
@@ -438,7 +438,7 @@ JShareModule.xxx();
   });
   ```
 
-- **setDebug(param, callback)**
+- **setDebug(param, callback)，Android 建议在 MainApplication 中调用，[参考 demo](./../example/android/app/src/main/java/cn/jiguang/share/demo/MainApplication.java)** 
 
   ```javascript
   /**
