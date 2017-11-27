@@ -10,7 +10,9 @@
  */
 
 
-#define JSHARE_VERSION_NUMBER 1.2.1
+
+#define JSHARE_VERSION_NUMBER 1.3.0
+
 
 #import <Foundation/Foundation.h>
 
@@ -24,6 +26,9 @@ typedef NS_ENUM(NSUInteger, JSHAREPlatform) {
     
     JSHAREPlatformSinaWeibo = 6,
     JSHAREPlatformSinaWeiboContact = 7,
+    
+    JSHAREPlatformFacebook = 8,
+    JSHAREPlatformFacebookMessenger = 9,
 };
 
 typedef NS_ENUM(NSUInteger,JSHAREState){
@@ -106,6 +111,17 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  */
 @property (nonatomic, copy) NSString *SinaRedirectUri;
 
+
+/**
+ 设置Facebook应用标识
+ */
+@property (nonatomic,copy) NSString *FacebookAppID;
+
+/**
+ 设置Facebook应用名称
+ */
+@property (nonatomic,copy) NSString *FacebookDisplayName;
+
 /**
  不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
  */
@@ -154,7 +170,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 
 
 /**
- 本地视频AssetURL:分享本地视频到 QQ 空间的必填参数，可传ALAsset的ALAssetPropertyAssetURL，或者PHAsset的localIdentifier。
+ 本地视频AssetURL:分享本地视频到 QQ 空间的必填参数，可传ALAsset的ALAssetPropertyAssetURL，或者PHAsset的localIdentifier。分享到视频类型至 facebook 、facebookMessenger 只能识别 ALAsset 的ALAssetPropertyAssetURL。
  */
 @property (nonatomic,strong) NSString *videoAssetURL;
 
@@ -182,7 +198,9 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 @property (nonatomic,strong) NSData *image;
 
 /**
- 图片数组：分享到 QQ 空间支持多张图片，图片数组的元素需要为 NSData 类型，图片数量限制为20张。若只分享单张图片至 QQ 空间使用 image 字段即可。
+ 图片数组：分享到 QQ 空间 或 Facebook/Messenger 支持多张图片。图片数组的元素需要为 NSData 类型。
+         1.QQ 空间图片数量限制为20张。若只分享单张图片使用 image 字段即可。
+         2.Facebook/Messenger 图片数量限制为6张。如果分享单张图片，图片大小建议不要超过12M；如果分享多张图片，图片大小建议不要超过700K，否则可能出现重启手机或者不能分享。
  */
 @property (nonatomic,strong) NSArray *images;
 
@@ -275,7 +293,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  @param platform 社交平台参数，JSHAREPlatformWechatSession表示微信平台，JSHAREPlatformQQ表示 QQ 平台，JSHAREPlatformSinaWeibo，表示新浪微博平台。
  @param handler 获取社交平台用户信息的回调
  */
-+ (void)getSoicalUserInfo:(JSHAREPlatform)platform
++ (void)getSocialUserInfo:(JSHAREPlatform)platform
                   handler:(JSHARESocialHandler)handler;
 
 
@@ -327,6 +345,21 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  */
 + (BOOL)isQQInstalled;
 
+
+/**
+ 检查是否存在 facebook 客户端
+
+ @return 返回结果
+ */
++ (BOOL)isFacebookInstalled;
+
+
+/**
+ 检查是否存在 facebookMessenger 客户端
+
+ @return 返回结果
+ */
++ (BOOL)isFacebookMessengerInstalled;
 
 /**
  检查是否存在新浪微博客户端
