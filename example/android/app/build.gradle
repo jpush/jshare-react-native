@@ -84,7 +84,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "cn.jiguang.share.demo"
@@ -132,17 +132,6 @@ android {
         }
         debug {
             signingConfig signingConfigs.debug
-        }
-    }
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            jniLibs.srcDirs = ['libs']
-            java.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
         }
     }
     // applicationVariants are e.g. debug, release
