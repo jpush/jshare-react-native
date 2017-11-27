@@ -44,6 +44,16 @@ public class JShareModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setDebug(ReadableMap map) {
+        try {
+            boolean enable = map.getBoolean("enable");
+            JShareInterface.setDebugMode(enable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ReactMethod
     public void getPlatformList(Callback callback) {
         List<String> list = JShareInterface.getPlatformList();
         WritableArray array = Arguments.createArray();

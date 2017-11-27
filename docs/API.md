@@ -438,7 +438,7 @@ JShareModule.xxx();
   });
   ```
 
-- **setDebug(param, callback)**
+- **setDebug(param, callback)，Android 建议在 MainApplication 中调用，[参考 demo](./../example/android/app/src/main/java/cn/jiguang/share/demo/MainApplication.java)** 
 
   ```javascript
   /**
