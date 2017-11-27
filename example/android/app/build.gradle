@@ -33,6 +33,13 @@ import com.android.build.OutputFile
  *   // bundleInPaidRelease: true,
  *   // bundleInBeta: true,
  *
+ *   // whether to disable dev mode in custom build variants (by default only disabled in release)
+ *   // for example: to disable dev mode in the staging build type (if configured)
+ *   devDisabledInStaging: true,
+ *   // The configuration property can be in the following formats
+ *   //         'devDisabledIn${productFlavor}${buildType}'
+ *   //         'devDisabledIn${buildType}'
+ *
  *   // the root of your project, i.e. where "package.json" lives
  *   root: "../../",
  *
@@ -58,12 +65,16 @@ import com.android.build.OutputFile
  *   inputExcludes: ["android/**", "ios/**"],
  *
  *   // override which node gets called and with what additional arguments
- *   nodeExecutableAndArgs: ["node"]
+ *   nodeExecutableAndArgs: ["node"],
  *
  *   // supply additional arguments to the packager
  *   extraPackagerArgs: []
  * ]
  */
+
+project.ext.react = [
+        entryFile: "index.js"
+]
 
 apply from: "../../node_modules/react-native/react.gradle"
 
@@ -84,22 +95,20 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "cn.jiguang.share.demo"
+        applicationId "com.rnproject"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
-                JSHARE_PKGNAME: "cn.jiguang.share.demo",
                 JPUSH_APPKEY: "d4ee2375846bc30fa51334f5",	//在此替换你的APPKey
                 JPUSH_CHANNEL: "developer-default",		//应用渠道号
-                TENCENT_APPID: "your tencent app id"
         ]
     }
     splits {
@@ -124,11 +133,15 @@ android {
             keyPassword "sdkteam" //你的签名密码
         }
     }
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.debug
         }
         debug {
             signingConfig signingConfigs.debug
@@ -150,10 +163,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':jshare-react-native')
+    implementation project(':jcore-react-native')
     compile "com.android.support:appcompat-v7:25.3.1"
-    compile project(':jshare-react-native')
-    compile project(':jcore-react-native')
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 

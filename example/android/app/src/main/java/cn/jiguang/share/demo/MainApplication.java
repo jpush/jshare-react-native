@@ -48,7 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
         super.onCreate();
         SoLoader.init(this, false);
 //        在 Init 之前调用，设置为 true，则会打印 debug 级别日志，否则只会打印 warning 级别以上的日志
-//        JShareInterface.setDebugMode(true);
+        JShareInterface.setDebugMode(true);
         JShareInterface.init(this);
     }
 }
