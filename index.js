@@ -192,6 +192,7 @@ export default class JShare {
 
     /**
      *  授权接口
+     * Android only
      * @param {Object} param = {
      *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
      * }
