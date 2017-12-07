@@ -18,8 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-  
-  
+
+
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -44,7 +44,13 @@
                         documentsDirectory,fileName];
   return filePath;
 }
-// work in iOS(2_0, 9_0)
+
+// work in iOS(8.0)
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
+// work in iOS(9_0)
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
   [JSHAREService handleOpenUrl:url];
   return YES;

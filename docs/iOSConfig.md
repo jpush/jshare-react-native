@@ -11,7 +11,12 @@
 添加 `handleOpenURL`
 
 ```objective-c
-// work in iOS(2_0, 9_0)
+// work in iOS(8.0)
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  [JSHAREService handleOpenUrl:url];
+  return YES;
+}
+// work in iOS(9_0)
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
   [JSHAREService handleOpenUrl:url];
   return YES;
@@ -31,7 +36,7 @@ TARGET -> Build Settings -> Header Search Paths 添加搜索路径
 $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 ```
 
-### 配置 Info.plist 
+### 配置 Info.plist
 
 在 info.plist 文件中添加如下键值对
 
@@ -96,7 +101,7 @@ Xcode 工程目录中的 [TARGETS] -> [Info] 中设置：
 
   目前 JSHARE 支持不存在新浪微博客户端情况下的网页分享，但是由于新浪微博的 api 尚未针对 https 做优化所以需要针对新浪的做对应的 https 设置。在 JSHARE 中是默认关闭新浪微博的网页端分享的，如需使用这个功能则需要在 JSHARELaunchConfig 类的实例中将 **isSupportWebSina** 属性设置为 YES。
 
-  以iOS10 SDK 编译的工程会默认以 SSL 安全协议进行网络传输，即 HTTPS，如果依然使用 HTTP 协议请求网络会报系统异常并中断请求。目前可用如下这种方式保持用 HTTP 进行网络连接：   
+  以iOS10 SDK 编译的工程会默认以 SSL 安全协议进行网络传输，即 HTTPS，如果依然使用 HTTP 协议请求网络会报系统异常并中断请求。目前可用如下这种方式保持用 HTTP 进行网络连接：
 
 在 info.plist 中加入安全域名白名单(右键 info.plist 用 source code 打开)
 
@@ -166,7 +171,7 @@ Xcode 工程目录中的 [TARGETS] -> [Info] 中设置：
            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
            <false/>
        </dict>
-       <!-- 新浪微博-->  
+       <!-- 新浪微博-->
    </dict>
 </dict>
 ```
