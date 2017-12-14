@@ -187,6 +187,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
       userDic[@"gender"] = @"female";
     }
     userDic[@"response"] = userInfo.userOriginalResponse;
+    userDic[@"openId"] = userInfo.openid;
     successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
   }];
 }
