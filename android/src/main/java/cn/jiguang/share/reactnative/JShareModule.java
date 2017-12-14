@@ -220,7 +220,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                             writableMap.putString("refreshToken", refreshToken);
                             writableMap.putString("openId", openId);
                             writableMap.putString("originData", originData);
-                            succeedCallback.invoke(map);
+                            succeedCallback.invoke(writableMap);
                         }
                         break;
                 }
