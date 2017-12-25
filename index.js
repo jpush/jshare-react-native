@@ -267,9 +267,9 @@ export default class JShare {
      * @param {Function} success = (Boolean) => {} 
      */
     static isWeChatInstalled(success) {
-        if(Platform.OS === 'android'){
+        if (Platform.OS === 'android') {
             JShareModule.isClientValid({ platform: "wechat_session"},success)
-        }else{
+        } else {
             JShareModule.isWeChatInstalled(success)
         }
     }
@@ -280,9 +280,9 @@ export default class JShare {
      * @param {Function} success = (Boolean) => {}
      */
     static isQQInstalled(success) {
-        if(Platform.OS === 'android'){
+        if (Platform.OS === 'android') {
             JShareModule.isClientValid({ platform: "qq"},success)
-        }else{
+        } else {
             JShareModule.isQQInstalled(success)
         }
     }
@@ -293,9 +293,9 @@ export default class JShare {
      * @param {Function} success = (Boolean) => {}
      */
     static isSinaWeiBoInstalled(success) {
-        if(Platform.OS === 'android'){
+        if (Platform.OS === 'android') {
             JShareModule.isClientValid({ platform: "sina_weibo"},success)
-        }else{
+        } else {
             JShareModule.isSinaWeiBoInstalled(success)
         }
     }
