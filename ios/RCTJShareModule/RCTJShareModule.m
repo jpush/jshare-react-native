@@ -143,7 +143,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
     return;
   }
 
-  [JSHAREService getSoicalUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+  [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
     NSMutableDictionary *userDic = [NSMutableDictionary new];
     if (error) {
       NSString *descript = [error description];
