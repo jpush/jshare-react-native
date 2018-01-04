@@ -80,6 +80,12 @@ $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
     <string>mqzoneopensdkapi</string>
     <string>mqqbrowser</string>
     <string>mttbrowser</string>
+
+    <!-- Facebook URL Scheme 白名单-->
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
 </array>
 ```
 
