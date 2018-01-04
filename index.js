@@ -264,33 +264,42 @@ export default class JShare {
 
     /**
      * 检查是否安装微信客户端
-     * 
-     * iOS Only
+     *
      * @param {Function} success = (Boolean) => {} 
      */
     static isWeChatInstalled(success) {
-        JShareModule.isWeChatInstalled(success)
+        if (Platform.OS === 'android') {
+            JShareModule.isClientValid({ platform: "wechat_session"},success)
+        } else {
+            JShareModule.isWeChatInstalled(success)
+        }
     }
 
     /**
      * 检查是否存在QQ客户端
      * 
-     * iOS Only
-     * @param {Function} success = (Boolean) => {} 
+     * @param {Function} success = (Boolean) => {}
      */
     static isQQInstalled(success) {
-        JShareModule.isQQInstalled(success)
+        if (Platform.OS === 'android') {
+            JShareModule.isClientValid({ platform: "qq"},success)
+        } else {
+            JShareModule.isQQInstalled(success)
+        }
     }
 
     /**
      * 检查是否存在新浪微博客户端
      * 
-     * iOS Only
-     * @param {Function} success = (Boolean) => {} 
+     * @param {Function} success = (Boolean) => {}
      */
     static isSinaWeiBoInstalled(success) {
+        if (Platform.OS === 'android') {
+            JShareModule.isClientValid({ platform: "sina_weibo"},success)
+        } else {
             JShareModule.isSinaWeiBoInstalled(success)
         }
+    }
     
     /**
      * 
