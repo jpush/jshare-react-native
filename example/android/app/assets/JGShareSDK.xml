@@ -16,4 +16,9 @@
     <Wechat
         AppId="wxc40e16f3ba6ebabc"
         AppSecret="dcad950cd0633a27e353477c4ec12e7a"/>
+
+    <Facebook
+        AppId="177776412817787"
+        AppName="HuminiOS"
+    />
 </DevInfor>

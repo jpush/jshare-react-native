@@ -9,6 +9,7 @@ const {
   Text,
   TouchableHighlight,
   StyleSheet,
+  ScrollView,
 } = ReactNative;
 
 
@@ -95,9 +96,52 @@ export default class MainActivity extends React.Component {
     });
   }
 
+  onShareLinkToFacebook = () => {
+    console.log("Share to facebook");
+    var shareParam = {
+      platform: "facebook",
+      type: "link",
+      url: "https://jiguang.cn",
+      text: "JShare test text",
+    };
+    JShareModule.share(shareParam, (map) => {
+      console.log("Share to facebook succeed " + JSON.stringify(map));
+    }, (error) => {
+      console.log("Share to facebook failed, error: " + JSON.stringify(error));
+    })
+  }
+
+  onShareImageToFacebook = () => {
+    console.log("Share image to facebook")
+    var shareParam = {
+      platform: "facebook",
+      type: "image",
+      imagePath: "assets/jiguang_test_img.png",
+    };
+    JShareModule.share(shareParam, (map) => {
+      console.log("Share image to facebook succeed: " + JSON.stringify(map));
+    }, (error) => {
+      console.log("Share failed, error: " + JSON.stringify(error));
+    });
+  }
+
+  onShareVideoToFacebook = () => {
+    console.log("Share video to facebook");
+    var shareParam = {
+      platform: "facebook",
+      type: "video",
+      videoUrl: "assets/jiguang.mp4"
+    };
+    JShareModule.share(shareParam, (map) => {
+      console.log("Share video to facebook succeed: " + JSON.stringify(map));
+    }, (error) => {
+      console.log("Share failed; error: " + JSON.stringify(error));
+    });
+  }
+
   render() {
     return (
-      <View>
+      <ScrollView style={styles.container}>
         <Text>
           style={styles.welcome}> 
           Welcome ! 
@@ -165,12 +209,43 @@ export default class MainActivity extends React.Component {
             Share
           </Text>
         </TouchableHighlight>
-      </View>
+        <TouchableHighlight 
+          underlayColor = "#e4083f"
+          activeOpacity = {0.5}
+          style = {styles.btnStyle}
+          onPress = {this.onShareLinkToFacebook}>
+          <Text style = {styles.btnTextStyle}>
+            Share Link to Facebook
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          underlayColor = "#e4083f"
+          activeOpacity = {0.5}
+          style = {styles.btnStyle}
+          onPress = {this.onShareImageToFacebook}>
+          <Text style = {styles.btnTextStyle}>
+            Share Photo to Facebook
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          underlayColor = "#e4083f"
+          activeOpacity = {0.5}
+          style = {styles.btnStyle}
+          onPress = {this.onShareVideoToFacebook}>
+          <Text style = {styles.btnTextStyle}>
+            Share Video to Facebook
+          </Text>
+        </TouchableHighlight>
+      </ScrollView>
     );
   }
 }
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
   welcome: {
     textAlign: 'center',
     margin: 10,

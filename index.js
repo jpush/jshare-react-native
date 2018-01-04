@@ -44,7 +44,7 @@ export default class JShare {
      * 分享
      * @param {object} message = {
      * 
-     * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook' / 'facebook_messenger'
      * type 必填
      * 
      * {
@@ -117,6 +117,7 @@ export default class JShare {
      *  imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一 (iOS 不支持)
      *  title: String // 选填
      *  text: String // 选填
+     *  quote: String // 选填，分享引用
      * }
      * 
      * {
