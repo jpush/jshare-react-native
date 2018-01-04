@@ -83,7 +83,7 @@ JShareModule.xxx();
    *  text: String  // 选填
    *  imagePath: String // 选填，缩略图，本地图片路径
 
-   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url，，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
+   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url(videoAssetURL 正确格式: assets-library://asset/asset.MOV?id=872C1D2F-97FD-4B0B-9C21-A619E4F23293&ext=MOV) (iOS only)，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
    *  videoUrl: String  // QQ 空间本地视频 (iOS 不支持这个字段)
    * }
    * 

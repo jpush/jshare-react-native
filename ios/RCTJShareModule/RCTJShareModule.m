@@ -307,8 +307,8 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
     
-    if (param[@"videoAssetURL"]) {// facebook only
-      message.videoAssetURL = [NSData dataWithContentsOfFile:param[@"videoAssetURL"]];
+    if (param[@"videoAssetURL"]) {
+      message.videoAssetURL = param[@"videoAssetURL"];
     }
 
     message.mediaType = JSHAREVideo;
