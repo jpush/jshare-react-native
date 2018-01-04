@@ -83,7 +83,7 @@ JShareModule.xxx();
    *  text: String  // 选填
    *  imagePath: String // 选填，缩略图，本地图片路径
 
-   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
+   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url，，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
    *  videoUrl: String  // QQ 空间本地视频 (iOS 不支持这个字段)
    * }
    * 
@@ -161,13 +161,16 @@ JShareModule.xxx();
   })
   ```
 
+
+
+
 - **getSocialUserInfo(param, successCallback, failCallback)**
 
   ```javascript
   /**
    * 获取社交平台用户信息
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook'
    * }
    * @param {Function} success function (userInfo) {} 
    * userInfo = {
