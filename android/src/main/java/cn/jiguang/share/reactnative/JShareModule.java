@@ -1,5 +1,11 @@
 package cn.jiguang.share.reactnative;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -21,6 +27,9 @@ import cn.jiguang.share.android.api.ShareParams;
 import cn.jiguang.share.android.model.AccessTokenInfo;
 import cn.jiguang.share.android.model.BaseResponseInfo;
 import cn.jiguang.share.android.model.UserInfo;
+import cn.jiguang.share.facebook.Facebook;
+import cn.jiguang.share.facebook.FacebookBroadcastReceiver;
+import cn.jiguang.share.facebook.messenger.FbMessenger;
 import cn.jiguang.share.qqmodel.QQ;
 import cn.jiguang.share.qqmodel.QZone;
 import cn.jiguang.share.wechat.Wechat;
@@ -159,6 +168,9 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 } else if (map.hasKey("imageUrl")) {
                     shareParams.setImageUrl(map.getString("imageUrl"));
                 }
+                if (map.hasKey("quote")) {
+                    shareParams.setQuote(map.getString("quote"));
+                }
                 break;
             default:
                 shareType = Platform.SHARE_APPS;
@@ -214,13 +226,13 @@ public class JShareModule extends ReactContextBaseJavaModule {
                             String openId = ((AccessTokenInfo) baseResponseInfo).getOpenid();
                             String originData = baseResponseInfo.getOriginData();
                             Logger.i(JSHARE_NAME, "授权成功：" + baseResponseInfo.toString());
-                            WritableMap writableMap = Arguments.createMap();
-                            writableMap.putString("token", token);
-                            writableMap.putDouble("expiration", expiration);
-                            writableMap.putString("refreshToken", refreshToken);
-                            writableMap.putString("openId", openId);
-                            writableMap.putString("originData", originData);
-                            succeedCallback.invoke(writableMap);
+                            WritableMap result = Arguments.createMap();
+                            result.putString("token", token);
+                            result.putDouble("expiration", expiration);
+                            result.putString("refreshToken", refreshToken);
+                            result.putString("openId", openId);
+                            result.putString("originData", originData);
+                            succeedCallback.invoke(result);
                         }
                         break;
                 }
@@ -345,9 +357,33 @@ public class JShareModule extends ReactContextBaseJavaModule {
             case "sina_weibo":
                 name = SinaWeibo.Name;
                 break;
+            case "facebook":
+                name = Facebook.Name;
+                break;
+            case "facebook_messenger":
+                name = FbMessenger.Name;
+                break;
             default:
                 name = SinaWeiboMessage.Name;
         }
         return name;
+    }
+
+    public static class FaceBookUploadReceiver extends FacebookBroadcastReceiver {
+
+        public FaceBookUploadReceiver() {}
+
+        private static final String TAG = "FaceBookUploadReceiver";
+
+        @Override
+        protected void onSuccessfulAppCall(String appCallId, String action, Bundle extras) {
+            Logger.i(TAG, String.format("Photo uploaded by call " + appCallId + " succeeded."));
+
+        }
+
+        @Override
+        protected void onFailedAppCall(String appCallId, String action, Bundle extras) {
+            Logger.i(TAG, String.format("Photo uploaded by call " + appCallId + " failed."));
+        }
     }
 }
