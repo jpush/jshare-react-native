@@ -19,7 +19,8 @@ const {
   Alert,
   TouchableWithoutFeedback,
   NativeAppEventEmitter,
-  ScrollView
+  ScrollView,
+  CameraRoll
 } = ReactNative;
 
 export default class MainActivity extends React.Component {
@@ -43,6 +44,8 @@ export default class MainActivity extends React.Component {
       sinaWeiboAppKey: '374535501',
       sinaWeiboAppSecret: 'baccd12c166f1df96736b51ffbf600a2',
       sinaRedirectUri: 'https://www.jiguang.cn',
+      facebookAppId: '177776412817787',
+      facebookDisplayName: 'HuminiOS',
       isSupportWebSina: true
     }
      
@@ -51,6 +54,7 @@ export default class MainActivity extends React.Component {
 
   componentWillMount() {
     NativeAppEventEmitter.addListener('finishGetResource', (result) => {
+      Alert.alert('das','fads')
         this.setState({ 
             imagePath: result.imagePath ,
             videoPath: result.videoPath,
@@ -62,11 +66,9 @@ export default class MainActivity extends React.Component {
 
   onGetUserInfo = () => {
     var param = {
-      platform: "qq"
+      platform: "facebook"
     };
-    // var param = {
-    //   platform: "wechat_session"
-    // };
+
     JShareModule.getSocialUserInfo(param, (map) => {
       // console.log(map);
       Alert.alert("getSocialUserInfo", JSON.stringify(map));
@@ -77,7 +79,7 @@ export default class MainActivity extends React.Component {
 
   onPlatformAuth = () => {
     var param = {
-      platform: "wechat_session"
+      platform: "facebook"
     };
     JShareModule.isPlatformAuth(param, (result) => {
       console.log(param.platform + "is Auth: " + result);
@@ -86,7 +88,7 @@ export default class MainActivity extends React.Component {
 
   onRemoveAuthorize = () => {
     var param = {
-      platform: "wechat_session"
+      platform: "facebook"
     };
     JShareModule.cancelAuthWithPlatform(param, (code) => {
       if (code === 0) {
@@ -104,7 +106,7 @@ export default class MainActivity extends React.Component {
       text: "JShare test text",
       imagePath: ""
     };
-    shareParam.imagePath = this.state.path
+    shareParam.imagePath = this.state.imagePath
     JShareModule.share(shareParam, (map) => {
       console.log("share succeed, map: " + map);
     }, (map) => {
@@ -125,7 +127,7 @@ export default class MainActivity extends React.Component {
     console.log(this.state.path)
 
     var shareParam = {
-      platform: "wechat_session",
+      platform: "facebook",
       type: "image",
       text: "JShare test text",
       imageUrl: "",
@@ -264,9 +266,9 @@ export default class MainActivity extends React.Component {
      */ 
     // Done
     var shareParam = {
-      platform: "wechat_session",
+      platform: "facebook",
       type: "link",
-      url: "JShare test text",
+      url: "www.baidu.com",
       imagePath: "",
       imageUrl: "",
       title: " shared link",
@@ -279,6 +281,39 @@ export default class MainActivity extends React.Component {
     }, (map) => {
       console.log("share failed, map: " + map);
     });
+  }
+
+  onShareLocalVideoPress = () => {
+
+
+    CameraRoll.getPhotos({
+      first: 20,
+      assetType: 'Videos',
+    })
+    .then(r => {
+      // this.setState({ photos: r.edges });
+      if (r.edges.length < 1) {
+        Alert.alert("alert", "系统相册视频数量少于 1 个分享失败")
+        return
+      }
+      
+      var shareParam = {
+        platform: "facebook",
+        type: "video",
+        title: "the video",
+        text: "JShare test text",
+      };
+      shareParam.videoAssetURL = r.edges[0]['node']['image']['uri']
+
+      JShareModule.share(shareParam, (map) => {
+        console.log("share succeed, map: " + map);
+      }, (map) => {
+        console.log("share failed, map: " + map);
+      });
+      })
+      .catch((err) => {
+        //Error Loading Images
+      });
   }
 
   render() {
@@ -388,6 +423,15 @@ export default class MainActivity extends React.Component {
             onPress = {this.onShareLinkPress}>
             <Text style = {styles.btnTextStyle}>
               Share Link
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight 
+            underlayColor = "#e4083f"
+            activeOpacity = {0.5}
+            style = {styles.btnStyle}
+            onPress = {this.onShareLocalVideoPress}>
+            <Text style = {styles.btnTextStyle}>
+              share local video to facebook
             </Text>
           </TouchableHighlight>
           <FormButton

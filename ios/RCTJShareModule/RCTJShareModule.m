@@ -71,6 +71,14 @@ RCT_EXPORT_MODULE();
     if ([param[@"platform"] isEqualToString:@"sina_weibo_contact"]) {
       platform = JSHAREPlatformSinaWeiboContact;
     }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook"]) {
+      platform = JSHAREPlatformFacebook;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook_messenger"]) {
+      platform = JSHAREPlatformFacebookMessenger;
+    }
   }
 
   return platform;
@@ -121,6 +129,14 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
 
   if (param[@"sinaRedirectUri"]) {
     config.SinaRedirectUri = param[@"sinaRedirectUri"];
+  }
+  
+  if (param[@"facebookAppId"]) {
+    config.FacebookAppID = param[@"facebookAppId"];
+  }
+  
+  if (param[@"facebookDisplayName"]) {
+    config.FacebookDisplayName = param[@"facebookDisplayName"];
   }
 
   if (param[@"isSupportWebSina"]) {
@@ -290,6 +306,10 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     if (param[@"imagePath"]) {
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
+    
+    if (param[@"videoAssetURL"]) {
+      message.videoAssetURL = param[@"videoAssetURL"];
+    }
 
     message.mediaType = JSHAREVideo;
   }
@@ -418,6 +438,14 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
 
   if ([platformStr isEqualToString:@"sina_weibo"]) {
     return JSHAREPlatformSinaWeibo;
+  }
+  
+  if ([platformStr isEqualToString:@"facebook"]) {
+    return JSHAREPlatformFacebook;
+  }
+  
+  if ([platformStr isEqualToString:@"facebook_messenger"]) {
+    return JSHAREPlatformFacebookMessenger;
   }
 
   if ([platformStr isEqualToString:@"sina_weibo_contact"]) {

@@ -26,6 +26,8 @@ JShareModule.xxx();
     * sinaWeiboAppSecret: String  // 新浪微博应用密匙。
     * sinaRedirectUri: String     // 新浪微博应用回调地址。
     * isSupportWebSina: Boolean   // 不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
+    * facebookAppId: string       // facebook 注册的应用 id（必须使用自己的，测试时需要添加自己的用户才能正常分享）。
+    * facebookDisplayName: string // facebook 注册的应用名，必须要匹配，否则会分享失败。
     * }
     */
   ```
@@ -80,7 +82,8 @@ JShareModule.xxx();
    *  url: String // 视频跳转页面 url
    *  text: String  // 选填
    *  imagePath: String // 选填，缩略图，本地图片路径
-   *  
+
+   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url(videoAssetURL 正确格式: assets-library://asset/asset.MOV?id=872C1D2F-97FD-4B0B-9C21-A619E4F23293&ext=MOV) (iOS only)，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
    *  videoUrl: String  // QQ 空间本地视频 (iOS 不支持这个字段)
    * }
    * 
@@ -158,13 +161,16 @@ JShareModule.xxx();
   })
   ```
 
+
+
+
 - **getSocialUserInfo(param, successCallback, failCallback)**
 
   ```javascript
   /**
    * 获取社交平台用户信息
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook'
    * }
    * @param {Function} success function (userInfo) {} 
    * userInfo = {
