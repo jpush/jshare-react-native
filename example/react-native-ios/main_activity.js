@@ -2,10 +2,10 @@
 
 import React from 'react';
 var {
-  PropTypes,
   Component,
 } = React;
 
+import PropTypes from 'prop-types';
 import ReactNative from 'react-native';
 import JShareModule from 'jshare-react-native';
 
@@ -50,9 +50,33 @@ export default class MainActivity extends React.Component {
     }
      
     JShareModule.setup(config)
+    
+
+
+
+  }
+
+  componentDidMount() {
+    this.timer = setTimeout(
+      () => {
+        
+        var param = {
+          platform: "wechat_session"
+        };
+      
+        JShareModule.getSocialUserInfo(param, (map) => {
+          // console.log(map);
+          Alert.alert("getSocialUserInfo", JSON.stringify(map));
+        }, (errorCode) => {
+          console.log("errorCode: " + errorCode);
+        });
+      },
+      100
+    );
   }
 
   componentWillMount() {
+
     NativeAppEventEmitter.addListener('finishGetResource', (result) => {
       Alert.alert('das','fads')
         this.setState({ 
@@ -66,7 +90,7 @@ export default class MainActivity extends React.Component {
 
   onGetUserInfo = () => {
     var param = {
-      platform: "facebook"
+      platform: "wechat_session"
     };
 
     JShareModule.getSocialUserInfo(param, (map) => {
