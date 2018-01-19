@@ -56,25 +56,6 @@ export default class MainActivity extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.timer = setTimeout(
-      () => {
-        
-        var param = {
-          platform: "wechat_session"
-        };
-      
-        JShareModule.getSocialUserInfo(param, (map) => {
-          // console.log(map);
-          Alert.alert("getSocialUserInfo", JSON.stringify(map));
-        }, (errorCode) => {
-          console.log("errorCode: " + errorCode);
-        });
-      },
-      100
-    );
-  }
-
   componentWillMount() {
 
     NativeAppEventEmitter.addListener('finishGetResource', (result) => {
