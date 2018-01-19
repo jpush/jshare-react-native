@@ -307,8 +307,8 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
     
-    if (param[@"videoAssetURL"]) {// facebook only
-      message.videoAssetURL = [NSData dataWithContentsOfFile:param[@"videoAssetURL"]];
+    if (param[@"videoAssetURL"]) {
+      message.videoAssetURL = param[@"videoAssetURL"];
     }
 
     message.mediaType = JSHAREVideo;
@@ -405,14 +405,16 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     message.mediaType = JSHARELink;
   }
 
-  [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
-    if (error) {
-      failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
-      return;
-    }
-    NSString *stateString = [self stateToString:state];
-    successCallBack(@[@{@"state": stateString}]);
-  }];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
+      if (error) {
+        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        return;
+      }
+      NSString *stateString = [self stateToString:state];
+      successCallBack(@[@{@"state": stateString}]);
+    }];
+  });
 }
 
 - (NSUInteger)getPlatformFromString:(NSString *)platformStr {

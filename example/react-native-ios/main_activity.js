@@ -2,10 +2,10 @@
 
 import React from 'react';
 var {
-  PropTypes,
   Component,
 } = React;
 
+import PropTypes from 'prop-types';
 import ReactNative from 'react-native';
 import JShareModule from 'jshare-react-native';
 
@@ -19,7 +19,8 @@ const {
   Alert,
   TouchableWithoutFeedback,
   NativeAppEventEmitter,
-  ScrollView
+  ScrollView,
+  CameraRoll
 } = ReactNative;
 
 export default class MainActivity extends React.Component {
@@ -49,9 +50,14 @@ export default class MainActivity extends React.Component {
     }
      
     JShareModule.setup(config)
+    
+
+
+
   }
 
   componentWillMount() {
+
     NativeAppEventEmitter.addListener('finishGetResource', (result) => {
       Alert.alert('das','fads')
         this.setState({ 
@@ -65,7 +71,7 @@ export default class MainActivity extends React.Component {
 
   onGetUserInfo = () => {
     var param = {
-      platform: "facebook"
+      platform: "wechat_session"
     };
 
     JShareModule.getSocialUserInfo(param, (map) => {
@@ -282,6 +288,39 @@ export default class MainActivity extends React.Component {
     });
   }
 
+  onShareLocalVideoPress = () => {
+
+
+    CameraRoll.getPhotos({
+      first: 20,
+      assetType: 'Videos',
+    })
+    .then(r => {
+      // this.setState({ photos: r.edges });
+      if (r.edges.length < 1) {
+        Alert.alert("alert", "系统相册视频数量少于 1 个分享失败")
+        return
+      }
+      
+      var shareParam = {
+        platform: "facebook",
+        type: "video",
+        title: "the video",
+        text: "JShare test text",
+      };
+      shareParam.videoAssetURL = r.edges[0]['node']['image']['uri']
+
+      JShareModule.share(shareParam, (map) => {
+        console.log("share succeed, map: " + map);
+      }, (map) => {
+        console.log("share failed, map: " + map);
+      });
+      })
+      .catch((err) => {
+        //Error Loading Images
+      });
+  }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -389,6 +428,15 @@ export default class MainActivity extends React.Component {
             onPress = {this.onShareLinkPress}>
             <Text style = {styles.btnTextStyle}>
               Share Link
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight 
+            underlayColor = "#e4083f"
+            activeOpacity = {0.5}
+            style = {styles.btnStyle}
+            onPress = {this.onShareLocalVideoPress}>
+            <Text style = {styles.btnTextStyle}>
+              share local video to facebook
             </Text>
           </TouchableHighlight>
           <FormButton
