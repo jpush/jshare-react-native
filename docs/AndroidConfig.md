@@ -27,6 +27,12 @@ android {
       TENCENT_APPID: "your tencent app id"
     ]
   }
+  // 必须添加 sourceSet 这段。因为 JGShareSDK.xml 放在 assets 下，不加上会报错。
+  sourceSets {
+    main {
+        assets.srcDirs = ['assets']
+    }
+  }
   ...
   signingConfigs {
         debug {
