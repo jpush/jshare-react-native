@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="code_40001">缺失 appid 参数</string>
+    <string name="code_40002">缺失 appkey 参数</string>
+    <string name="code_40003">缺失 secret 参数</string>
+    <string name="code_40004">缺失 mediaType 参数</string>
+    <string name="code_40005">不合法的 mediaType</string>
+    <string name="code_40006">缺失 platform 参数</string>
+    <string name="code_40007">不合法的 platform</string>
+    <string name="code_40009">没安装客户端</string>
+    <string name="code_40010">未完成初始化</string>
+    <string name="code_40011">缺少 ShareParams</string>
+    <string name="code_40012">platform 没配置</string>
+    <string name="code_41001">文本参数长度超过限制</string>
+    <string name="code_41002">图片链接字段长度超过限制</string>
+    <string name="code_41003">图片大小超过限制</string>
+    <string name="code_41004">url 长度超过限制</string>
+    <string name="code_41005">音频 url 长度超过限制</string>
+    <string name="code_41006">视频 url 长度超过限制</string>
+    <string name="code_41009">文件大小超过限制</string>
+    <string name="code_41010">emotion 大小超过限制</string>
+    <string name="code_41011">title 参数超过限制</string>
+    <string name="code_41012">description 参数超过限制</string>
+    <string name="code_41013">缩略图参数超过限制</string>
+    <string name="code_41014">图片参数为空</string>
+    <string name="code_41015">音频 url 参数为空</string>
+    <string name="code_41016">视频 url 参数为空</string>
+    <string name="code_41018">emotion 参数为空</string>
+    <string name="code_41019">文件参数为空</string>
+    <string name="code_41021">url 参数为空</string>
+    <string name="code_41022">文本参数为空</string>
+    <string name="code_41025">title 为空</string>
+    <string name="code_41026">非法 url</string>
+    <string name="code_41027">文件不存在</string>
+    <string name="code_41028">文本和 url 长度超过限制</string>
+    <string name="code_41029">不能同时分享图片和视频</string>
+    <string name="code_42001">不合法的调用凭证</string>
+    <string name="code_50001">获取 access token 错误</string>
+    <string name="code_50002">分享失败</string>
+    <string name="code_50003">获取用户信息失败</string>
+    <string name="code_50004">授权失败</string>
+    <string name="code_50005">平台不支持授权</string>
+    <string name="code_50006">无效或过期的 token</string>
+    <string name="code_50007">无法验证你的凭证</string>
+    <string name="code_50008">发生未知的内部错误</string>
+    <string name="code_50009">该状态的内容已经过验证的账户发布</string>
+</resources>

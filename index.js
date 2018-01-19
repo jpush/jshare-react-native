@@ -126,10 +126,10 @@ export default class JShare {
      * }
      * 
      * @param {Function} success = function (state) => {} ## 
-     * state = {state: String} state = 'success' / 'fail' / 'cancel' / 'unknow'
+     * state = {state: String} state = 'success' / 'fail' / 'cancel' / 'unknown'
      *
      * @param {Function} fail = function (error) => {} ## 
-     * error = {code: number, descript: String}
+     * error = {code: number, description: String}
      */
     static share(message, success, fail) {
         JShareModule.share(message, (map) => {
@@ -158,8 +158,8 @@ export default class JShare {
     static getSocialUserInfo(param, success, fail) {
         JShareModule.getSocialUserInfo(param, (map) => {
             success(map);
-        }, (errorCode) => {
-            fail(errorCode);
+        }, (error) => {
+            fail(error);
         });
     }
 
