@@ -200,6 +200,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "share has been canceled");
+                succeedCallback.invoke(i);
             }
         });
     }
@@ -248,6 +249,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "authorize has been canceled");
+                succeedCallback.invoke(i);
             }
         });
     }
@@ -286,6 +288,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "remove auth has been canceled");
+                callback.invoke(i);
             }
         });
     }
@@ -332,6 +335,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "Get userInfo has been canceled");
+                successCallback.invoke(i);
             }
         });
     }
