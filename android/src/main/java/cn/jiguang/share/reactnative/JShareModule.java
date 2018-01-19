@@ -42,6 +42,13 @@ import cn.jiguang.share.weibo.SinaWeiboMessage;
 public class JShareModule extends ReactContextBaseJavaModule {
 
     private static final String JSHARE_NAME = "RCTJShareModule";
+    private static final String STATE = "state";
+    private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
+    private static final String CANCEL = "cancel";
+    private static final String UNKNOWN = "unknown";
+    private static final String CODE = "code";
+    private static final String DESCRIPTION = "description";
 
     public JShareModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -182,25 +189,21 @@ public class JShareModule extends ReactContextBaseJavaModule {
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                 Logger.i(JSHARE_NAME, "share completed");
                 WritableMap writableMap = Arguments.createMap();
-                writableMap.putString("name", platform.getName());
-                writableMap.putInt("code", i);
+                writableMap.putString(STATE, SUCCESS);
                 succeedCallback.invoke(writableMap);
             }
 
             @Override
             public void onError(Platform platform, int action, int errorCode, Throwable throwable) {
                 Logger.i(JSHARE_NAME, "share failed");
-                WritableMap writableMap = Arguments.createMap();
-                writableMap.putString("name", platform.getName());
-                writableMap.putInt("code", errorCode);
-                failedCallback.invoke(writableMap);
+                handleCallback(succeedCallback, failedCallback, errorCode);
                 throwable.printStackTrace();
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "share has been canceled");
-                succeedCallback.invoke(i);
+                handleCallback(succeedCallback, failedCallback, i);
             }
         });
     }
@@ -243,13 +246,13 @@ public class JShareModule extends ReactContextBaseJavaModule {
             public void onError(Platform platform, int action, int errorCode, Throwable throwable) {
                 Logger.i(JSHARE_NAME, "authorize failed");
                 throwable.printStackTrace();
-                failedCallback.invoke(errorCode);
+                handleCallback(succeedCallback, failedCallback, errorCode);
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "authorize has been canceled");
-                succeedCallback.invoke(i);
+                handleCallback(succeedCallback, failedCallback, i);
             }
         });
     }
@@ -280,7 +283,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 throwable.printStackTrace();
                 switch (action) {
                     case Platform.ACTION_REMOVE_AUTHORIZING:
-                        callback.invoke(errorCode);
+                        handleCallback(callback, callback, errorCode);
                         break;
                 }
             }
@@ -288,7 +291,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "remove auth has been canceled");
-                callback.invoke(i);
+                handleCallback(callback, callback, i);
             }
         });
     }
@@ -327,7 +330,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 throwable.printStackTrace();
                 switch (action) {
                     case Platform.ACTION_USER_INFO:
-                        failCallback.invoke(errorCode);
+                        handleCallback(successCallback, failCallback, errorCode);
                         break;
                 }
             }
@@ -335,9 +338,197 @@ public class JShareModule extends ReactContextBaseJavaModule {
             @Override
             public void onCancel(Platform platform, int i) {
                 Logger.i(JSHARE_NAME, "Get userInfo has been canceled");
-                successCallback.invoke(i);
+                handleCallback(successCallback, failCallback, i);
             }
         });
+    }
+
+    private void handleCallback(Callback succeed, Callback failed, int errorCode) {
+        WritableMap result = Arguments.createMap();
+        result.putInt(CODE, errorCode);
+        result.putString(STATE, FAIL);
+        switch (errorCode) {
+            case 40001:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40001));
+                failed.invoke(result);
+                break;
+            case 40002:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40002));
+                failed.invoke(result);
+                break;
+            case 40003:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40003));
+                failed.invoke(result);
+                break;
+            case 40004:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40004));
+                failed.invoke(result);
+                break;
+            case 40005:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40005));
+                failed.invoke(result);
+                break;
+            case 40006:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40006));
+                failed.invoke(result);
+                break;
+            case 40007:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40007));
+                failed.invoke(result);
+                break;
+            case 40009:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40009));
+                failed.invoke(result);
+                break;
+            case 40010:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40010));
+                failed.invoke(result);
+                break;
+            case 40011:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40011));
+                failed.invoke(result);
+                break;
+            case 40012:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_40012));
+                failed.invoke(result);
+                break;
+            case 41001:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41001));
+                failed.invoke(result);
+                break;
+            case 41002:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41002));
+                failed.invoke(result);
+                break;
+            case 41003:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41003));
+                failed.invoke(result);
+                break;
+            case 41004:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41004));
+                failed.invoke(result);
+                break;
+            case 41005:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41005));
+                failed.invoke(result);
+                break;
+            case 41006:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41006));
+                failed.invoke(result);
+                break;
+            case 41009:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41009));
+                failed.invoke(result);
+                break;
+            case 41010:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41010));
+                failed.invoke(result);
+                break;
+            case 41011:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41011));
+                failed.invoke(result);
+                break;
+            case 41012:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41012));
+                failed.invoke(result);
+                break;
+            case 41013:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41013));
+                failed.invoke(result);
+                break;
+            case 41014:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41014));
+                failed.invoke(result);
+                break;
+            case 41015:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41015));
+                failed.invoke(result);
+                break;
+            case 41016:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41016));
+                failed.invoke(result);
+                break;
+            case 41018:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41018));
+                failed.invoke(result);
+                break;
+            case 41019:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41019));
+                failed.invoke(result);
+                break;
+            case 41021:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41021));
+                failed.invoke(result);
+                break;
+            case 41022:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41022));
+                failed.invoke(result);
+                break;
+            case 41025:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41025));
+                failed.invoke(result);
+                break;
+            case 41026:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41026));
+                failed.invoke(result);
+                break;
+            case 41027:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41027));
+                failed.invoke(result);
+                break;
+            case 41028:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41028));
+                failed.invoke(result);
+                break;
+            case 41029:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_41029));
+                failed.invoke(result);
+                break;
+            case 42001:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_42001));
+                failed.invoke(result);
+                break;
+            case 50001:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50001));
+                failed.invoke(result);
+                break;
+            case 50002:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50002));
+                failed.invoke(result);
+                break;
+            case 50003:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50003));
+                failed.invoke(result);
+                break;
+            case 50004:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50004));
+                failed.invoke(result);
+                break;
+            case 50005:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50005));
+                failed.invoke(result);
+                break;
+            case 50006:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50006));
+                failed.invoke(result);
+                break;
+            case 50007:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50007));
+                failed.invoke(result);
+                break;
+            case 50008:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50008));
+                failed.invoke(result);
+                break;
+            case 50009:
+                result.putString(DESCRIPTION, getReactApplicationContext().getResources().getString(R.string.code_50009));
+                failed.invoke(result);
+                break;
+            default:
+                result.putString(STATE, CANCEL);
+                succeed.invoke(result);
+        }
+
     }
 
     private String getPlatformName(ReadableMap map) {
