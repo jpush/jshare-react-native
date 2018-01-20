@@ -410,19 +410,25 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       if (error) {
         switch (message.platform) {
           case JSHAREPlatformQQ:{
-            NSString *stateString = [self stateToString:state];
-            successCallBack(@[@{@"state": stateString}]);
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
             break;
           }
           case JSHAREPlatformQzone: {
-            NSString *stateString = [self stateToString:state];
-            successCallBack(@[@{@"state": stateString}]);
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
             break;
           }
           default:
-            failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
             break;
         }
+        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
         return;
       }
       NSString *stateString = [self stateToString:state];
