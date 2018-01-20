@@ -408,7 +408,21 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   dispatch_async(dispatch_get_main_queue(), ^{
     [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
       if (error) {
-        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        switch (message.platform) {
+          case JSHAREPlatformQQ:{
+            NSString *stateString = [self stateToString:state];
+            successCallBack(@[@{@"state": stateString}]);
+            break;
+          }
+          case JSHAREPlatformQzone: {
+            NSString *stateString = [self stateToString:state];
+            successCallBack(@[@{@"state": stateString}]);
+            break;
+          }
+          default:
+            failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+            break;
+        }
         return;
       }
       NSString *stateString = [self stateToString:state];
