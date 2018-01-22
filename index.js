@@ -149,7 +149,7 @@ export default class JShare {
      *  name: String        
      *  iconUrl: String   // 社交平台头像链接
      *  gender: String    // 'female' /  'male'
-     *  response: Object  // 社交平台上的原始数据
+     *  response: String  // 社交平台上的原始数据
      * }
      *
      * @param {Function} fail = function (error) {} ## 
@@ -164,10 +164,10 @@ export default class JShare {
     }
 
     /**
-     * 判断某平台是否支持授权
+     * 判断某平台是否已经授权
      * 
      * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' / 'facebook_messenger'
      * }
      * @param {Function} callback = (Boolean) => {} 
      */
@@ -178,10 +178,24 @@ export default class JShare {
     }
 
     /**
+     * Android Only
+     * 判断平台是否支持授权
+     * @param {Object} param  = {
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook' / 'facebook_messenger'
+     * }
+     * @param {Function} cb = (boolean) => {}
+     */
+    static isSupportAuthorize(param, cb) {
+        JShareModule.isSupportAuthorize(param, (result) => {
+            cb(result);
+        })
+    }
+
+    /**
      * 判断该平台的分享是否有效
      * Android only
      * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' / 'facebook_messenger'
      * }
      * @param {Function} callback = (Boolean) => {} 
      */
@@ -195,10 +209,20 @@ export default class JShare {
      *  授权接口
      * Android only
      * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' / 'facebook_messenger'
      * }
-     * @param {Function} success 
-     * @param {Function} fail 
+     * @param {Function} success = {
+     *     token: string,
+     *     expiration: number,
+     *     refreshToken: string,
+     *     openId: string,
+     *     originData: string
+     * }
+     * @param {Function} fail = {
+     *     code: number,
+     *     description: string,
+     *     platform: string
+     * }
      */
     static authorize(param, success, fail) {
         JShareModule.authorize(param, (map) => {

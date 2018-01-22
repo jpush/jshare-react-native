@@ -56,7 +56,7 @@ JShareModule.xxx();
    * 分享
    * @param {object} message = {
    * 
-   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger' 
    * type 必填
    * 
    * {
@@ -177,7 +177,7 @@ JShareModule.xxx();
    *  name: String        
    *  iconUrl: String   // 社交平台头像链接
    *  gender: String    // 'female' /  'male'
-   *  response: Object  // 社交平台上的原始数据
+   *  response: String  // 社交平台上的原始数据, 返回 JSON 字符串
    * }
    *
    * @param {Function} fail = function (error) {} ## 
@@ -202,10 +202,10 @@ JShareModule.xxx();
 
   ```javascript
   /**
-   * 判断某平台是否支持授权
+   * 判断某平台是否已经授权
    * 
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger' 
    * }
    * @param {Function} callback = (Boolean) => {} 
    */
@@ -228,7 +228,7 @@ JShareModule.xxx();
    * 判断该平台的分享是否有效
    * Android only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger' 
    * }
    * @param {Function} callback = (Boolean) => {} 
    */
@@ -251,7 +251,7 @@ JShareModule.xxx();
   /**
    * 授权接口 Android Only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger' 
    * }
    * @param {Function} success 
    * @param {Function} fail 
@@ -271,12 +271,12 @@ JShareModule.xxx();
   });
   ```
 
-- **isAuthorize(param, callback)**
+- **isSupportAuthorize(param, callback)    Android Only** 
   ```javascript
   /**
-   *  判断是否授权接口
+   *  判断平台是否支持授权接口
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook' /'facebook_messenger' 
    * }  
    * @param {Function} callback = (Boolean) => {} 
    */
@@ -288,7 +288,7 @@ JShareModule.xxx();
   var param = {  
     platform: "wechat_session"
   };
-  JShareModule.isAuthorize(param, (result) => {        		
+  JShareModule.isSupportAuthorize(param, (result) => {        
      console.log("param is Authorize: " + result);
   });
   ```
