@@ -408,6 +408,26 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   dispatch_async(dispatch_get_main_queue(), ^{
     [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
       if (error) {
+        switch (message.platform) {
+          case JSHAREPlatformQQ:{
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          case JSHAREPlatformQzone: {
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          default:
+            break;
+        }
         failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
         return;
       }
