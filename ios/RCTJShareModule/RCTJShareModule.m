@@ -176,6 +176,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
     }
     userDic[@"response"] = userInfo.userOriginalResponse;
     userDic[@"openId"] = userInfo.openid;
+    userDic[@"access_token"] = userInfo.accessToken;
     successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
   }];
 }
