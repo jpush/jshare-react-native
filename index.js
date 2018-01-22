@@ -149,7 +149,7 @@ export default class JShare {
      *  name: String        
      *  iconUrl: String   // 社交平台头像链接
      *  gender: String    // 'female' /  'male'
-     *  response: String  // 社交平台上的原始数据
+     *  response: String  // 社交平台上的原始数据，为 json 格式字符串。
      * }
      *
      * @param {Function} fail = function (error) {} ## 
@@ -167,7 +167,7 @@ export default class JShare {
      * 判断某平台是否已经授权
      * 
      * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' / 'facebook_messenger'
+     *  platform: String //可以是 'wechat_session' / 'qq' / 'sina_weibo' / 'facebook' 
      * }
      * @param {Function} callback = (Boolean) => {} 
      */
@@ -209,14 +209,14 @@ export default class JShare {
      *  授权接口
      * Android only
      * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' / 'facebook_messenger'
+     *  platform: String //可以是 'wechat_session' / 'qq' / 'qzone' / 'sina_weibo'  / 'facebook'
      * }
      * @param {Function} success = {
      *     token: string,
      *     expiration: number,
      *     refreshToken: string,
      *     openId: string,
-     *     originData: string
+     *     originData: string // 授权登录返回的原始数据，为 json 格式字符串。
      * }
      * @param {Function} fail = {
      *     code: number,
