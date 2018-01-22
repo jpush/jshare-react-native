@@ -233,19 +233,6 @@ export default class JShare {
     }
 
     /**
-     *  判断是否授权接口
-     * @param {Object} param = {
-     *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
-     * }  
-     * @param {Function} callback = (Boolean) => {} 
-     */
-    static isAuthorize(param, cb) {
-        JShareModule.isAuthorize(param, (result) => {
-            cb(result);
-        });
-    }
-
-    /**
      * 删除用户授权本地数据
      * 
      * @param {Object} param = {
@@ -300,7 +287,7 @@ export default class JShare {
     }
 
     /**
-     * 检查是否存在QQ客户端
+     * 检查是否存在 QQ 客户端
      * 
      * @param {Function} success = (Boolean) => {}
      */
@@ -311,6 +298,20 @@ export default class JShare {
             JShareModule.isQQInstalled(success)
         }
     }
+
+    /**
+     * 检查是否存在 Facebook 客户端
+     * 
+     * @param {Function} success = (Boolean) => {}
+     */
+    static isFacebookInstalled(success) {
+        if (Platform.OS === 'android') {
+            JShareModule.isClientValid({ platform: "facebook"},success)
+        } else {
+            JShareModule.isFacebookInstalled(success)
+        }
+    }
+
 
     /**
      * 检查是否存在新浪微博客户端

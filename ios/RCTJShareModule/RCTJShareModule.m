@@ -256,6 +256,10 @@ RCT_EXPORT_METHOD(isQQInstalled:(RCTResponseSenderBlock) successCallBack) {
   successCallBack(@[@(result)]);
 }
 
+RCT_EXPORT_METHOD(isFacebookInstalled:(RCTResponseSenderBlock) successCallBack) {
+  BOOL result = [JSHAREService isFacebookInstalled];
+  successCallBack(@[@(result)]);
+}
 
 RCT_EXPORT_METHOD(isSinaWeiBoInstalled:(RCTResponseSenderBlock) successCallBack) {
   BOOL result = [JSHAREService isSinaWeiBoInstalled];
