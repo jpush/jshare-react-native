@@ -207,7 +207,6 @@ export default class JShare {
 
     /**
      *  授权接口
-     * Android only
      * @param {Object} param = {
      *  platform: String //可以是 'wechat_session' / 'qq' / 'qzone' / 'sina_weibo'  / 'facebook'
      * }
