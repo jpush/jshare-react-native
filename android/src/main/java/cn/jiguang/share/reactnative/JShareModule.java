@@ -47,7 +47,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
     private static final String UNKNOWN = "unknown";
     private static final String CODE = "code";
     private static final String DESCRIPTION = "description";
-    private static final String PLATFORM = "platform";
 
     public JShareModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -190,7 +189,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putString(STATE, SUCCESS);
                 result.putInt(CODE, 0);
-                result.putString(PLATFORM, map.getString("platform"));
                 succeedCallback.invoke(result);
             }
 
@@ -202,7 +200,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 result.putInt(CODE, errorCode);
                 result.putString(STATE, FAIL);
                 result.putString(DESCRIPTION, getErrorDescription(errorCode));
-                result.putString(PLATFORM, map.getString("platform"));
                 failedCallback.invoke(result);
             }
 
@@ -212,7 +209,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putInt(CODE, i);
                 result.putString(STATE, CANCEL);
-                result.putString(PLATFORM, map.getString("platform"));
                 succeedCallback.invoke(result);
             }
         });
@@ -220,7 +216,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
 
     /**
      * 判断平台是否已经授权
-     * @param map
+     * @param map 包含平台名字
      * @param callback return boolean
      */
     @ReactMethod
@@ -273,7 +269,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 result.putInt(CODE, errorCode);
                 result.putString(STATE, FAIL);
                 result.putString(DESCRIPTION, getErrorDescription(errorCode));
-                result.putString(PLATFORM, map.getString("platform"));
                 failedCallback.invoke(result);
             }
 
@@ -283,7 +278,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putInt(CODE, i);
                 result.putString(STATE, CANCEL);
-                result.putString(PLATFORM, map.getString("platform"));
                 succeedCallback.invoke(result);
             }
         });
@@ -300,7 +294,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putString(STATE, SUCCESS);
                 result.putInt(CODE, 0);
-                result.putString(PLATFORM, map.getString("platform"));
                 callback.invoke(result);
             }
 
@@ -312,7 +305,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 result.putInt(CODE, errorCode);
                 result.putString(STATE, FAIL);
                 result.putString(DESCRIPTION, getErrorDescription(errorCode));
-                result.putString(PLATFORM, map.getString("platform"));
                 callback.invoke(result);
             }
 
@@ -322,7 +314,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putInt(CODE, i);
                 result.putString(STATE, CANCEL);
-                result.putString(PLATFORM, map.getString("platform"));
                 callback.invoke(result);
             }
         });
@@ -366,7 +357,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 result.putInt(CODE, errorCode);
                 result.putString(STATE, FAIL);
                 result.putString(DESCRIPTION, getErrorDescription(errorCode));
-                result.putString(PLATFORM, map.getString("platform"));
                 failCallback.invoke(result);
             }
 
@@ -376,7 +366,6 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 WritableMap result = Arguments.createMap();
                 result.putInt(CODE, i);
                 result.putString(STATE, CANCEL);
-                result.putString(PLATFORM, map.getString("platform"));
                 successCallback.invoke(result);
             }
         });
