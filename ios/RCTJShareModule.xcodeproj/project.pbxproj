@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		626A78841FA337680074D518 /* jshare-ios-1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626A78831FA337680074D518 /* jshare-ios-1.3.0.a */; };
+		626A78841FA337680074D518 /* libjshare-ios-1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626A78831FA337680074D518 /* libjshare-ios-1.3.0.a */; };
 		62CBDDDF1F27397F00C1C703 /* RCTJShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */; };
 		62CBDDE21F273B9B00C1C703 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE11F273B9B00C1C703 /* UIKit.framework */; };
 		62CBDDE41F273BA400C1C703 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CBDDE31F273BA400C1C703 /* SystemConfiguration.framework */; };
@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		621D8DB51F7369C400C415A2 /* JSHAREService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSHAREService.h; sourceTree = "<group>"; };
-		626A78831FA337680074D518 /* jshare-ios-1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jshare-ios-1.3.0.a"; sourceTree = "<group>"; };
+		626A78831FA337680074D518 /* libjshare-ios-1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libjshare-ios-1.3.0.a"; sourceTree = "<group>"; };
 		62CBDDCE1F27394300C1C703 /* libRCTJShareModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTJShareModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62CBDDDC1F27397F00C1C703 /* RCTJShareModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTJShareModule.h; sourceTree = "<group>"; };
 		62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTJShareModule.m; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 				62CBDDEA1F273BC500C1C703 /* Security.framework in Frameworks */,
 				62CBDDE81F273BBC00C1C703 /* CoreGraphics.framework in Frameworks */,
 				62CBDDE61F273BAE00C1C703 /* CoreTelephony.framework in Frameworks */,
-				626A78841FA337680074D518 /* jshare-ios-1.3.0.a in Frameworks */,
+				626A78841FA337680074D518 /* libjshare-ios-1.3.0.a in Frameworks */,
 				62CBDDE41F273BA400C1C703 /* SystemConfiguration.framework in Frameworks */,
 				62CBDDE21F273B9B00C1C703 /* UIKit.framework in Frameworks */,
 			);
@@ -92,7 +92,7 @@
 		62CBDDD01F27394300C1C703 /* RCTJShareModule */ = {
 			isa = PBXGroup;
 			children = (
-				626A78831FA337680074D518 /* jshare-ios-1.3.0.a */,
+				626A78831FA337680074D518 /* libjshare-ios-1.3.0.a */,
 				621D8DB51F7369C400C415A2 /* JSHAREService.h */,
 				62CBDDDC1F27397F00C1C703 /* RCTJShareModule.h */,
 				62CBDDDD1F27397F00C1C703 /* RCTJShareModule.m */,
