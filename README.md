@@ -8,6 +8,21 @@ npm install jcore-react-native --save
 react-native link
 ```
 
+##### Add with CocoaPods(if you integrated react-native to native iOS project)
+
+Add the JShareRN pod to your list of application pods in your Podfile, using the path from the Podfile to the installed module:
+
+```
+pod 'JShareRN', :path => '../node_modules/jshare-react-native'
+pod 'JCoreRN', :path => '../node_modules/jcore-react-native'
+```
+
+Install pods as usual::
+
+```
+pod install
+```
+
 ## Manually Configure Part
 
 ### Android
@@ -35,6 +50,8 @@ That's it.
   import JShareModule from 'jshare-react-native';
   JShareModule.setup(param) // iOS 调用该方法才能正常使用， param 参考 API 文档
   ```
+
+
 
 - Use JShareModule call APIs, [API Document](./docs/API.md)
 
