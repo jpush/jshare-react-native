@@ -95,13 +95,13 @@ export default class MainActivity extends React.Component {
 
   onSharePress = () => {
     var shareParam = {
-      platform: "wechat_session",
+      platform: "facebook",
       type: "image",
       text: "JShare test text",
       imagePath: "/storage/emulated/0/DCIM/Camera/IMG20170707202330.jpg"
     };
     JShareModule.share(shareParam, (map) => {
-      console.log("share succeed, map: " + map);
+      console.log("share result: " + JSON.stringify(map));
     }, (map) => {
       console.log("share failed, map: " + map);
     });

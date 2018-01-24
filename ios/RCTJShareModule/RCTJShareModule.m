@@ -147,6 +147,36 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
   [JSHAREService setupWithConfig:config];
 }
 
+RCT_EXPORT_METHOD(authorize:(NSDictionary *)param
+                  success:(RCTResponseSenderBlock) successCallBack
+                  fail:(RCTResponseSenderBlock) failCallBack) {
+  JSHAREPlatform platform = [self getPlatformFromDic:param];
+  
+  if (platform == 0) {
+    failCallBack(@[@{@"code": @(1), @"description": @"platform 参数错误"}]);
+    return;
+  }
+  
+  [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+    NSMutableDictionary *userDic = [NSMutableDictionary new];
+    if (error) {
+      NSString *description = [error description];
+      failCallBack(@[@{@"code": @(1), @"description": description}]);
+      return;
+    }
+    
+    userDic[@"token"] = userInfo.accessToken;
+    userDic[@"expiration"] = @(userInfo.expiration);
+    userDic[@"refreshToken"] = userInfo.refreshToken;
+    userDic[@"openId"] = userInfo.openid;
+    
+    userDic[@"originData"] = userInfo.userOriginalResponse;
+    if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
+      userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
+    }
+    successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
+  }];
+}
 
 RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
                   success:(RCTResponseSenderBlock) successCallBack
@@ -162,7 +192,6 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
   [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
     NSMutableDictionary *userDic = [NSMutableDictionary new];
     if (error) {
-      NSString *descript = [error description];
       failCallBack(@[@{@"code": @(1), @"description": [error description]}]);
       return;
     }
@@ -176,6 +205,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
     }
     userDic[@"response"] = userInfo.userOriginalResponse;
     userDic[@"openId"] = userInfo.openid;
+    userDic[@"access_token"] = userInfo.accessToken;
     successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
   }];
 }
@@ -226,6 +256,10 @@ RCT_EXPORT_METHOD(isQQInstalled:(RCTResponseSenderBlock) successCallBack) {
   successCallBack(@[@(result)]);
 }
 
+RCT_EXPORT_METHOD(isFacebookInstalled:(RCTResponseSenderBlock) successCallBack) {
+  BOOL result = [JSHAREService isFacebookInstalled];
+  successCallBack(@[@(result)]);
+}
 
 RCT_EXPORT_METHOD(isSinaWeiBoInstalled:(RCTResponseSenderBlock) successCallBack) {
   BOOL result = [JSHAREService isSinaWeiBoInstalled];
@@ -408,6 +442,26 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   dispatch_async(dispatch_get_main_queue(), ^{
     [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
       if (error) {
+        switch (message.platform) {
+          case JSHAREPlatformQQ:{
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          case JSHAREPlatformQzone: {
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          default:
+            break;
+        }
         failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
         return;
       }
@@ -477,5 +531,21 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       break;
   }
   return stateString;
+}
+
+- (NSString *)dictionaryToJson:(NSDictionary *)dic {
+  if (!dic) {
+    return nil;
+  }
+  
+  NSError *error;
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:&error];
+  if (!jsonData) {
+    return nil;
+  } else {
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  }
 }
 @end
