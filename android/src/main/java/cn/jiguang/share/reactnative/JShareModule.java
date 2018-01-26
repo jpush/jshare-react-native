@@ -233,54 +233,74 @@ public class JShareModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void authorize(final ReadableMap map, final Callback succeedCallback, final Callback failedCallback) {
-        String name = getPlatformName(map);
-        JShareInterface.authorize(name, new AuthListener() {
-            @Override
-            public void onComplete(Platform platform, int action, BaseResponseInfo baseResponseInfo) {
-                Logger.i(JSHARE_NAME, "authorize completed" + platform + ", action: " + action + ", data: " + baseResponseInfo);
-                switch (action) {
-                    case Platform.ACTION_AUTHORIZING:
-                        if (baseResponseInfo instanceof AccessTokenInfo) {
-                            String token = ((AccessTokenInfo) baseResponseInfo).getToken();
-                            long expiration = ((AccessTokenInfo) baseResponseInfo).getExpiresIn();
-                            String refreshToken = ((AccessTokenInfo) baseResponseInfo).getRefeshToken();
-                            String openId = ((AccessTokenInfo) baseResponseInfo).getOpenid();
-                            String originData = baseResponseInfo.getOriginData();
-                            Logger.i(JSHARE_NAME, "授权成功：" + baseResponseInfo.toString());
-                            WritableMap result = Arguments.createMap();
-                            result.putInt(CODE, 0);
-                            result.putString(STATE, SUCCESS);
-                            result.putString("token", token);
-                            result.putDouble("expiration", expiration);
-                            result.putString("refreshToken", refreshToken);
-                            result.putString("openId", openId);
-                            result.putString("originData", originData);
-                            succeedCallback.invoke(result);
-                        }
-                        break;
+        String name = "";
+        try {
+            switch (map.getString("platform")) {
+                case "wechat":
+                    name = Wechat.Name;
+                    break;
+                case "qq":
+                    name = QQ.Name;
+                    break;
+                case "weibo":
+                    name = SinaWeibo.Name;
+                    break;
+                default:
+                    name = Facebook.Name;
+            }
+            JShareInterface.authorize(name, new AuthListener() {
+                @Override
+                public void onComplete(Platform platform, int action, BaseResponseInfo baseResponseInfo) {
+                    Logger.i(JSHARE_NAME, "authorize completed" + platform + ", action: " + action + ", data: " + baseResponseInfo);
+                    switch (action) {
+                        case Platform.ACTION_AUTHORIZING:
+                            if (baseResponseInfo instanceof AccessTokenInfo) {
+                                String token = ((AccessTokenInfo) baseResponseInfo).getToken();
+                                long expiration = ((AccessTokenInfo) baseResponseInfo).getExpiresIn();
+                                String refreshToken = ((AccessTokenInfo) baseResponseInfo).getRefeshToken();
+                                String openId = ((AccessTokenInfo) baseResponseInfo).getOpenid();
+                                String originData = baseResponseInfo.getOriginData();
+                                Logger.i(JSHARE_NAME, "授权成功：" + baseResponseInfo.toString());
+                                WritableMap result = Arguments.createMap();
+                                result.putInt(CODE, 0);
+                                result.putString(STATE, SUCCESS);
+                                result.putString("token", token);
+                                result.putDouble("expiration", expiration);
+                                result.putString("refreshToken", refreshToken);
+                                result.putString("openId", openId);
+                                result.putString("originData", originData);
+                                succeedCallback.invoke(result);
+                            }
+                            break;
+                    }
                 }
-            }
 
-            @Override
-            public void onError(Platform platform, int action, int errorCode, Throwable throwable) {
-                Logger.i(JSHARE_NAME, "authorize failed");
-                throwable.printStackTrace();
-                WritableMap result = Arguments.createMap();
-                result.putInt(CODE, errorCode);
-                result.putString(STATE, FAIL);
-                result.putString(DESCRIPTION, getErrorDescription(errorCode));
-                failedCallback.invoke(result);
-            }
+                @Override
+                public void onError(Platform platform, int action, int errorCode, Throwable throwable) {
+                    Logger.i(JSHARE_NAME, "authorize failed");
+                    throwable.printStackTrace();
+                    WritableMap result = Arguments.createMap();
+                    result.putInt(CODE, errorCode);
+                    result.putString(STATE, FAIL);
+                    result.putString(DESCRIPTION, getErrorDescription(errorCode));
+                    failedCallback.invoke(result);
+                }
 
-            @Override
-            public void onCancel(Platform platform, int i) {
-                Logger.i(JSHARE_NAME, "authorize has been canceled");
-                WritableMap result = Arguments.createMap();
-                result.putInt(CODE, i);
-                result.putString(STATE, CANCEL);
-                succeedCallback.invoke(result);
-            }
-        });
+                @Override
+                public void onCancel(Platform platform, int i) {
+                    Logger.i(JSHARE_NAME, "authorize has been canceled");
+                    WritableMap result = Arguments.createMap();
+                    result.putInt(CODE, i);
+                    result.putString(STATE, CANCEL);
+                    succeedCallback.invoke(result);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            WritableMap writableMap = Arguments.createMap();
+            writableMap.putString(DESCRIPTION, "Can't get platform name");
+            failedCallback.invoke(writableMap);
+        }
     }
 
 
