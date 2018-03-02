@@ -40,6 +40,29 @@ RCT_EXPORT_MODULE();
   return self;
 }
 
+- (JSHAREPlatform)getAuthorizePlatformFromDic:(NSDictionary *)param {
+  JSHAREPlatform platform = 0;
+  if (param[@"platform"]) {
+    if ([param[@"platform"] isEqualToString:@"wechat"]) {
+      platform = JSHAREPlatformWechatSession;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"qq"]) {
+      platform = JSHAREPlatformQQ;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"weibo"]) {
+      platform = JSHAREPlatformSinaWeibo;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook"]) {
+      platform = JSHAREPlatformFacebook;
+    }
+  }
+  
+  return platform;
+}
+
 - (JSHAREPlatform)getPlatformFromDic:(NSDictionary *)param {
   JSHAREPlatform platform = 0;
 
@@ -150,7 +173,7 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
 RCT_EXPORT_METHOD(authorize:(NSDictionary *)param
                   success:(RCTResponseSenderBlock) successCallBack
                   fail:(RCTResponseSenderBlock) failCallBack) {
-  JSHAREPlatform platform = [self getPlatformFromDic:param];
+  JSHAREPlatform platform = [self getAuthorizePlatformFromDic:param];
   
   if (platform == 0) {
     failCallBack(@[@{@"code": @(1), @"description": @"platform 参数错误"}]);
