@@ -22,6 +22,7 @@
 #import "React/RCTBridge.h"
 #endif
 
+#define JShareConfig_FileName @"RCTJShareConfig"
 @implementation RCTJShareModule
 
 RCT_EXPORT_MODULE();
@@ -105,51 +106,59 @@ RCT_EXPORT_MODULE();
   }
 
   return platform;
-
 }
 
-RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
+RCT_EXPORT_METHOD(setup){
+  
+  NSString *plistPath = [[NSBundle mainBundle] pathForResource:JShareConfig_FileName ofType:@"plist"];
+  if (plistPath == nil) {
+    NSLog(@"error: RCTJShareConfig.plist not found");
+    return;
+  }
+  
+  NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+  
   JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
   if (param[@"appKey"]) {
     config.appKey = param[@"appKey"];
   }
-
+  
   if (param[@"channel"]) {
     config.channel = param[@"channel"];
   }
-
+  
   if (param[@"advertisingId"]) {
     config.advertisingId = param[@"advertisingId"];
   }
-
+  
   if (param[@"isProduction"]) {
     config.isProduction = param[@"isProduction"];
   }
-
+  
   if (param[@"wechatAppId"]) {
     config.WeChatAppId = param[@"wechatAppId"];
   }
-
+  
   if (param[@"wechatAppSecret"]) {
     config.WeChatAppSecret = param[@"wechatAppSecret"];
   }
-
+  
   if (param[@"qqAppId"]) {
     config.QQAppId = param[@"qqAppId"];
   }
-
+  
   if (param[@"qqAppKey"]) {
     config.QQAppKey = param[@"qqAppKey"];
   }
-
+  
   if (param[@"sinaWeiboAppKey"]) {
     config.SinaWeiboAppKey = param[@"sinaWeiboAppKey"];
   }
-
+  
   if (param[@"sinaWeiboAppSecret"]) {
     config.SinaWeiboAppSecret = param[@"sinaWeiboAppSecret"];
   }
-
+  
   if (param[@"sinaRedirectUri"]) {
     config.SinaRedirectUri = param[@"sinaRedirectUri"];
   }
@@ -161,12 +170,12 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
   if (param[@"facebookDisplayName"]) {
     config.FacebookDisplayName = param[@"facebookDisplayName"];
   }
-
+  
   if (param[@"isSupportWebSina"]) {
     NSNumber *isSupportWebSina = param[@"isSupportWebSina"];
     config.isSupportWebSina = [isSupportWebSina boolValue];
   }
-
+  
   [JSHAREService setupWithConfig:config];
 }
 

@@ -9,24 +9,13 @@ const JShareModule = NativeModules.JShareModule;
 export default class JShare {
     /**
      * iOS Only
-     * 
-     * @param {Object} config = {
-     *  appKey: String              // appKey 一个 JIGUANG 应用必须的,唯一的标识. 请参考 JIGUANG 相关说明文档来获取这个标识。
-     *  channel: String             // channel 发布渠道. 可选。
-     *  advertisingId: String       // advertisingIdentifier 广告标识符（IDFA). 可选，IDFA能帮助您更准确的统计。
-     *  isProduction: Boolean       // isProduction 是否生产环境. 如果为开发状态,设置为NO; 如果为生产状态,应改为 YES.默认为NO。
-     *  wechatAppId: String         // 微信的应用标识。
-     *  wechatAppSecret: String     // 微信的应用密匙。
-     *  qqAppId: String             // QQ 的应用密匙。
-     *  qqAppKey: String            // QQ 应用Key。
-     *  sinaWeiboAppKey: String     // 新浪微博应用标识。
-     *  sinaWeiboAppSecret: String  // 新浪微博应用密匙。
-     *  sinaRedirectUri: String     // 新浪微博应用回调地址。
-     *  isSupportWebSina: Boolean   // 不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
-     * }
      */
-    static setup(config) {
-        JShareModule.setup(config);
+    static setup() {
+        if (arguments[0] !== undefined) {
+            console.warn('当前版本已经不需要在 setup 方法中传入参数。请复制 RCTJShareConfig.plist 文件到 XCode 工程中进行相关参数配置，详情请参考 iOS 配置文档。')
+        } else {
+        }
+        JShareModule.setup();
     }
 
     /**

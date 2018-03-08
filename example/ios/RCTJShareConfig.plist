@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appKey</key>
+	<string>a1703c14b186a68a66ef86c1</string>
+	<key>channel</key>
+	<string></string>
+	<key>advertisingId</key>
+	<string></string>
+	<key>isProduction</key>
+	<true/>
+	<key>wechatAppId</key>
+	<string>wxc40e16f3ba6ebabc</string>
+	<key>wechatAppSecret</key>
+	<string>dcad950cd0633a27e353477c4ec12e7a</string>
+	<key>qqAppId</key>
+	<string>1105864531</string>
+	<key>qqAppKey</key>
+	<string>glFYjkHQGSOCJHMC</string>
+	<key>sinaWeiboAppKey</key>
+	<string>374535501</string>
+	<key>sinaWeiboAppSecret</key>
+	<string>baccd12c166f1df96736b51ffbf600a2</string>
+	<key>sinaRedirectUri</key>
+	<string>https://www.jiguang.cn</string>
+	<key>facebookAppId</key>
+	<string>177776412817787</string>
+	<key>facebookDisplayName</key>
+	<string>HuminiOS</string>
+	<key>isSupportWebSina</key>
+	<true/>
+</dict>
+</plist>
