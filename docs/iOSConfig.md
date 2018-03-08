@@ -36,6 +36,10 @@ TARGET -> Build Settings -> Header Search Paths 添加搜索路径
 $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 ```
 
+### 添加 RCTJShareConfig.plist 文件到 XCode 中
+
+将 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件添加到 XCode 工程中，并替换自己的 key。具体可以参考 [demo](../example/ios/RCTJShareConfig.plist) 。
+
 ### 配置 Info.plist
 
 在 info.plist 文件中添加如下键值对
