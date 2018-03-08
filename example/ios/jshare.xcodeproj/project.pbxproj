@@ -49,6 +49,7 @@
 		62482E811F1DFAFD009C9996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E801F1DFAFD009C9996 /* UIKit.framework */; };
 		62482E831F1DFB03009C9996 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 62482E821F1DFB03009C9996 /* libz.tbd */; };
 		626BCC491FFE2647006F7C15 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626BCC301FFE2633006F7C15 /* libRCTCameraRoll.a */; };
+		62B0CCD22050DDAA00D87F94 /* RCTJShareConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62B0CCD12050DDAA00D87F94 /* RCTJShareConfig.plist */; };
 		62CBDE471F286B3F00C1C703 /* wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE461F286B3F00C1C703 /* wechat@3x.png */; };
 		62CBDE4A1F286B7E00C1C703 /* res6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE491F286B7E00C1C703 /* res6.gif */; };
 		62CBDE4B1F28726600C1C703 /* jiguang.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 62CBDE481F286B5100C1C703 /* jiguang.mp4 */; };
@@ -305,6 +306,7 @@
 		62482E801F1DFAFD009C9996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		62482E821F1DFB03009C9996 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		626BCC281FFE2633006F7C15 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		62B0CCD12050DDAA00D87F94 /* RCTJShareConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RCTJShareConfig.plist; sourceTree = "<group>"; };
 		62CBDE461F286B3F00C1C703 /* wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@3x.png"; sourceTree = "<group>"; };
 		62CBDE481F286B5100C1C703 /* jiguang.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jiguang.mp4; sourceTree = "<group>"; };
 		62CBDE491F286B7E00C1C703 /* res6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res6.gif; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				624764021F2ADF9E00BB06C7 /* EventEmiter.h */,
 				624764031F2ADF9E00BB06C7 /* EventEmiter.m */,
+				62B0CCD12050DDAA00D87F94 /* RCTJShareConfig.plist */,
 				62CBDE461F286B3F00C1C703 /* wechat@3x.png */,
 				62CBDE481F286B5100C1C703 /* jiguang.mp4 */,
 				62CBDE491F286B7E00C1C703 /* res6.gif */,
@@ -1012,6 +1015,7 @@
 				62CBDE471F286B3F00C1C703 /* wechat@3x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				62B0CCD22050DDAA00D87F94 /* RCTJShareConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
