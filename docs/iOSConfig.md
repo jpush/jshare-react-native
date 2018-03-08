@@ -38,7 +38,9 @@ $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 
 ### 添加 RCTJShareConfig.plist 文件到 XCode 中
 
-将 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件添加到 XCode 工程中，并替换自己的 key。具体可以参考 [demo](../example/ios/RCTJShareConfig.plist) 。
+> 1.3.0 及以后版将不再 setup 中传入相关配置参数，将使用 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件进行传递参数。
+
+将 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件添加到 XCode 工程中，并替换自己的 value。具体可以参考 [demo](../example/ios/RCTJShareConfig.plist) 。
 
 ### 配置 Info.plist
 
