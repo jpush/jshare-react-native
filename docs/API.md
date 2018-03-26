@@ -9,27 +9,12 @@ JShare plugin's APIs list.
 JShareModule.xxx();
 ```
 
-- **setup(param)**
+- **setup()**  : 1.3.0 之后版本将不再需要填写平台参数。
   ```javascript
   /**
     * iOS Only
-    * @param {Object} config = {
-    * appKey: String              // appKey 一个 JIGUANG 应用必须的,唯一的标识. 请参考 JIGUANG 相关说明文档来获取这个标识。
-    * channel: String             // channel 发布渠道. 可选。
-    * advertisingId: String       // advertisingIdentifier 广告标识符（IDFA). 可选，IDFA能帮助您更准确的统计。
-    * isProduction: Boolean       // isProduction 是否生产环境. 如果为开发状态,设置为NO; 如果为生产状态,应改为 YES.默认为NO。
-    * wechatAppId: String         // 微信的应用标识。
-    * wechatAppSecret: String     // 微信的应用密匙。
-    * qqAppId: String             // QQ 的应用密匙。
-    * qqAppKey: String            // QQ 应用Key。
-    * sinaWeiboAppKey: String     // 新浪微博应用标识。
-    * sinaWeiboAppSecret: String  // 新浪微博应用密匙。
-    * sinaRedirectUri: String     // 新浪微博应用回调地址。
-    * isSupportWebSina: Boolean   // 不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
-    * facebookAppId: string       // facebook 注册的应用 id（必须使用自己的，测试时需要添加自己的用户才能正常分享）。
-    * facebookDisplayName: string // facebook 注册的应用名，必须要匹配，否则会分享失败。
-    * }
     */
+  JShareModule.setup()
   ```
 
 - **getPlatformList(cb)**
