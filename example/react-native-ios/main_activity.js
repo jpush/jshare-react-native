@@ -31,29 +31,8 @@ export default class MainActivity extends React.Component {
       videoPath: "",
       emotionPath: ""
     }
-    var config = 
-    {
-      appKey:'a1703c14b186a68a66ef86c1',
-      channel:'',
-      advertisingId:'',
-      isProduction:false,
-      wechatAppId: 'wxc40e16f3ba6ebabc',
-      wechatAppSecret: 'dcad950cd0633a27e353477c4ec12e7a',
-      qqAppId: '1105864531',
-      qqAppKey: 'glFYjkHQGSOCJHMC',
-      sinaWeiboAppKey: '374535501',
-      sinaWeiboAppSecret: 'baccd12c166f1df96736b51ffbf600a2',
-      sinaRedirectUri: 'https://www.jiguang.cn',
-      facebookAppId: '177776412817787',
-      facebookDisplayName: 'HuminiOS',
-      isSupportWebSina: true
-    }
      
-    JShareModule.setup(config)
-    
-
-
-
+    JShareModule.setup()
   }
 
   componentWillMount() {
@@ -132,7 +111,7 @@ export default class MainActivity extends React.Component {
     console.log(this.state.path)
 
     var shareParam = {
-      platform: "facebook",
+      platform: "qzone",
       type: "image",
       text: "JShare test text",
       imageUrl: "",
