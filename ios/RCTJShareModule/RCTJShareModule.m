@@ -468,6 +468,13 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     if (param[@"imagePath"]) {
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
+    
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.thumbnail = imageData;
+    }
+    
     message.mediaType = JSHARELink;
   }
 
