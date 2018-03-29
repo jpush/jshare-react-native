@@ -353,6 +353,12 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.images = imageDataArr;
 
     }
+    
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.images = imageData;
+    }
     message.mediaType =JSHAREImage;
   }
 
@@ -401,6 +407,11 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.mediaDataUrl = param[@"musicUrl"];
     }
 
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.thumbnail = imageData;
+    }
     message.mediaType = JSHAREAudio;
   }
 
