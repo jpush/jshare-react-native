@@ -56,7 +56,7 @@ JShareModule.xxx();
    *  platform: platformString  // 分享到指定平台
    *  imagePath: String   // 本地图片路径 imagePath, imageUrl imageArray 必须三选一
    *  text: String  // 选填
-   *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一 (iOS 不支持这个字段)
+   *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一
    *  imageArray: [String]  // (选填: 分享到 Qzone 才提供这个字段) 如果需要分享多张图片需要这个参数，数组中问题图片路径 imagePath, imageUrl imageArray 必须三选一
    * }
    * 
