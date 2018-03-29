@@ -357,7 +357,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     if (param[@"imageUrl"]) {
       NSString *imageURL = param[@"imageUrl"];
       NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
-      message.images = imageData;
+      message.image = imageData;
     }
     message.mediaType =JSHAREImage;
   }
