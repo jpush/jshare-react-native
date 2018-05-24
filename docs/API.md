@@ -75,7 +75,7 @@ JShareModule.xxx();
    * {
    *  type: 'audio'
    *  platform: platformString  // 分享到指定平台
-   *  musicUrl: String //必填 点击直接播放的 url
+   *  musicUrl: String //必填 点击直接播放的 urlurl
    *  url: String //选填，点击跳转的 url
    *  imagePath: String   //选填，缩略图，本地图片路径，imagePath，imageUrl 必须二选一
    *  imageUrl: String // 选填，网络图片路径，imagePath， imageUrl 必须二选一
@@ -112,7 +112,7 @@ JShareModule.xxx();
    * platform: platformString  // 分享到指定平台
    * url: String // 必填，网页 url
    * imagePath: String // 选填，本地图片路径 imagePath，imageUrl 必须二选一 
-   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一 (iOS 不支持)
+   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一 
    * title: String // 选填
    * text: String // 选填
    * }
