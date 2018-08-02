@@ -514,7 +514,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
           default:
             break;
         }
-        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        failCallBack(@[@{@"code":@(error.code), @"description": [error userInfo] ?: @""}]);
         return;
       }
       NSString *stateString = [self stateToString:state];
