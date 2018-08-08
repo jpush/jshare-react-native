@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appKey</key>
+	<string></string>
+	<key>channel</key>
+	<string></string>
+	<key>advertisingId</key>
+	<string></string>
+	<key>isProduction</key>
+	<true/>
+	<key>wechatAppId</key>
+	<string></string>
+	<key>wechatAppSecret</key>
+	<string></string>
+	<key>qqAppId</key>
+	<string></string>
+	<key>qqAppKey</key>
+	<string></string>
+	<key>sinaWeiboAppKey</key>
+	<string></string>
+	<key>sinaWeiboAppSecret</key>
+	<string></string>
+	<key>sinaRedirectUri</key>
+	<string></string>
+	<key>facebookAppId</key>
+	<string></string>
+	<key>facebookDisplayName</key>
+	<string></string>
+	<key>isSupportWebSina</key>
+	<true/>
+</dict>
+</plist>

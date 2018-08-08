@@ -22,6 +22,7 @@
 #import "React/RCTBridge.h"
 #endif
 
+#define JShareConfig_FileName @"RCTJShareConfig"
 @implementation RCTJShareModule
 
 RCT_EXPORT_MODULE();
@@ -38,6 +39,29 @@ RCT_EXPORT_MODULE();
 - (id)init {
   self = [super init];
   return self;
+}
+
+- (JSHAREPlatform)getAuthorizePlatformFromDic:(NSDictionary *)param {
+  JSHAREPlatform platform = 0;
+  if (param[@"platform"]) {
+    if ([param[@"platform"] isEqualToString:@"wechat"]) {
+      platform = JSHAREPlatformWechatSession;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"qq"]) {
+      platform = JSHAREPlatformQQ;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"weibo"]) {
+      platform = JSHAREPlatformSinaWeibo;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook"]) {
+      platform = JSHAREPlatformFacebook;
+    }
+  }
+  
+  return platform;
 }
 
 - (JSHAREPlatform)getPlatformFromDic:(NSDictionary *)param {
@@ -71,66 +95,120 @@ RCT_EXPORT_MODULE();
     if ([param[@"platform"] isEqualToString:@"sina_weibo_contact"]) {
       platform = JSHAREPlatformSinaWeiboContact;
     }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook"]) {
+      platform = JSHAREPlatformFacebook;
+    }
+    
+    if ([param[@"platform"] isEqualToString:@"facebook_messenger"]) {
+      platform = JSHAREPlatformFacebookMessenger;
+    }
   }
 
   return platform;
-
 }
 
-RCT_EXPORT_METHOD(setup:(NSDictionary *)param){
+RCT_EXPORT_METHOD(setup){
+  
+  NSString *plistPath = [[NSBundle mainBundle] pathForResource:JShareConfig_FileName ofType:@"plist"];
+  if (plistPath == nil) {
+    NSLog(@"error: RCTJShareConfig.plist not found");
+    return;
+  }
+  
+  NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+  
   JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
   if (param[@"appKey"]) {
     config.appKey = param[@"appKey"];
   }
-
+  
   if (param[@"channel"]) {
     config.channel = param[@"channel"];
   }
-
+  
   if (param[@"advertisingId"]) {
     config.advertisingId = param[@"advertisingId"];
   }
-
+  
   if (param[@"isProduction"]) {
     config.isProduction = param[@"isProduction"];
   }
-
+  
   if (param[@"wechatAppId"]) {
     config.WeChatAppId = param[@"wechatAppId"];
   }
-
+  
   if (param[@"wechatAppSecret"]) {
     config.WeChatAppSecret = param[@"wechatAppSecret"];
   }
-
+  
   if (param[@"qqAppId"]) {
     config.QQAppId = param[@"qqAppId"];
   }
-
+  
   if (param[@"qqAppKey"]) {
     config.QQAppKey = param[@"qqAppKey"];
   }
-
+  
   if (param[@"sinaWeiboAppKey"]) {
     config.SinaWeiboAppKey = param[@"sinaWeiboAppKey"];
   }
-
+  
   if (param[@"sinaWeiboAppSecret"]) {
     config.SinaWeiboAppSecret = param[@"sinaWeiboAppSecret"];
   }
-
+  
   if (param[@"sinaRedirectUri"]) {
     config.SinaRedirectUri = param[@"sinaRedirectUri"];
   }
-
+  
+  if (param[@"facebookAppId"]) {
+    config.FacebookAppID = param[@"facebookAppId"];
+  }
+  
+  if (param[@"facebookDisplayName"]) {
+    config.FacebookDisplayName = param[@"facebookDisplayName"];
+  }
+  
   if (param[@"isSupportWebSina"]) {
     NSNumber *isSupportWebSina = param[@"isSupportWebSina"];
     config.isSupportWebSina = [isSupportWebSina boolValue];
   }
-
+  
   [JSHAREService setupWithConfig:config];
 }
 
+RCT_EXPORT_METHOD(authorize:(NSDictionary *)param
+                  success:(RCTResponseSenderBlock) successCallBack
+                  fail:(RCTResponseSenderBlock) failCallBack) {
+  JSHAREPlatform platform = [self getAuthorizePlatformFromDic:param];
+  
+  if (platform == 0) {
+    failCallBack(@[@{@"code": @(1), @"description": @"platform 参数错误"}]);
+    return;
+  }
+  
+  [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+    NSMutableDictionary *userDic = [NSMutableDictionary new];
+    if (error) {
+      NSString *description = [error description];
+      failCallBack(@[@{@"code": @(1), @"description": description}]);
+      return;
+    }
+    
+    userDic[@"token"] = userInfo.accessToken;
+    userDic[@"expiration"] = @(userInfo.expiration);
+    userDic[@"refreshToken"] = userInfo.refreshToken;
+    userDic[@"openId"] = userInfo.openid;
+    
+    userDic[@"originData"] = userInfo.userOriginalResponse;
+    if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
+      userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
+    }
+    successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
+  }];
+}
 
 RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
                   success:(RCTResponseSenderBlock) successCallBack
@@ -146,7 +224,6 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
   [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
     NSMutableDictionary *userDic = [NSMutableDictionary new];
     if (error) {
-      NSString *descript = [error description];
       failCallBack(@[@{@"code": @(1), @"description": [error description]}]);
       return;
     }
@@ -160,6 +237,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
     }
     userDic[@"response"] = userInfo.userOriginalResponse;
     userDic[@"openId"] = userInfo.openid;
+    userDic[@"access_token"] = userInfo.accessToken;
     successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
   }];
 }
@@ -210,6 +288,10 @@ RCT_EXPORT_METHOD(isQQInstalled:(RCTResponseSenderBlock) successCallBack) {
   successCallBack(@[@(result)]);
 }
 
+RCT_EXPORT_METHOD(isFacebookInstalled:(RCTResponseSenderBlock) successCallBack) {
+  BOOL result = [JSHAREService isFacebookInstalled];
+  successCallBack(@[@(result)]);
+}
 
 RCT_EXPORT_METHOD(isSinaWeiBoInstalled:(RCTResponseSenderBlock) successCallBack) {
   BOOL result = [JSHAREService isSinaWeiBoInstalled];
@@ -271,6 +353,12 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.images = imageDataArr;
 
     }
+    
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.image = imageData;
+    }
     message.mediaType =JSHAREImage;
   }
 
@@ -289,6 +377,10 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
 
     if (param[@"imagePath"]) {
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
+    }
+    
+    if (param[@"videoAssetURL"]) {
+      message.videoAssetURL = param[@"videoAssetURL"];
     }
 
     message.mediaType = JSHAREVideo;
@@ -315,6 +407,11 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       message.mediaDataUrl = param[@"musicUrl"];
     }
 
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.thumbnail = imageData;
+    }
     message.mediaType = JSHAREAudio;
   }
 
@@ -382,17 +479,46 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
     if (param[@"imagePath"]) {
       message.thumbnail = [NSData dataWithContentsOfFile:param[@"imagePath"]];
     }
+    
+    if (param[@"imageUrl"]) {
+      NSString *imageURL = param[@"imageUrl"];
+      NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+      message.thumbnail = imageData;
+    }
+    
     message.mediaType = JSHARELink;
   }
 
-  [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
-    if (error) {
-      failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
-      return;
-    }
-    NSString *stateString = [self stateToString:state];
-    successCallBack(@[@{@"state": stateString}]);
-  }];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {
+      if (error) {
+        switch (message.platform) {
+          case JSHAREPlatformQQ:{
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          case JSHAREPlatformQzone: {
+            if (state == JSHAREStateCancel) {
+              NSString *stateString = [self stateToString:state];
+              successCallBack(@[@{@"state": stateString}]);
+              return;
+            }
+            break;
+          }
+          default:
+            break;
+        }
+        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        return;
+      }
+      NSString *stateString = [self stateToString:state];
+      successCallBack(@[@{@"state": stateString}]);
+    }];
+  });
 }
 
 - (NSUInteger)getPlatformFromString:(NSString *)platformStr {
@@ -418,6 +544,14 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
 
   if ([platformStr isEqualToString:@"sina_weibo"]) {
     return JSHAREPlatformSinaWeibo;
+  }
+  
+  if ([platformStr isEqualToString:@"facebook"]) {
+    return JSHAREPlatformFacebook;
+  }
+  
+  if ([platformStr isEqualToString:@"facebook_messenger"]) {
+    return JSHAREPlatformFacebookMessenger;
   }
 
   if ([platformStr isEqualToString:@"sina_weibo_contact"]) {
@@ -447,5 +581,21 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
       break;
   }
   return stateString;
+}
+
+- (NSString *)dictionaryToJson:(NSDictionary *)dic {
+  if (!dic) {
+    return nil;
+  }
+  
+  NSError *error;
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:&error];
+  if (!jsonData) {
+    return nil;
+  } else {
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  }
 }
 @end

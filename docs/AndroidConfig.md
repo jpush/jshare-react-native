@@ -18,14 +18,17 @@ project(':jcore-react-native').projectDir = new File(rootProject.projectDir, '..
 android {
   ...
   defaultConfig {
-    applicationId "your application id"
-    ...
+    applicationId "your application id"    // <-- 包名、应用的签名、第三方平台注册的 AppID 及 Appkey 三者要一一对应，否则会无法分享
+    ...
     manifestPlaceholders = [
-      JSHARE_PKGNAME: "your application id",
-      JPUSH_APPKEY: "your app key",	//在此替换你的APPKey
-      JPUSH_CHANNEL: "developer-default",		//应用渠道号, 默认即可
-      TENCENT_APPID: "your tencent app id"
+      JPUSH_APPKEY: "your app key",	        // <--    在此替换你的APPKey
+      JPUSH_CHANNEL: "developer-default",		// <--    应用渠道号, 默认即可
     ]
+  }
+  sourceSets {      // <--   必须添加 sourceSet 这段。因为 JGShareSDK.xml 放在 assets 下，不加上会报错。
+    main {
+        assets.srcDirs = ['assets']
+    }
   }
   ...
   signingConfigs {
@@ -54,9 +57,9 @@ android {
     }
     ...
     dependencies {
-      compile project(':jshare-react-native')
-      compile project(':jcore-react-native')
-    }
+      compile project(':jshare-react-native')     // <-- JShare 依赖
+      compile project(':jcore-react-native')      // <-- JCore 依赖
+   }
 }
 ```
 

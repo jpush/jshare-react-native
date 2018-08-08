@@ -36,6 +36,31 @@ TARGET -> Build Settings -> Header Search Paths 添加搜索路径
 $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
 ```
 
+### 添加 RCTJShareConfig.plist 文件到 XCode 中
+
+> 1.3.0 及以后版将不再 setup 中传入相关配置参数，将使用 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件进行传递参数。
+
+将 [RCTJShareConfig.plist](../RCTJShareConfig.plist) 文件添加到 XCode 工程中，并替换自己的 value。具体可以参考 [demo](../example/ios/RCTJShareConfig.plist) 。
+
+
+- 参数说明：
+  - `appKey`: String              // appKey 一个 JIGUANG 应用必须的,唯一的标识. 请参考 JIGUANG 相关说明文档来获取这个标识。
+  - `channel`: String             // channel 发布渠道. 可选。
+  - `advertisingId`: String       // advertisingIdentifier 广告标识符（IDFA). 可选，IDFA能帮助您更准确的统计。
+  - `isProduction`: Boolean       // isProduction 是否生产环境. 如果为开发状态,设置为NO; 如果为生产状态,应改为 YES.默认为NO。
+  - `wechatAppId`: String         // 微信的应用标识。
+  - `wechatAppSecret`: String     // 微信的应用密匙。
+  - `qqAppId`: String             // QQ 的应用密匙。
+  - `qqAppKey`: String            // QQ 应用Key。
+  - `sinaWeiboAppKey`: String     // 新浪微博应用标识。
+  - `sinaWeiboAppSecret`: String  // 新浪微博应用密匙。
+  - `sinaRedirectUri`: String     // 新浪微博应用回调地址。
+  - `isSupportWebSina`: Boolean   // 不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
+  - `facebookAppId`: string       // facebook 注册的应用 id（必须使用自己的，测试时需要添加自己的用户才能正常分享）。
+  - `facebookDisplayName`: string // facebook 注册的应用名，必须要匹配，否则会分享失败。
+
+  ​
+
 ### 配置 Info.plist
 
 在 info.plist 文件中添加如下键值对
@@ -80,6 +105,12 @@ $(SRCROOT)/../node_modules/jshare-react-native/ios/RCTJShareModule
     <string>mqzoneopensdkapi</string>
     <string>mqqbrowser</string>
     <string>mttbrowser</string>
+
+    <!-- Facebook URL Scheme 白名单-->
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
 </array>
 ```
 

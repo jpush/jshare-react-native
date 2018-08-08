@@ -18,5 +18,4 @@
         <item name="android:hint">@string/tag_hint</item>
         <item name="android:textSize">14sp</item>
     </style>
-
 </resources>

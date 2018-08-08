@@ -9,25 +9,12 @@ JShare plugin's APIs list.
 JShareModule.xxx();
 ```
 
-- **setup(param)**
+- **setup()**  : 1.3.0 之后版本将不再需要填写平台参数。
   ```javascript
   /**
     * iOS Only
-    * @param {Object} config = {
-    * appKey: String              // appKey 一个 JIGUANG 应用必须的,唯一的标识. 请参考 JIGUANG 相关说明文档来获取这个标识。
-    * channel: String             // channel 发布渠道. 可选。
-    * advertisingId: String       // advertisingIdentifier 广告标识符（IDFA). 可选，IDFA能帮助您更准确的统计。
-    * isProduction: Boolean       // isProduction 是否生产环境. 如果为开发状态,设置为NO; 如果为生产状态,应改为 YES.默认为NO。
-    * wechatAppId: String         // 微信的应用标识。
-    * wechatAppSecret: String     // 微信的应用密匙。
-    * qqAppId: String             // QQ 的应用密匙。
-    * qqAppKey: String            // QQ 应用Key。
-    * sinaWeiboAppKey: String     // 新浪微博应用标识。
-    * sinaWeiboAppSecret: String  // 新浪微博应用密匙。
-    * sinaRedirectUri: String     // 新浪微博应用回调地址。
-    * isSupportWebSina: Boolean   // 不存在新浪客户端的情况下，是否支持新浪网页版分享，默认不支持值为NO，若需支持将此值设置为YES，具体参考官方文档。
-    * }
     */
+  JShareModule.setup()
   ```
 
 - **getPlatformList(cb)**
@@ -53,26 +40,26 @@ JShareModule.xxx();
   /**
    * 分享
    * @param {object} message = {
-   * 
-   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *
+   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
    * type 必填
-   * 
+   *
    * {
    *  type: 'text'
    *  platform: platformString  // 分享到指定平台
    *  text: String
    *  imagePath: // 选填，新浪微博本地图片地址，其他平台没有这个字段(iOS 不支持这个字段)
    * }
-   * 
+   *
    * {
    *  type: 'image'
    *  platform: platformString  // 分享到指定平台
    *  imagePath: String   // 本地图片路径 imagePath, imageUrl imageArray 必须三选一
    *  text: String  // 选填
-   *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一 (iOS 不支持这个字段)
+   *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一
    *  imageArray: [String]  // (选填: 分享到 Qzone 才提供这个字段) 如果需要分享多张图片需要这个参数，数组中问题图片路径 imagePath, imageUrl imageArray 必须三选一
    * }
-   * 
+   *
    * {
    *  type: 'video'
    *  platform: platformString  // 分享到指定平台
@@ -80,21 +67,22 @@ JShareModule.xxx();
    *  url: String // 视频跳转页面 url
    *  text: String  // 选填
    *  imagePath: String // 选填，缩略图，本地图片路径
-   *  
+
+   *  videoAssetURL: string // videoAssetURL：系统相册视频文件的 url(videoAssetURL 正确格式: assets-library://asset/asset.MOV?id=872C1D2F-97FD-4B0B-9C21-A619E4F23293&ext=MOV) (iOS only)，facebook 只支持使用 videoAssetURL 来发送本地视频（不支持 url）。
    *  videoUrl: String  // QQ 空间本地视频 (iOS 不支持这个字段)
    * }
-   * 
+   *
    * {
    *  type: 'audio'
    *  platform: platformString  // 分享到指定平台
-   *  musicUrl: String //必填 点击直接播放的 url
+   *  musicUrl: String //必填 点击直接播放的 urlurl
    *  url: String //选填，点击跳转的 url
    *  imagePath: String   //选填，缩略图，本地图片路径，imagePath，imageUrl 必须二选一
    *  imageUrl: String // 选填，网络图片路径，imagePath， imageUrl 必须二选一
-   *  title: String // 选填 
+   *  title: String // 选填
    *  text: String  // 选填
    * }
-   * 
+   *
    * {
    *  type: 'file'
    *  platform: platformString  // 分享到指定平台
@@ -102,13 +90,13 @@ JShareModule.xxx();
    *  fileExt: String // 必填，文件类型后缀
    *  tile: String
    * }
-   * 
+   *
    * {
    * type: 'emoticon'
    * platform: platformString  // 分享到指定平台
    * imagePath: String // 必填，本地图片路径
    * }
-   * 
+   *
    * {
    * type: 'app' // wechat_favourite 不支持
    * platform: platformString  // 分享到指定平台
@@ -118,26 +106,26 @@ JShareModule.xxx();
    * title: String // 选填
    * text: String // 选填
    * }
-   * 
+   *
    * {
    * type: 'link'
    * platform: platformString  // 分享到指定平台
    * url: String // 必填，网页 url
-   * imagePath: String // 选填，本地图片路径 imagePath，imageUrl 必须二选一 
-   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一 (iOS 不支持)
+   * imagePath: String // 选填，本地图片路径 imagePath，imageUrl 必须二选一
+   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一
    * title: String // 选填
    * text: String // 选填
    * }
-   * 
+   *
    * {
    * type: 'undefined'
    * platform: platformString  // 分享到指定平台
    * }
-   * 
-   * @param {Function} success = function (state) {} ## 
+   *
+   * @param {Function} success = function (state) {} ##
    * state = {state: String} state = 'success' / 'fail' / 'cancel' / 'unknow'
      *
-   * @param {Function} fail = function (error) {} ## 
+   * @param {Function} fail = function (error) {} ##
    * error = {code: number, descript: String}
    */
   ```
@@ -158,23 +146,26 @@ JShareModule.xxx();
   })
   ```
 
+
+
+
 - **getSocialUserInfo(param, successCallback, failCallback)**
 
   ```javascript
   /**
    * 获取社交平台用户信息
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook'
    * }
-   * @param {Function} success function (userInfo) {} 
+   * @param {Function} success function (userInfo) {}
    * userInfo = {
-   *  name: String        
+   *  name: String
    *  iconUrl: String   // 社交平台头像链接
    *  gender: String    // 'female' /  'male'
-   *  response: Object  // 社交平台上的原始数据
+   *  response: String  // 社交平台上的原始数据, 返回 JSON 字符串
    * }
    *
-   * @param {Function} fail = function (error) {} ## 
+   * @param {Function} fail = function (error) {} ##
    * error = {code: number, descript: String}
    */
   ```
@@ -196,12 +187,12 @@ JShareModule.xxx();
 
   ```javascript
   /**
-   * 判断某平台是否支持授权
-   * 
+   * 判断某平台是否已经授权
+   *
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
    * }
-   * @param {Function} callback = (Boolean) => {} 
+   * @param {Function} callback = (Boolean) => {}
    */
   ```
 
@@ -222,9 +213,9 @@ JShareModule.xxx();
    * 判断该平台的分享是否有效
    * Android only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
    * }
-   * @param {Function} callback = (Boolean) => {} 
+   * @param {Function} callback = (Boolean) => {}
    */
   ```
 
@@ -239,16 +230,16 @@ JShareModule.xxx();
   });
   ```
 
-- **authorize(param, successCallback, failCallback) Android Only**
+- **authorize(param, successCallback, failCallback)**
 
   ```javascript
   /**
-   * 授权接口 Android Only
+   * 授权接口
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
+   *  platform: String //可以是 'wechat' / 'qq' / 'weibo' / 'facebook'
    * }
-   * @param {Function} success 
-   * @param {Function} fail 
+   * @param {Function} success
+   * @param {Function} fail
    */
   ```
 
@@ -265,24 +256,24 @@ JShareModule.xxx();
   });
   ```
 
-- **isAuthorize(param, callback)**
+- **isSupportAuthorize(param, callback)    Android Only**
   ```javascript
   /**
-   *  判断是否授权接口
+   *  判断平台是否支持授权接口, NOTE：Android Only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' 
-   * }  
-   * @param {Function} callback = (Boolean) => {} 
+   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook' /'facebook_messenger'
+   * }
+   * @param {Function} callback = (Boolean) => {}
    */
   ```
 
   usage:
 
   ```javascript
-  var param = {  
+  var param = {
     platform: "wechat_session"
   };
-  JShareModule.isAuthorize(param, (result) => {        		
+  JShareModule.isSupportAuthorize(param, (result) => {
      console.log("param is Authorize: " + result);
   });
   ```
@@ -292,15 +283,15 @@ JShareModule.xxx();
   ```javascript
   /**
    * 删除用户授权本地数据
-   * 
+   *
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 
-   *                           'wechat_timeLine' / 
-   *                           'wechat_favourite' / 
-   *                           'qq' / 
+   *  platform: String //可以是 'wechat_session' /
+   *                           'wechat_timeLine' /
+   *                           'wechat_favourite' /
+   *                           'qq' /
    *                           'qzone' /
    *                           'sina_weibo' /
-   *                           'sina_weibo_contact' 
+   *                           'sina_weibo_contact'
    * }
    * @param {Function} callback = (Int) => {}
    * @code 返回码，0 表示成功删除
@@ -323,14 +314,14 @@ JShareModule.xxx();
   ```
 
 
-- **isSinaWeiboWebLogined(param, callback)**
+- **isSinaWeiboWebLogined(callback)**
 
   ```javascript
   /**
    * 检查不存在新浪客户端情况下的网页端是否登陆
-   * 
+   *
    * iOS Only
-   * @param {Function} success = (Boolean) => {} 
+   * @param {Function} success = (Boolean) => {}
    */
   ```
 
@@ -346,14 +337,14 @@ JShareModule.xxx();
   });
   ```
 
-- **sinaWeiboWebLogOut(param, callback)**
+- **sinaWeiboWebLogOut(callback)**
 
   ```javascript
   /**
    * 登出新浪网页端最新帐号
-   * 
+   *
    * iOS Only
-   * @param {Function} success = (Boolean) => {} 
+   * @param {Function} success = (Boolean) => {}
    */
   ```
 
@@ -369,14 +360,13 @@ JShareModule.xxx();
   });
   ```
 
-- **isWeChatInstalled(param, callback)**
+- **isWeChatInstalled(callback)**
 
   ```javascript
   /**
    * 检查是否安装微信客户端
-   * 
-   * iOS Only
-   * @param {Function} success = (Boolean) => {} 
+   *
+   * @param {Function} success = (Boolean) => {}
    */
   ```
 
@@ -392,14 +382,13 @@ JShareModule.xxx();
   });
   ```
 
-- **isQQInstalled(param, callback)**
+- **isQQInstalled(callback)**
 
   ```javascript
   /**
    * 检查是否存在QQ客户端
-   * 
-   * iOS Only
-   * @param {Function} success = (Boolean) => {} 
+   *
+   * @param {Function} success = (Boolean) => {}
    */
   ```
 
@@ -415,14 +404,13 @@ JShareModule.xxx();
   });
   ```
 
-- **isSinaWeiBoInstalled(param, callback)**
+- **isSinaWeiBoInstalled(callback)**
 
   ```javascript
   /**
    * 检查是否存在新浪微博客户端
-   * 
-   * iOS Only
-   * @param {Function} success = (Boolean) => {} 
+   *
+   * @param {Function} success = (Boolean) => {}
    */
   ```
 
@@ -438,11 +426,33 @@ JShareModule.xxx();
   });
   ```
 
-- **setDebug(param, callback)，Android 建议在 MainApplication 中调用，[参考 demo](./../example/android/app/src/main/java/cn/jiguang/share/demo/MainApplication.java)** 
+- **isFacebookInstalled(callback)**
+
+    ```javascript
+    /**
+     * 检查是否存在 facebook 户端
+     *
+     * @param {Function} success = (Boolean) => {}
+     */
+    ```
+
+    usage:
+
+    ```javascript
+    JShareModule.isFacebookInstalled((isInstalled) => {
+      if (isInstalled === true) {
+        console.log("sina weibo is intalled");
+      } else {
+        console.log("sina weibo is not installed");
+      }
+    });
+    ```
+
+- **setDebug(param, callback)，Android 建议在 MainApplication 中调用，[参考 demo](./../example/android/app/src/main/java/cn/jiguang/share/demo/MainApplication.java)**
 
   ```javascript
   /**
-   * 
+   *
    * @param {Object} param = {
    *  enable: Boolean
    * }

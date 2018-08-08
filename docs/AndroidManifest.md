@@ -49,6 +49,11 @@
             android:name=".wxapi.WXEntryActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:exported="true" />
+        <!-- Optional facebook配置,authorities必须为com.facebook.app.FacebookContentProvider+APP_ID-->
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider177776412817787"
+            android:name="cn.jiguang.share.facebook.FacebookContentProvider"
+            android:exported="true" />    
     </application>
 
 

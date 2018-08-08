@@ -30,7 +30,7 @@ npm-debug.log
 # Don't publish example apps
 example/
 # .idea
-
+RCTJShareConfig.plist
 .idea/
 .gradle/
 
