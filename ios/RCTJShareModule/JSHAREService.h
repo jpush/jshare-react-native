@@ -11,7 +11,7 @@
 
 
 
-#define JSHARE_VERSION_NUMBER 1.3.0
+#define JSHARE_VERSION_NUMBER 1.5.0
 
 
 #import <Foundation/Foundation.h>
@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, JSHAREPlatform) {
     
     JSHAREPlatformFacebook = 8,
     JSHAREPlatformFacebookMessenger = 9,
+    
+    JSHAREPlatformTwitter = 10,
 };
 
 typedef NS_ENUM(NSUInteger,JSHAREState){
@@ -127,6 +129,15 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  */
 @property (nonatomic, assign) BOOL isSupportWebSina;
 
+/**
+ *  Twitter consumer key
+ */
+@property (nonatomic, copy) NSString *TwitterConsumerKey;
+/**
+ *  Twitter consumer secret
+ */
+@property (nonatomic, copy) NSString *TwitterConsumerSecret;
+
 @end
 
 @interface JSHAREMessage : NSObject
@@ -152,7 +163,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ：分享文本类型时，最大 1536 字符。分享非文本类型，最大 512 字符。
  QQ空间：分享文本类型时，最大 128 字符。分享非文本类型，最大 512 字符。
  新浪微博：最大 140 汉字。
- 
+ Twitter:最大 140 汉字
  */
 @property (nonatomic,strong) NSString *text;
 
@@ -164,7 +175,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ：最大 512 字符。
  QQ空间：最大 512 字符。
  新浪微博：最大 512 字符。
- 
+ Twitter:以Twitter返回结果为准。分享链接时必要,其它情况可选。
  */
 @property (nonatomic,strong) NSString *url;
 
@@ -193,16 +204,17 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ：最大 5 M。
  QQ空间：最大 5 M。
  新浪微博：最大 10 M。
-
+ Twitter:最大 5 M。
  */
 @property (nonatomic,strong) NSData *image;
 
 /**
- 图片数组：分享到 QQ 空间 或 Facebook/Messenger 支持多张图片。图片数组的元素需要为 NSData 类型。
+ 图片数组：分享到 QQ 空间 或 Facebook/Messenger 或 Twitter支持多张图片。图片数组的元素需要为 NSData 类型。
          1.QQ 空间图片数量限制为20张。若只分享单张图片使用 image 字段即可。
          2.Facebook/Messenger 图片数量限制为6张。如果分享单张图片，图片大小建议不要超过12M；如果分享多张图片，图片大小建议不要超过700K，否则可能出现重启手机或者不能分享。
+         3、Twitter 图片数量限制为4张。单张图片大小不超过5mb。
  */
-@property (nonatomic,strong) NSArray *images;
+@property (nonatomic,strong) NSArray<NSData *> *images;
 
 /**
  分享的媒体类型。必要！
@@ -249,6 +261,17 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  分享至新浪微博平台时，分享参数的一个标识符，默认为 “objectId”。最大 255 字符。
  */
 @property (nonatomic,strong) NSString *sinaObjectID;
+
+/**
+ 分享的视频，目前支持平台有Twitter
+ 上传至Twitter视频有几个要求：
+    - 持续时间应该在0.5秒到30秒之间
+    - 文件大小不应超过15 mb
+    - 尺寸应该在32x32和1280x1024之间
+    - 长宽比应在1：3和3：1之间
+    - 帧率应该是40fps或更少
+ */
+@property (nonatomic,strong) NSData *videoData;
 
 /**
  返回一个 JShareMessage 实例
@@ -368,6 +391,13 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  */
 + (BOOL)isSinaWeiBoInstalled;
 
+/**
+ 检查是否存在Twitter客户端
+ 
+ @return 返回结果
+ */
++ (BOOL)isTwitterInstalled;
+
 
 
 /**
@@ -393,7 +423,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 @interface JSHARESocial : NSObject
 
 /**
- 对应新浪微博平台的uid，以及QQ与微信平台可能会存在的unionid。
+ 对应新浪微博平台的uid，以及QQ与微信平台可能会存在的unionid，Twitter平台对应的userID
  */
 @property (nonatomic, copy) NSString  *uid;
 
@@ -409,11 +439,13 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 
 /**
  accessToken有效期的时间戳，单位为秒。
+ Twitter平台为空
  */
 @property (nonatomic, assign) long expiration;
 
 /**
  refreshToken 用来刷新 accessToken 的有效期。
+ Twitter平台为空
  */
 @property (nonatomic, copy) NSString  *refreshToken;
 
@@ -445,6 +477,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 
 /**
  社交平台的用户性别，数值1表示男，数值2表示女。
+ Twitter平台为空
  */
 @property (nonatomic, assign) NSInteger gender;
 

@@ -189,25 +189,27 @@ RCT_EXPORT_METHOD(authorize:(NSDictionary *)param
     return;
   }
   
-  [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
-    NSMutableDictionary *userDic = [NSMutableDictionary new];
-    if (error) {
-      NSString *description = [error description];
-      failCallBack(@[@{@"code": @(1), @"description": description}]);
-      return;
-    }
-    
-    userDic[@"token"] = userInfo.accessToken;
-    userDic[@"expiration"] = @(userInfo.expiration);
-    userDic[@"refreshToken"] = userInfo.refreshToken;
-    userDic[@"openId"] = userInfo.openid;
-    
-    userDic[@"originData"] = userInfo.userOriginalResponse;
-    if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
-      userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
-    }
-    successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
-  }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+            NSMutableDictionary *userDic = [NSMutableDictionary new];
+            if (error) {
+                failCallBack(@[@{@"code": @(error.code), @"description": [error userInfo] ?: @""}]);
+                return;
+            }
+            
+            userDic[@"token"] = userInfo.accessToken;
+            userDic[@"expiration"] = @(userInfo.expiration);
+            userDic[@"refreshToken"] = userInfo.refreshToken;
+            userDic[@"openId"] = userInfo.openid;
+            
+            userDic[@"originData"] = userInfo.userOriginalResponse;
+            if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
+                userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
+            }
+            successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
+        }];
+    });
+//  ;
 }
 
 RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
@@ -224,7 +226,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
   [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
     NSMutableDictionary *userDic = [NSMutableDictionary new];
     if (error) {
-      failCallBack(@[@{@"code": @(1), @"description": [error description]}]);
+      failCallBack(@[@{@"code": @(error.code), @"description": [error userInfo] ?: @""}]);
       return;
     }
 
@@ -512,7 +514,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
           default:
             break;
         }
-        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        failCallBack(@[@{@"code":@(error.code), @"description": [error userInfo] ?: @""}]);
         return;
       }
       NSString *stateString = [self stateToString:state];
