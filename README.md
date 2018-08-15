@@ -32,6 +32,7 @@ pod install
 - [Checkout AndroidManifest](./docs/AndroidManifest.md)
 - [Add JGShareSDK.xml](./docs/JGShareSDK.md)
 - [Add WXEntryActivity](./docs/WXEntryActivity.md)
+- [Add JChatProCallbackActivity](./docs/JChatProCallbackActivity.md)
 
 That's it.
 
