@@ -28,8 +28,10 @@ import cn.jiguang.share.android.model.UserInfo;
 import cn.jiguang.share.facebook.Facebook;
 import cn.jiguang.share.facebook.FacebookBroadcastReceiver;
 import cn.jiguang.share.facebook.messenger.FbMessenger;
+import cn.jiguang.share.jchatpro.JChatPro;
 import cn.jiguang.share.qqmodel.QQ;
 import cn.jiguang.share.qqmodel.QZone;
+import cn.jiguang.share.twitter.Twitter;
 import cn.jiguang.share.wechat.Wechat;
 import cn.jiguang.share.wechat.WechatFavorite;
 import cn.jiguang.share.wechat.WechatMoments;
@@ -97,6 +99,24 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 if (map.hasKey("imagePath")) {
                     shareParams.setImagePath(map.getString("imagePath"));
                 }
+                if (map.hasKey("appName")) {
+                    shareParams.setAppName(map.getString("appName"));
+                }
+                if (map.hasKey("targetPkg")) {
+                    shareParams.setTargetPkg(map.getString("targetPkg"));
+                }
+                if (map.hasKey("targetClass")) {
+                    shareParams.setImagePath(map.getString("targetClass"));
+                }
+                if (map.hasKey("extra")) {
+                    shareParams.setExtra(map.getString("extra"));
+                }
+                if (map.hasKey("url")) {
+                    shareParams.setUrl(map.getString("url"));
+                }
+                if (map.hasKey("callBackUrl")) {
+                    shareParams.setCallBackUrl(map.getString("callBackUrl"));
+                }
                 break;
             case "image":
                 shareType = Platform.SHARE_IMAGE;
@@ -115,6 +135,54 @@ public class JShareModule extends ReactContextBaseJavaModule {
                         imageArray[i] = array.getString(i);
                     }
                     shareParams.setImageArray(imageArray);
+                }
+                if (map.hasKey("appName")) {
+                    shareParams.setAppName(map.getString("appName"));
+                }
+                if (map.hasKey("targetPkg")) {
+                    shareParams.setTargetPkg(map.getString("targetPkg"));
+                }
+                if (map.hasKey("targetClass")) {
+                    shareParams.setImagePath(map.getString("targetClass"));
+                }
+                if (map.hasKey("extra")) {
+                    shareParams.setExtra(map.getString("extra"));
+                }
+                if (map.hasKey("url")) {
+                    shareParams.setUrl(map.getString("url"));
+                }
+                if (map.hasKey("callBackUrl")) {
+                    shareParams.setCallBackUrl(map.getString("callBackUrl"));
+                }
+                break;
+            case "image_text":
+                shareType = Platform.SHARE_IMAGETEXT;
+                if (map.hasKey("appName")) {
+                    shareParams.setAppName(map.getString("appName"));
+                }
+                if (map.hasKey("title")) {
+                    shareParams.setTitle(map.getString("title"));
+                }
+                if (map.hasKey("text")) {
+                    shareParams.setText(map.getString("text"));
+                }
+                if (map.hasKey("imageUrl")) {
+                    shareParams.setImageUrl(map.getString("imageUrl"));
+                }
+                if (map.hasKey("targetPkg")) {
+                    shareParams.setTargetPkg(map.getString("targetPkg"));
+                }
+                if (map.hasKey("targetClass")) {
+                    shareParams.setImagePath(map.getString("targetClass"));
+                }
+                if (map.hasKey("extra")) {
+                    shareParams.setExtra(map.getString("extra"));
+                }
+                if (map.hasKey("url")) {
+                    shareParams.setUrl(map.getString("url"));
+                }
+                if (map.hasKey("callBackUrl")) {
+                    shareParams.setCallBackUrl(map.getString("callBackUrl"));
                 }
                 break;
             case "video":
@@ -237,19 +305,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
     public void authorize(final ReadableMap map, final Callback succeedCallback, final Callback failedCallback) {
         String name = "";
         try {
-            switch (map.getString("platform")) {
-                case "wechat":
-                    name = Wechat.Name;
-                    break;
-                case "qq":
-                    name = QQ.Name;
-                    break;
-                case "weibo":
-                    name = SinaWeibo.Name;
-                    break;
-                default:
-                    name = Facebook.Name;
-            }
+            name = getPlatformName(map);
             JShareInterface.authorize(name, new AuthListener() {
                 @Override
                 public void onComplete(Platform platform, int action, BaseResponseInfo baseResponseInfo) {
@@ -495,6 +551,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
         try {
             name = map.getString("platform");
             switch (name) {
+                case "wechat":
                 case "wechat_session":
                     name = Wechat.Name;
                     break;
@@ -510,6 +567,7 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 case "qzone":
                     name = QZone.Name;
                     break;
+                case "weibo":
                 case "sina_weibo":
                     name = SinaWeibo.Name;
                     break;
@@ -518,6 +576,12 @@ public class JShareModule extends ReactContextBaseJavaModule {
                     break;
                 case "facebook_messenger":
                     name = FbMessenger.Name;
+                    break;
+                case "twitter":
+                    name = Twitter.Name;
+                    break;
+                case "jchat_pro":
+                    name = JChatPro.Name;
                     break;
                 default:
                     name = SinaWeiboMessage.Name;
