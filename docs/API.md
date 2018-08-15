@@ -41,7 +41,17 @@ JShareModule.xxx();
    * 分享
    * @param {object} message = {
    *
-   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger' /'twitter' /'jchat_pro'
+   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' /
+   *                                               'wechat_timeLine' /
+   *                                               'wechat_favourite' /
+   *                                               'qq' /
+   *                                               'qzone' /
+   *                                               'sina_weibo' /
+   *                                               'sina_weibo_contact'  /
+   *                                               'facebook' /
+   *                                               'facebook_messenger' /
+   *                                               'twitter' /
+   *                                               'jchat_pro'
    * type 必填
    *
    * {
