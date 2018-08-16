@@ -351,7 +351,7 @@ export default class JShare {
         if (Platform.OS === 'android') {
             JShareModule.isClientValid({ platform: "twitter" }, success);
         } else {
-            
+            JShareModule.isTwitterInstalled(success)
         }
     }
 
