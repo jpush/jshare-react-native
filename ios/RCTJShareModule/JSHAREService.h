@@ -11,8 +11,7 @@
 
 
 
-#define JSHARE_VERSION_NUMBER 1.5.0
-
+#define JSHARE_VERSION_NUMBER 1.6.0
 
 #import <Foundation/Foundation.h>
 
@@ -30,7 +29,10 @@ typedef NS_ENUM(NSUInteger, JSHAREPlatform) {
     JSHAREPlatformFacebook = 8,
     JSHAREPlatformFacebookMessenger = 9,
     
+
     JSHAREPlatformTwitter = 10,
+
+    JSHAREPlatformJChatPro = 11,
 };
 
 typedef NS_ENUM(NSUInteger,JSHAREState){
@@ -49,11 +51,13 @@ typedef NS_ENUM(NSUInteger,JSHAREMediaType){
     JSHAREApp = 6,
     JSHAREFile = 7,
     JSHAREEmoticon = 8,
+    JSHARGraphic = 9,  //图文类型，仅用于JChatPro
     JSHAREUndefined = 100,
 };
 
 @class JSHARESocialUserInfo;
 typedef void(^JSHAREStateHandler)(JSHAREState state,NSError *error);
+typedef void(^JSHARECompletionHandler)(JSHAREState state,NSError *error, id responseObject);
 typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error);
 
 @interface JSHARELaunchConfig : NSObject
@@ -137,6 +141,10 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  *  Twitter consumer secret
  */
 @property (nonatomic, copy) NSString *TwitterConsumerSecret;
+/**
+ *  JChatPro Auth
+ */
+@property (nonatomic, copy) NSString *JChatProAuth;
 
 @end
 
@@ -150,6 +158,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ：最大 128 字符。
  QQ空间：最大 128 字符。
  新浪微博：分享链接类型，最大 1 K字符。
+ JChatPro:消息标题。
  */
 @property (nonatomic,strong) NSString *title;
 
@@ -164,6 +173,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ空间：分享文本类型时，最大 128 字符。分享非文本类型，最大 512 字符。
  新浪微博：最大 140 汉字。
  Twitter:最大 140 汉字
+ JChatPro:消息内容。不超过4k字节
  */
 @property (nonatomic,strong) NSString *text;
 
@@ -197,6 +207,11 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 @property (nonatomic,strong) NSData *thumbnail;
 
 /**
+ JChatPro 网络缩略图地址
+ */
+@property (nonatomic,copy) NSString *thumbUrl;
+
+/**
  图片：分享JSHAREImage类型，大小限制根据平台不同而不同，当分享JSHARELink类型时没有提供缩略图时，若此参数不为空，JSHARE将会裁剪此参数提供的图片去适配缩略图。
  微信好友：最大 10 M。
  微信朋友圈：最大 10 M。
@@ -205,6 +220,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ空间：最大 5 M。
  新浪微博：最大 10 M。
  Twitter:最大 5 M。
+ JChatPro :分享单张图片。暂无限制
  */
 @property (nonatomic,strong) NSData *image;
 
@@ -213,6 +229,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
          1.QQ 空间图片数量限制为20张。若只分享单张图片使用 image 字段即可。
          2.Facebook/Messenger 图片数量限制为6张。如果分享单张图片，图片大小建议不要超过12M；如果分享多张图片，图片大小建议不要超过700K，否则可能出现重启手机或者不能分享。
          3、Twitter 图片数量限制为4张。单张图片大小不超过5mb。
+         4、JChatPro图片限制为9张。若分享单张图片使用image字段即可。
  */
 @property (nonatomic,strong) NSArray<NSData *> *images;
 
@@ -238,7 +255,8 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
 @property (nonatomic,strong) NSString *mediaDataUrl;
 
 /**
- 分享JSHAREApp类型至微信平台时，第三方程序自定义的简单数据。
+ 微信 分享JSHAREApp类型至微信平台时，第三方程序自定义的简单数据。
+ JChatPro 点击消息跳转到第三方应用时带的extra信息
  */
 @property (nonatomic,strong) NSString *extInfo;
 
@@ -272,6 +290,36 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
     - 帧率应该是40fps或更少
  */
 @property (nonatomic,strong) NSData *videoData;
+
+/*
+ JChatPro 当应用内的分享消息被点击时，如果启动的客户端不存在时，回调的url。开发者可以通过这个配置实现本地应用不存在时跳转到他们的官网之类的操作
+ */
+@property (nonatomic,strong) NSString *callbackUrl ;
+
+/**
+ JChatPro 点击消息时跳转第三方android客户端的包名
+ */
+@property (nonatomic,strong) NSString *pkgName;
+
+/**
+ JChatPro 点击消息时跳转第三方android客户端的类名
+ */
+@property (nonatomic,strong) NSString *className;
+
+/**
+ JChatPro  第三方客户端应用名称
+ */
+@property (nonatomic, copy) NSString *appName;
+
+/**
+ JChatPro  点击消息跳转第三方iOS客户端的Scheme
+ */
+@property (nonatomic, copy) NSString *fromScheme __attribute__((deprecated("已废弃,设置无效")));
+
+/**
+ JChatPro  图片网络地址
+ */
+@property (nonatomic, copy) NSString *imageURL;
 
 /**
  返回一个 JShareMessage 实例
@@ -308,6 +356,15 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  */
 + (void)share:(JSHAREMessage *)message
       handler:(JSHAREStateHandler)handler;
+
+/**
+ 分享 仅支持JChatPro
+ @param message  分享参数
+ @param handler  分享之后的回调
+ */
++ (void)share:(JSHAREMessage *)message
+      completionHandler:(JSHARECompletionHandler)handler;
+
 
 
 /**
@@ -397,6 +454,13 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  @return 返回结果
  */
 + (BOOL)isTwitterInstalled;
+
+/**
+ 检查是否存在JChatPro客户端
+ 
+ @return 返回结果
+ */
++ (BOOL)isJChatProInstalled;
 
 
 
