@@ -50,14 +50,14 @@ export default class MainActivity extends React.Component {
 
   onGetUserInfo = () => {
     var param = {
-      platform: "wechat_session"
+      platform: "facebook"
     };
 
-    JShareModule.getSocialUserInfo(param, (map) => {
+    JShareModule.authorize(param, (map) => {
       // console.log(map);
       Alert.alert("getSocialUserInfo", JSON.stringify(map));
-    }, (errorCode) => {
-      console.log("errorCode: " + errorCode);
+    }, (err) => {
+      Alert.alert("errorCode: ", JSON.stringify(err));
     });
   }
 
