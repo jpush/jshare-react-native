@@ -295,7 +295,7 @@ RCT_EXPORT_METHOD(cancelAuthWithPlatform:(NSDictionary *)param
   }
 
   BOOL result = [JSHAREService cancelAuthWithPlatform:platform];
-  successCallBack(@[@(result)]);
+  successCallBack(@[@(result ? 0 : 1)]);
 }
 
 RCT_EXPORT_METHOD(isSinaWeiboWebLogined:(RCTResponseSenderBlock)successCallBack) {
