@@ -41,14 +41,30 @@ JShareModule.xxx();
    * 分享
    * @param {object} message = {
    *
-   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
+   * platformString 必填，用于分享置不同的平台 //可以是 'wechat_session' /
+   *                                               'wechat_timeLine' /
+   *                                               'wechat_favourite' /
+   *                                               'qq' /
+   *                                               'qzone' /
+   *                                               'sina_weibo' /
+   *                                               'sina_weibo_contact'  /
+   *                                               'facebook' /
+   *                                               'facebook_messenger' /
+   *                                               'twitter' /
+   *                                               'jchat_pro'
    * type 必填
    *
    * {
    *  type: 'text'
    *  platform: platformString  // 分享到指定平台
    *  text: String
-   *  imagePath: // 选填，新浪微博本地图片地址，其他平台没有这个字段(iOS 不支持这个字段)
+   *  imagePath: // 选填，本地图片地址，新浪微博(iOS 不支持这个字段)
+   *  appName: // 选填，应用名称，趣聊
+   *  targetPkg: // 选填，点击消息时跳转应用的包名，趣聊	
+   *  targetClass: // 选填，点击消息时跳转应用的类名，趣聊	
+   *  extra: // 选填，点击消息跳转到第三方应用时带的extra信息，趣聊	
+   *  url: // 选填，点击消息时跳转应用的url，趣聊	
+   *  callBackUrl: // 选填，点击消息跳转第三方应用失败时，回调的url，趣聊
    * }
    *
    * {
@@ -58,6 +74,26 @@ JShareModule.xxx();
    *  text: String  // 选填
    *  imageUrl: String // 网络图片地址，必须以 http 或 https 开头，imagePath, imageUrl imageArray 必须三选一
    *  imageArray: [String]  // (选填: 分享到 Qzone 才提供这个字段) 如果需要分享多张图片需要这个参数，数组中问题图片路径 imagePath, imageUrl imageArray 必须三选一
+   *  appName: // 选填，应用名称，趣聊
+   *  targetPkg: // 选填，点击消息时跳转应用的包名，趣聊	
+   *  targetClass: // 选填，点击消息时跳转应用的类名，趣聊	
+   *  extra: // 选填，点击消息跳转到第三方应用时带的extra信息，趣聊	
+   *  url: // 选填，点击消息时跳转应用的url，趣聊	
+   *  callBackUrl: // 选填，点击消息跳转第三方应用失败时，回调的url，趣聊
+   * }
+   *
+   * {
+   *  type: 'image_text'
+   *  platform: platformString  // 分享到指定平台，目前只支持趣聊
+   *  appName: String // 选填，应用名称，趣聊
+   *  title: String // 选填，消息标题，趣聊	
+   *  text: String // 消息内容，趣聊	
+   *  imageUrl: String // 选填，缩略图网络图片地址，趣聊	
+   *  targetPkg: String // 选填，点击消息时跳转应用的包名，趣聊	
+   *  targetClass: String // 选填，点击消息时跳转应用的类名，趣聊	
+   *  extra: String // 选填，点击消息跳转到第三方应用时带的extra信息，趣聊	
+   *  url: String // 选填，点击消息时跳转应用的url，趣聊	
+   *  callBackUrl: String // 选填，点击消息跳转第三方应用失败时，回调的url，趣聊
    * }
    *
    * {
@@ -155,7 +191,16 @@ JShareModule.xxx();
   /**
    * 获取社交平台用户信息
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook'
+   *  platform: String //可以是 'wechat_session' / 
+   *                           'wechat_timeLine' / 
+   *                           'wechat_favourite' / 
+   *                           'qq' / 
+   *                           'qzone' / 
+   *                           'sina_weibo' / 
+   *                           'sina_weibo_contact' / 
+   *                           'facebook' / 
+   *                           'twitter' / 
+   *                           'jchat_pro'
    * }
    * @param {Function} success function (userInfo) {}
    * userInfo = {
@@ -190,7 +235,17 @@ JShareModule.xxx();
    * 判断某平台是否已经授权
    *
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
+   *  platform: String //可以是 'wechat_session' /
+   *                           'wechat_timeLine' /
+   *                           'wechat_favourite' /
+   *                           'qq' / 
+   *                           'qzone' /
+   *                           'sina_weibo' /
+   *                           'sina_weibo_contact'  /
+   *                           'facebook' /
+   *                           'facebook_messenger' /
+   *                           'twitter' /
+   *                           'jchat_pro'
    * }
    * @param {Function} callback = (Boolean) => {}
    */
@@ -213,7 +268,17 @@ JShareModule.xxx();
    * 判断该平台的分享是否有效
    * Android only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' / 'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact'  / 'facebook' /'facebook_messenger'
+   *  platform: String //可以是 'wechat_session' /
+   *                           'wechat_timeLine' /
+   *                           'wechat_favourite' /
+   *                           'qq' /
+   *                           'qzone' /
+   *                           'sina_weibo' /
+   *                           'sina_weibo_contact'  /
+   *                           'facebook' /
+   *                           'facebook_messenger'/
+   *                           'twitter' /
+   *                           'jchat_pro'
    * }
    * @param {Function} callback = (Boolean) => {}
    */
@@ -236,7 +301,12 @@ JShareModule.xxx();
   /**
    * 授权接口
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat' / 'qq' / 'weibo' / 'facebook'
+   *  platform: String //可以是 'wechat' /
+   *                           'qq' /
+   *                           'weibo' /
+   *                           'facebook'/
+   *                           'twitter' /
+   *                           'jchat_pro'
    * }
    * @param {Function} success
    * @param {Function} fail
@@ -261,7 +331,17 @@ JShareModule.xxx();
   /**
    *  判断平台是否支持授权接口, NOTE：Android Only
    * @param {Object} param = {
-   *  platform: String //可以是 'wechat_session' / 'wechat_timeLine' / 'wechat_favourite' /    'qq' / 'qzone' / 'sina_weibo' / 'sina_weibo_contact' / 'facebook' /'facebook_messenger'
+   *  platform: String //可以是 'wechat_session' /
+   *                           'wechat_timeLine' /
+   *                           'wechat_favourite' /
+   *                           'qq' /
+   *                           'qzone' /
+   *                           'sina_weibo' /
+   *                           'sina_weibo_contact' /
+   *                           'facebook' /
+   *                           'facebook_messenger'/
+   *                           'twitter' /
+   *                           'jchat_pro'
    * }
    * @param {Function} callback = (Boolean) => {}
    */
@@ -291,7 +371,9 @@ JShareModule.xxx();
    *                           'qq' /
    *                           'qzone' /
    *                           'sina_weibo' /
-   *                           'sina_weibo_contact'
+   *                           'sina_weibo_contact'/ 
+   *                           'twitter'/ 
+   *                           'jchat_pro'/ 
    * }
    * @param {Function} callback = (Int) => {}
    * @code 返回码，0 表示成功删除

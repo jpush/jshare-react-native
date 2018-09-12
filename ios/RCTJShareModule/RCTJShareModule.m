@@ -59,6 +59,14 @@ RCT_EXPORT_MODULE();
     if ([param[@"platform"] isEqualToString:@"facebook"]) {
       platform = JSHAREPlatformFacebook;
     }
+      
+      if ([param[@"platform"] isEqualToString:@"twitter"]) {
+          platform = JSHAREPlatformTwitter;
+      }
+      
+      if ([param[@"platform"] isEqualToString:@"jchat_pro"]) {
+          platform = JSHAREPlatformJChatPro;
+      }
   }
   
   return platform;
@@ -102,6 +110,14 @@ RCT_EXPORT_MODULE();
     
     if ([param[@"platform"] isEqualToString:@"facebook_messenger"]) {
       platform = JSHAREPlatformFacebookMessenger;
+    }
+      
+    if ([param[@"platform"] isEqualToString:@"twitter"]) {
+      platform = JSHAREPlatformTwitter;
+    }
+      
+    if ([param[@"platform"] isEqualToString:@"jchat_pro"]) {
+      platform = JSHAREPlatformJChatPro;
     }
   }
 
@@ -175,6 +191,18 @@ RCT_EXPORT_METHOD(setup){
     NSNumber *isSupportWebSina = param[@"isSupportWebSina"];
     config.isSupportWebSina = [isSupportWebSina boolValue];
   }
+    
+  if (param[@"twitterConsumerKey"]) {
+    config.TwitterConsumerKey = param[@"twitterConsumerKey"];
+  }
+
+  if (param[@"twitterConsumerSecret"]) {
+    config.TwitterConsumerSecret = param[@"twitterConsumerSecret"];
+  }
+
+  if (param[@"jchatProAuth"]) {
+    config.JChatProAuth = param[@"jchatProAuth"];
+  }
   
   [JSHAREService setupWithConfig:config];
 }
@@ -189,25 +217,27 @@ RCT_EXPORT_METHOD(authorize:(NSDictionary *)param
     return;
   }
   
-  [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
-    NSMutableDictionary *userDic = [NSMutableDictionary new];
-    if (error) {
-      NSString *description = [error description];
-      failCallBack(@[@{@"code": @(1), @"description": description}]);
-      return;
-    }
-    
-    userDic[@"token"] = userInfo.accessToken;
-    userDic[@"expiration"] = @(userInfo.expiration);
-    userDic[@"refreshToken"] = userInfo.refreshToken;
-    userDic[@"openId"] = userInfo.openid;
-    
-    userDic[@"originData"] = userInfo.userOriginalResponse;
-    if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
-      userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
-    }
-    successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
-  }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+            NSMutableDictionary *userDic = [NSMutableDictionary new];
+            if (error) {
+                failCallBack(@[@{@"code": @(error.code), @"description": [error userInfo] ?: @""}]);
+                return;
+            }
+            
+            userDic[@"token"] = userInfo.accessToken;
+            userDic[@"expiration"] = @(userInfo.expiration);
+            userDic[@"refreshToken"] = userInfo.refreshToken;
+            userDic[@"openId"] = userInfo.openid;
+            
+            userDic[@"originData"] = userInfo.userOriginalResponse;
+            if ([self dictionaryToJson: userInfo.userOriginalResponse]) {
+                userDic[@"originData"] = [self dictionaryToJson: userInfo.userOriginalResponse];
+            }
+            successCallBack(@[[NSDictionary dictionaryWithDictionary: userDic]]);
+        }];
+    });
+//  ;
 }
 
 RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
@@ -224,7 +254,7 @@ RCT_EXPORT_METHOD(getSocialUserInfo:(NSDictionary *)param
   [JSHAREService getSocialUserInfo:platform handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
     NSMutableDictionary *userDic = [NSMutableDictionary new];
     if (error) {
-      failCallBack(@[@{@"code": @(1), @"description": [error description]}]);
+      failCallBack(@[@{@"code": @(error.code), @"description": [error userInfo] ?: @""}]);
       return;
     }
 
@@ -265,7 +295,7 @@ RCT_EXPORT_METHOD(cancelAuthWithPlatform:(NSDictionary *)param
   }
 
   BOOL result = [JSHAREService cancelAuthWithPlatform:platform];
-  successCallBack(@[@(result)]);
+  successCallBack(@[@(result ? 0 : 1)]);
 }
 
 RCT_EXPORT_METHOD(isSinaWeiboWebLogined:(RCTResponseSenderBlock)successCallBack) {
@@ -296,6 +326,16 @@ RCT_EXPORT_METHOD(isFacebookInstalled:(RCTResponseSenderBlock) successCallBack) 
 RCT_EXPORT_METHOD(isSinaWeiBoInstalled:(RCTResponseSenderBlock) successCallBack) {
   BOOL result = [JSHAREService isSinaWeiBoInstalled];
   successCallBack(@[@(result)]);
+}
+
+RCT_EXPORT_METHOD(isTwitterInstalled:(RCTResponseSenderBlock) successCallBack) {
+    BOOL result = [JSHAREService isTwitterInstalled];
+    successCallBack(@[@(result)]);
+}
+
+RCT_EXPORT_METHOD(isJChatProInstalled:(RCTResponseSenderBlock) successCallBack) {
+    BOOL result = [JSHAREService isJChatProInstalled];
+    successCallBack(@[@(result)]);
 }
 
 
@@ -512,7 +552,7 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
           default:
             break;
         }
-        failCallBack(@[@{@"code":@(error.code), @"description": [error description]}]);
+        failCallBack(@[@{@"code":@(error.code), @"description": [error userInfo] ?: @""}]);
         return;
       }
       NSString *stateString = [self stateToString:state];
@@ -557,7 +597,14 @@ RCT_EXPORT_METHOD(share:(NSDictionary *)param
   if ([platformStr isEqualToString:@"sina_weibo_contact"]) {
     return JSHAREPlatformSinaWeiboContact;
   }
-
+    
+  if ([platformStr isEqualToString:@"twitter"]) {
+    return JSHAREPlatformTwitter;
+  }
+    
+  if ([platformStr isEqualToString:@"jchat_pro"]) {
+    return JSHAREPlatformJChatPro;
+  }
   return 0;
 }
 

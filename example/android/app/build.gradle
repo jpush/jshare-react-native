@@ -107,7 +107,7 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
-                JPUSH_APPKEY: "d4ee2375846bc30fa51334f5",	//在此替换你的APPKey
+                JPUSH_APPKEY: "7b4b94cca0d185d611e53cca",	//在此替换你的APPKey
                 JPUSH_CHANNEL: "developer-default",		//应用渠道号
         ]
     }
@@ -119,34 +119,34 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        debug {
-            storeFile file("jshare.jks") //你的签名文件路径
-            storePassword "sdkteam"    //你的签名文件保存密码
-            keyAlias "jshare"         // 你的别名
-            keyPassword "sdkteam" //你的签名密码
-        }
-        release {
-            storeFile file("jshare.jks") //你的签名文件路径
-            storePassword "sdkteam"     //你的签名文件保存密码
-            keyAlias "jshare"          // 你的别名
-            keyPassword "sdkteam" //你的签名密码
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file("jshare.jks") //你的签名文件路径
+//            storePassword "sdkteam"    //你的签名文件保存密码
+//            keyAlias "jshare"         // 你的别名
+//            keyPassword "sdkteam" //你的签名密码
+//        }
+//        release {
+//            storeFile file("jshare.jks") //你的签名文件路径
+//            storePassword "sdkteam"     //你的签名文件保存密码
+//            keyAlias "jshare"          // 你的别名
+//            keyPassword "sdkteam" //你的签名密码
+//        }
+//    }
     sourceSets {
         main {
             assets.srcDirs = ['assets']
         }
     }
-    buildTypes {
-        release {
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-        }
-        debug {
-            signingConfig signingConfigs.debug
-        }
-    }
+//    buildTypes {
+//        release {
+//            minifyEnabled enableProguardInReleaseBuilds
+//            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+//        }
+//        debug {
+//            signingConfig signingConfigs.debug
+//        }
+//    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->

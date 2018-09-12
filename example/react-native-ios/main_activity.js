@@ -50,20 +50,20 @@ export default class MainActivity extends React.Component {
 
   onGetUserInfo = () => {
     var param = {
-      platform: "wechat_session"
+      platform: "wechat"
     };
 
-    JShareModule.getSocialUserInfo(param, (map) => {
+    JShareModule.authorize(param, (map) => {
       // console.log(map);
       Alert.alert("getSocialUserInfo", JSON.stringify(map));
-    }, (errorCode) => {
-      console.log("errorCode: " + errorCode);
+    }, (err) => {
+      Alert.alert("errorCode: ", JSON.stringify(err));
     });
   }
 
   onPlatformAuth = () => {
     var param = {
-      platform: "facebook"
+      platform: "twitter"
     };
     JShareModule.isPlatformAuth(param, (result) => {
       console.log(param.platform + "is Auth: " + result);
@@ -72,11 +72,11 @@ export default class MainActivity extends React.Component {
 
   onRemoveAuthorize = () => {
     var param = {
-      platform: "facebook"
+      platform: "wechat_session"
     };
     JShareModule.cancelAuthWithPlatform(param, (code) => {
       if (code === 0) {
-        console.log("remove authorize succeed");
+        console.log("remove authorize succeed" + code);
       } else {
         console.log("remove authorize failed, errorCode: " + code);
       }
@@ -85,7 +85,7 @@ export default class MainActivity extends React.Component {
 
   onShareTextPress = () => {
     var shareParam = {
-      platform: "wechat_session",
+      platform: "twitter",
       type: "text",
       text: "JShare test text",
       imagePath: ""
@@ -111,7 +111,7 @@ export default class MainActivity extends React.Component {
     console.log(this.state.path)
 
     var shareParam = {
-      platform: "qzone",
+      platform: "twitter",
       type: "image",
       text: "JShare test text",
       imageUrl: "",
@@ -139,7 +139,7 @@ export default class MainActivity extends React.Component {
      * }
      */
     var shareParam = {
-      platform: "wechat_session",
+      platform: "twitter",
       type: "video",
       title: "the video",
       text: "JShare test text",
@@ -170,7 +170,7 @@ export default class MainActivity extends React.Component {
      * }
      */
     var shareParam = {
-      platform: "wechat_session",
+      platform: "twitter",
       type: "audio",
       musicUrl: "",
       text: "JShare test text",
@@ -204,7 +204,7 @@ export default class MainActivity extends React.Component {
 
   onShareEmoticonPress = () => {
     var shareParam = {
-      platform: "wechat_session",
+      platform: "twitter",
       type: "emoticon",
       imagePath: ""
     };
@@ -219,7 +219,7 @@ export default class MainActivity extends React.Component {
   onShareAppPress = () => {
     // Done
     var shareParam = {
-      platform: "wechat_session",
+      platform: "twitter",
       type: "app",
       text: "JShare test text",
       title: "my app",
@@ -250,7 +250,7 @@ export default class MainActivity extends React.Component {
      */ 
     // Done
     var shareParam = {
-      platform: "facebook",
+      platform: "twitter",
       type: "link",
       url: "www.baidu.com",
       imagePath: "",
@@ -282,7 +282,7 @@ export default class MainActivity extends React.Component {
       }
       
       var shareParam = {
-        platform: "facebook",
+        platform: "twitter",
         type: "video",
         title: "the video",
         text: "JShare test text",

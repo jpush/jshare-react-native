@@ -30,5 +30,15 @@ JGShareSDK.xml示例
         AppName="facebook 后台填写的名称"
     />
 
+    <Twitter
+        ConsumerKey="twitter 的 ConsumerKey"
+        ConsumerSecret="twitter 的 ConsumerSecret"
+    />
+
+    <!-- 趣聊平台appkey的申请， 请查看入门指南的第三方平台申请文档 -->
+    <JChatPro
+          auth="申请后的 appkey"
+    />
+
 </DevInfor>
 ```
