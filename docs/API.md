@@ -148,7 +148,7 @@ JShareModule.xxx();
    * platform: platformString  // 分享到指定平台
    * url: String // 必填，网页 url
    * imagePath: String // 选填，本地图片路径 imagePath，imageUrl 必须二选一
-   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一
+   * imageUrl: String // 选填，网络图片地址 imagePath imageUrl 必须二选一，不支持Android wechat
    * title: String // 选填
    * text: String // 选填
    * }
