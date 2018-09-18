@@ -247,6 +247,20 @@ public class JShareModule extends ReactContextBaseJavaModule {
                     shareParams.setQuote(map.getString("quote"));
                 }
                 break;
+            case "app":
+                shareType = Platform.SHARE_APPS;
+                if (map.hasKey("title")) {
+                    shareParams.setTitle(map.getString("title"));
+                }
+                if (map.hasKey("text")) {
+                    shareParams.setText(map.getString("text"));
+                }
+                if (map.hasKey("imagePath")) {
+                    shareParams.setImagePath(map.getString("imagePath"));
+                } else if (map.hasKey("imageUrl")) {
+                    shareParams.setImageUrl(map.getString("imageUrl"));
+                }
+                break;
             default:
                 shareType = Platform.SHARE_APPS;
 
