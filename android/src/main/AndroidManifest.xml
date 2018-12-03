@@ -25,10 +25,8 @@
         <!-- Required SDK核心功能-->
         <activity
             android:name="cn.jiguang.share.android.ui.JiguangShellActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <!-- Optional QQ分享回调-->
