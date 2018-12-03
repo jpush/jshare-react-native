@@ -57,8 +57,8 @@ android {
     }
     ...
     dependencies {
-      compile project(':jshare-react-native')     // <-- JShare 依赖
-      compile project(':jcore-react-native')      // <-- JCore 依赖
+     implementation project(':jshare-react-native')     // <-- JShare 依赖
+     implementation project(':jcore-react-native')      // <-- JCore 依赖
    }
 }
 ```
