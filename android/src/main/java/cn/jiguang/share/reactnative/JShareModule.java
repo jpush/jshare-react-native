@@ -1,6 +1,8 @@
 package cn.jiguang.share.reactnative;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.facebook.react.bridge.Arguments;
@@ -16,6 +18,12 @@ import com.facebook.react.bridge.WritableMap;
 
 import java.util.HashMap;
 import java.util.List;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.net.HttpURLConnection;
+import java.io.IOException;
+import java.io.InputStream;
+
 
 import cn.jiguang.share.android.api.AuthListener;
 import cn.jiguang.share.android.api.JShareInterface;
@@ -53,6 +61,29 @@ public class JShareModule extends ReactContextBaseJavaModule {
     public JShareModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
+
+
+    public Bitmap imgUrlToBitmap(final String url) {
+        URL imgUrl = null;
+        Bitmap bitmap = null;
+        try {
+            imgUrl = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            HttpURLConnection conn = (HttpURLConnection) imgUrl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
 
     @Override
     public String getName() {
@@ -127,7 +158,8 @@ public class JShareModule extends ReactContextBaseJavaModule {
                 if (map.hasKey("imagePath")) {
                     shareParams.setImagePath(map.getString("imagePath"));
                 } else if (map.hasKey("imageUrl")) {
-                    shareParams.setImageUrl(map.getString("imageUrl"));
+                    Bitmap bitmap = imgUrlToBitmap(map.getString("imageUrl"));
+                    shareParams.setImageData(bitmap);
                 } else if (map.hasKey("imageArray")) {
                     ReadableArray array = map.getArray("imageArray");
                     String[] imageArray = new String[array.size()];
