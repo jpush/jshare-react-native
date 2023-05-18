@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <!-- User defined.  For test only  用户自定义的广播接收器-->
-        <receiver android:name="cn.jiguang.share.reactnative.JShareModule$FaceBookUploadReceiver">
+        <receiver android:exported="true" android:name="cn.jiguang.share.reactnative.JShareModule$FaceBookUploadReceiver">
             <intent-filter>
                 <action android:name="com.facebook.platform.AppCallResultBroadcast" />
             </intent-filter>
