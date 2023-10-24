@@ -1,6 +1,6 @@
 {
   "name": "jshare-react-native",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "JShare SDK for react native application",
   "main": "index.js",
   "scripts": {

@@ -11,7 +11,7 @@
 
 
 
-#define JSHARE_VERSION_NUMBER 1.6.0
+#define JSHARE_VERSION_NUMBER 1.9.2
 
 #import <Foundation/Foundation.h>
 
@@ -51,7 +51,8 @@ typedef NS_ENUM(NSUInteger,JSHAREMediaType){
     JSHAREApp = 6,
     JSHAREFile = 7,
     JSHAREEmoticon = 8,
-    JSHARGraphic = 9,  //图文类型，仅用于JChatPro
+    JSHAREGraphic = 9,  //图文类型，仅用于JChatPro
+    JSHAREMiniProgram = 10, //小程序
     JSHAREUndefined = 100,
 };
 
@@ -145,6 +146,10 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  *  JChatPro Auth
  */
 @property (nonatomic, copy) NSString *JChatProAuth;
+/*
+*  应用的 Universal link
+*/
+@property (nonatomic, copy) NSString *universalLink;
 
 @end
 
@@ -159,6 +164,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ空间：最大 128 字符。
  新浪微博：分享链接类型，最大 1 K字符。
  JChatPro:消息标题。
+ 微信小程序:小程序title。长度不超过512字节
  */
 @property (nonatomic,strong) NSString *title;
 
@@ -172,10 +178,14 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ：分享文本类型时，最大 1536 字符。分享非文本类型，最大 512 字符。
  QQ空间：分享文本类型时，最大 128 字符。分享非文本类型，最大 512 字符。
  新浪微博：最大 140 汉字。
+        网页分享必须包含至少一个第三方分享到微博的网页URL(安全域名下的链接)，不能包含#话题词#。
  Twitter:最大 140 汉字
  JChatPro:消息内容。不超过4k字节
+ 微信小程序:描述内容。长度不能超过1k
  */
 @property (nonatomic,strong) NSString *text;
+
+
 
 /**
  链接：根据媒体类型填入链接，长度每个平台的限制不同。分享非文本及非图片类型时，必要！
@@ -186,6 +196,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  QQ空间：最大 512 字符。
  新浪微博：最大 512 字符。
  Twitter:以Twitter返回结果为准。分享链接时必要,其它情况可选。
+ 微信小程序:兼容微信低版本网页地址。
  */
 @property (nonatomic,strong) NSString *url;
 
@@ -221,6 +232,7 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  新浪微博：最大 10 M。
  Twitter:最大 5 M。
  JChatPro :分享单张图片。暂无限制
+ 微信小程序: 小程序新版本的预览图 最大128k
  */
 @property (nonatomic,strong) NSData *image;
 
@@ -320,6 +332,26 @@ typedef void(^JSHARESocialHandler)(JSHARESocialUserInfo *userInfo,NSError *error
  JChatPro  图片网络地址
  */
 @property (nonatomic, copy) NSString *imageURL;
+
+/**
+ 微信小程序: 小程序username,如"gh_d43f693ca31f"
+ */
+@property (nonatomic, copy) NSString *userName;
+
+/**
+ 微信小程序: 小程序页面路径,如"pages/page10000/page10000"
+ */
+@property (nonatomic, copy) NSString *path;
+
+/**
+ 微信小程序: 小程序版本类型。 0正式版，1开发版，2体验版。默认0，正式版
+ */
+@property (nonatomic, assign) int miniProgramType;
+
+/**
+ 微信小程序: 是否使用带 shareTicket 的转发。默认false,不使用带 shareTicket 的转发。
+ */
+@property (nonatomic, assign) BOOL withShareTicket;   
 
 /**
  返回一个 JShareMessage 实例
